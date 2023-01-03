@@ -1,0 +1,188 @@
+\chapter{源代码排版}
+
+\section{{\ttfamily verbatim} 环境与{\ttfamily \textbackslash verb} 命令}
+
+{\ttfamily verbatim} 环境适合比较简单场合下使用，无法实现代码的高亮显示，如：
+
+\begin{latexcode}{colorbox}
+\begin{verbatim}
+#include <stdio.h>
+
+int main(int argc, char **argc) {
+  printf("Hello, world\n");
+  return 0;
+}
+\end{verbatim}
+\end{latexcode}
+
+\verb|\verb| 命令可以使用行内的代码显示，如：\verb!\verb|message = "hello,world"|!。
+
+实际上使用 \verb|{\ttfamily message = "hello,world"}| 也可以达到类似的效果；
+并且 \verb|\verb| 命令不能出现章节标题之中。
+
+\section{listings 包}
+
+\subsection{{\ttfamily lstlisting} 环境}
+
+\begin{latexcode}{colorbox}
+\begin{lstlisting}[language=C,caption={C/C++ 语言},numbers=left]
+  /* Hello, world */
+  int main{int argc, char **argv} {
+    printf("Hello, world\n");
+    return 0;
+  }
+\end{lstlisting}
+\end{latexcode}
+
+\subsection{{\ttfamily \textbackslash lstinline} 命令}
+
+\verb|\lstinline| 命令可以使用行内的代码显示，如：\verb!\lstinline|message = "hello,world"|!
+
+\subsection{{\ttfamily \textbackslash lstinputlisting} 命令}
+
+显示代码文件，文件路径为相对于主文件的路径:
+
+\begin{latexcode}{colorbox}
+\lstinputlisting[language=C,caption={hello.c 文件},numbers=left]{snippets/codelistings/helloworld.c}
+\end{latexcode}
+
+\subsection{自定义语言}
+
+listings 包没有提供 JavaScript 语言高亮显示， 但是可以自定义（详见模板）。
+
+\begin{latexcode}{colorbox}
+\begin{lstlisting}[language=js,caption={JavaScript 语言}]
+// 向控制台输出 'hello, world'
+const message = 'hello, world'
+console.log(message)
+\end{lstlisting}
+\end{latexcode}
+
+其它的扩展见:
+\href{https://tex.stackexchange.com/questions/224093/adding-keywords-to-existing-language-for-listings-package}{Adding Keywords to Existing Language for Listings Package}
+
+\section{minted 包}
+
+minted 包需要借助 \href{https://pygments.org/}{pygments} 来渲染代码。
+minted 整体风格比 listings 略胜一筹。
+
+\subsection{支持的语言和风格}
+
+首先，安装 pygments：
+
+\mint{bash}{pip3 install pygments}
+
+查看支持的语言：
+
+\mint{bash}|pygmentize -L lexers|
+
+查查支持的风格：
+
+\mint{bash}|pygmentize -L styles|
+
+此外，可以通过网站
+\href{https://pygments.org/demo/}{Pygments website}或
+\href{https://thepythonguru.com/tools/pygments-demo/}{Syntax Highlighter}
+来查看各种代码渲染的风格\footnote{注意：部分风格与一些特殊字符有冲突，比较可靠的风格是 xcode。}。
+
+\subsection{{\ttfamily minted} 环境}
+
+\begin{latexcode}{colorbox}
+\begin{minted}{c}
+int main{int argc, char **argv} {
+  printf("Hello, world\n");
+  return 0;
+}
+\end{minted}
+\end{latexcode}
+
+\subsection{{\ttfamily \textbackslash mint} 命令}
+
+对于单行的代码，可以使用 \verb|\mint| 命令
+\footnote{注意：不是在行内显示代码，而是另起一段显示。}，如：
+\verb!\mint{js}|message = "hello, world"|!。
+
+\subsection{{\ttfamily \textbackslash mintinline} 命令}
+
+可以使用 \verb|\mintinline| 命令来在行内显示代码，如：
+\verb!\mintinline{js}|message = "hello, world"|!。
+
+\subsection{{\ttfamily \textbackslash inputminted} 命令}
+
+显示代码文件，文件路径为相对于主文件的路径:
+
+\begin{latexcode}{colorbox}
+\inputminted{c}{snippets/codelistings/helloworld.c}
+\end{latexcode}
+
+\subsection{{\ttfamily listing} 环境}
+
+minted 提供 {\ttfamily listing} 环境来作为一个浮动体来包裹代码。
+
+\begin{latexcode}{colorbox}
+\begin{listing}[H]
+  \caption{hello.c文件}
+  \inputminted{c}{snippets/codelistings/helloworld.c}
+\end{listing}
+\end{latexcode}
+
+\subsection{Troubleshooting}
+
+\subsubsection{在设置{\ttfamily bgcolor}后{\ttfamily \textbackslash mintinline}不换行}
+
+在设置{\ttfamily bgcolor}后，对于较长的一行代码使用{\ttfamily \textbackslash mintinline}时不换行，
+见
+\href{https://github.com/gpoore/minted/issues/194}{Github issue 194: breaklines doesn't work with mintinline when other options are set}
+和 
+\href{https://tex.stackexchange.com/questions/419934/breaklines-doesnt-work-with-mintinline}{Stackoverflow: breaklines doesn't work with mintinline}。
+
+The documentation mentions this as a limitation of bgcolor. The standard ways to put a background behind inline text don't work with line wrapping.
+
+\subsubsection{代码的换页}
+
+见
+\href{https://tex.stackexchange.com/questions/368864/pagebreak-for-minted-in-figure}{Stackoverflow: Pagebreak for minted in figure}
+和
+\href{https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540#53540}{Code spanning over two pages with minted, inside listing with caption}。
+
+\subsubsection{一些字符出现红色方框}
+
+见
+\href{https://tex.stackexchange.com/questions/343494/minted-red-box-around-greek-characters}{Minted red box around greek characters}
+和 
+\href{https://tex.stackexchange.com/questions/424421/code-validation-in-minted-package-how-to-disable-it}{Code validation in minted package? How to disable it?}。
+
+解决方法，使用下面的风格：
+xcode，igor，rrt。
+
+\section{{\ttfamily latexcode} 环境与{\ttfamily \textbackslash inputlatexcode} 命令}
+为了显示{\LaTeX}代码和现实渲染结果
+\footnote{实现类似{\ttfamily tcblisting}环境的功能}，可以采用：
+\begin{itemize}
+  \item {\ttfamily latexcode} 环境：工作过程是将代码输出到文件，读取并渲染该文件
+  \item {\ttfamily \textbackslash inputlatexcode} 命令：直接读取并渲染该文件
+\end{itemize}
+
+显示并渲染代码：
+
+\begin{minted}{tex}
+\begin{latexcode}{colorbox}
+{\LaTeX} is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation.
+\end{latexcode}
+\end{minted}
+
+显示并渲染代码文件，渲染结果带有 colorbox（这是默认参数）：
+
+\begin{minted}{tex}
+\inputlatexcode[colorbox]{.tex文件路径}
+\end{minted}
+
+显示并渲染代码文件，渲染结果不带 colorbox
+\footnote{algorithm 与 tcolorbox 存在冲突，请使用 nobox 参数}：
+
+\begin{minted}{tex}
+\inputlatexcode[nobox]{.tex文件路径}
+\end{minted}
+
+
+

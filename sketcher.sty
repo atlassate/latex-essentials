@@ -1,0 +1,363 @@
+\ProvidesPackage{sketcher}[2023/01/01 v1.0 a latex template]
+
+% -------------------------------- tikz ---------------------------------------
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\usetikzlibrary{arrows.meta,calc,math,intersections,through,angles,quotes,decorations,decorations.markings}
+ 
+% 注意: 计算过程是保留坐标单位(pt)的, 所以存在乘除法单位的问题, 首先数值始终携带单位, 在 calc 运算时有的需要
+% 转换为标量; 将坐标转换为 pt 值, 数值可能超出限值, 出现 Dimension too large 错误, 
+% 在计算长度时及时进行缩小 https://tex.stackexchange.com/questions/475556/tikz-why-is-dimension-too-large
+% 具体方法是修改默认的 1cm, 如: [scale=1.0,x=0.5cm,y=0.5cm]
+% 注意此处的变量不要和 tikzpicture 环境重名, 否则被替换掉
+% triangle centers: https://mathworld.wolfram.com/BarycentricCoordinates.html
+\tikzmath{
+  % 采用列主元消元法求直线 P1P2 与直线 P3P4 的交点 P 位置参数 s: s = P1P/P1P2
+  function intersectll(\x1,\y1,\x2,\y2,\x3,\y3,\x4,\y4) {
+    \a1 = \x2-\x1; \b1 = \x3-\x4; \c1 = \x3-\x1;
+    \a2 = \y2-\y1; \b2 = \y3-\y4; \c2 = \y3-\y1;
+    \dmax = max(max(abs(\a1),abs(\a2)), max(abs(\b1),abs(\b2)));
+    \a1 = \a1/\dmax; \b1 = \b1/\dmax; \c1=\c1/\dmax;
+    \a2 = \a2/\dmax; \b2 = \b2/\dmax; \c2=\c2/\dmax;
+    if abs(\a1) < abs(\a2) then {
+      \temp = \a1; \a1 = \a2; \a2 = \temp;
+      \temp = \b1; \b1 = \b2; \b2 = \temp;
+      \temp = \c1; \c1 = \c2; \c2 = \temp;
+    };
+    \b1 = \b1/\a1; \c1 = \c1/\a1; \a1 = 1.0;
+    \b2 = \b2-\a2*\b1; \c2 = \c2-\a2*\c1; \a2 = 0.0;
+    \n2 = \c2/\b2; \n1 = \c1-\b1*\n2;
+    return \n1;
+  };
+}
+
+\tikzset{
+  % perpendicular bisector of the line segment (#1 -- #2)
+  % specifying start and end with modifiers(#3 and #4,see tikz manual 13.5) 
+  perpendicular bisector/.style args={#1,#2,#3,#4}{
+    insert path={
+      let
+        \p1=($(#1)!0.5!(#2)$),
+        \p2=($(\p1)!#3!90:(#2)$), 
+        \p3=($(\p1)!#4!-90:(#2)$)  
+      in (\p2) -- (\p3)
+    }
+  },
+  % perpendicular line of the line (#1 -- #2) through #3
+  % specifying start and end with modifiers(#4 and #5,see tikz manual 13.5) 
+  perpendicular/.style args={#1,#2,#3,#4,#5}{
+    insert path={
+      let
+        \p1=($(#1)!(#3)!(#2)$),   
+        \p2=($(#3)!#4!(\p1)$),    
+        \p3=($(#3)!#5!(\p1)$)     
+      in (\p2) -- (\p3)
+    }
+  },
+  % parallel line of the line (#1 -- #2) through #3
+  % specifying start and end with modifiers(#4 and #5,see tikz manual 13.5) 
+  parallel/.style args={#1,#2,#3,#4,#5}{
+    insert path={
+      let
+        \p1=($(#3)+(#2)-(#1)$),    
+        \p2=($(#3)!#4!(\p1)$),    
+        \p3=($(#3)!#5!(\p1)$)    
+      in (\p2) -- (\p3)
+    }
+  },
+  % translate #3 by the vector (#1 -> #2)
+  translate/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1=($(#3)+(#2)-(#1)$),    
+      in (\p1)
+    }
+  },
+  % reflect #3 about the line (#1 -- #2) 
+  reflect/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1=($(#1)!(#3)!(#2)$),
+        \p2=($(#3)!2!(\p1)$),    
+      in (\p2)
+    }
+  },
+  % rotate #2 around #1 with degree #3
+  rotate/.style args={#1,#2,#3}{
+    insert path={
+      let 
+        \p1=(#1),
+        \p2=(#2),
+      in ($(\p1)!1!#3:(\p2)$)
+    }
+  },
+  % intersection of angle bisector and the opposite side to the vertex (#1)
+  % (using the angle bisector theorem)
+  angle bisector/.style args={#1,#2,#3}{
+    insert path={
+      let 
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p{AB} = ($(#2)-(#1)$),
+        \p{AC} = ($(#3)-(#1)$),
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{b} = {veclen(\x{AC}, \y{AC})},
+        \n{r} = {scalar(\n{c}/(\n{b}+\n{c}))}, % 转换为标量
+      in ($(\p2)!\n{r}!(\p3)$)
+    }
+  },
+  angle/.style args={#1,#2,#3,#4,#5,#6}{
+    insert path={
+      let 
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p4 = (#4), \p5 = (#5), \n1 = {#6},
+        \p{AB} = ($(#2)-(#1)$),
+        \p{BC} = ($(#3)-(#2)$),
+        \p{CA} = ($(#1)-(#3)$),
+        \p{PQ} = ($(#5)-(#4)$),
+        \n{a} = {veclen(\x{BC}, \y{BC})},
+        \n{b} = {veclen(\x{CA}, \y{CA})},
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{s} = {\n{a}+\n{b}+\n{c}},
+        \n{a} = {\n{a}/\n{s}},  % Avoid 'Dimension too large'
+        \n{b} = {\n{b}/\n{s}},
+        \n{c} = {\n{c}/\n{s}},
+        \n{theta} = {acos((\n{b}*\n{b}+\n{c}*\n{c}-\n{a}*\n{a})/(2*\n{b}*\n{c}))},
+        \n{Cos} = {cos(\n1*\n{theta})},
+        \n{Sin} = {sin(\n1*\n{theta})},
+      in ({\x4+\x{PQ}*\n{Cos}-\y{PQ}*\n{Sin},\y4+\x{PQ}*\n{Sin}+\y{PQ}*\n{Cos}})
+    }
+  },
+  % incenter coordinate 
+  incenter/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p{AB} = ($(#2)-(#1)$),
+        \p{BC} = ($(#3)-(#2)$),
+        \p{CA} = ($(#1)-(#3)$),
+        \n{a} = {veclen(\x{BC}, \y{BC})},
+        \n{b} = {veclen(\x{CA}, \y{CA})},
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{s} = {\n{a}+\n{b}+\n{c}},
+        \n1 = {\n{a}/\n{s}}, 
+        \n2 = {\n{b}/\n{s}},
+        \n3 = {\n{c}/\n{s}},
+      in ({\n1*\x1+\n2*\x2+\n3*\x3,\n1*\y1+\n2*\y2+\n3*\y3})
+    }
+  },
+  % excenter coordinate corresponding to the vertex #1
+  excenter/.style args={#1,#2,#3}{ 
+    insert path={
+      let
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p{AB} = ($(#2)-(#1)$),
+        \p{BC} = ($(#3)-(#2)$),
+        \p{CA} = ($(#1)-(#3)$),
+        \n{a} = {veclen(\x{BC}, \y{BC})},
+        \n{b} = {veclen(\x{CA}, \y{CA})},
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{s} = {-\n{a}+\n{b}+\n{c}},
+        \n1 = {\n{a}/\n{s}}, 
+        \n2 = {\n{b}/\n{s}},
+        \n3 = {\n{c}/\n{s}},
+      in ({-\n1*\x1+\n2*\x2+\n3*\x3,-\n1*\y1+\n2*\y2+\n3*\y3})
+    }
+  },
+  % circumcenter coordinate
+  circumcenter/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p{AB} = ($(#2)-(#1)$),
+        \p{BC} = ($(#3)-(#2)$),
+        \p{CA} = ($(#1)-(#3)$),
+        \n{a} = {veclen(\x{BC}, \y{BC})},
+        \n{b} = {veclen(\x{CA}, \y{CA})},
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{m} = {max(max(\n{a},\n{b}),\n{c})},
+        \n{a} = {\n{a}/\n{m}},
+        \n{a} = {\n{a}*\n{a}},
+        \n{b} = {\n{b}/\n{m}},
+        \n{b} = {\n{b}*\n{b}},
+        \n{c} = {\n{c}/\n{m}},
+        \n{c} = {\n{c}*\n{c}},
+        \n1 = {\n{a}*(\n{b}+\n{c}-\n{a})},
+        \n2 = {\n{b}*(\n{c}+\n{a}-\n{b})},
+        \n3 = {\n{c}*(\n{a}+\n{b}-\n{c})},
+        \n{s} = {\n1+\n2+\n3},
+        \n1 = {\n1/\n{s}},
+        \n2 = {\n2/\n{s}},
+        \n3 = {\n3/\n{s}},
+      in ({\n1*\x1+\n2*\x2+\n3*\x3,\n1*\y1+\n2*\y2+\n3*\y3})
+    }
+  },
+  % orthocenter coordinate
+  orthocenter/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p{AB} = ($(#2)-(#1)$),
+        \p{BC} = ($(#3)-(#2)$),
+        \p{CA} = ($(#1)-(#3)$),
+        \n{a} = {veclen(\x{BC}, \y{BC})},
+        \n{b} = {veclen(\x{CA}, \y{CA})},
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{m} = {max(max(\n{a},\n{b}),\n{c})},
+        \n{a} = {\n{a}/\n{m}},
+        \n{a} = {\n{a}*\n{a}},
+        \n{b} = {\n{b}/\n{m}},
+        \n{b} = {\n{b}*\n{b}},
+        \n{c} = {\n{c}/\n{m}},
+        \n{c} = {\n{c}*\n{c}},
+        \n{a2} = {\n{b}+\n{c}-\n{a}},
+        \n{b2} = {\n{c}+\n{a}-\n{b}},
+        \n{c2} = {\n{a}+\n{b}-\n{c}},
+        \n1 = {\n{c2}*\n{b2}},
+        \n2 = {\n{a2}*\n{c2}},
+        \n3 = {\n{b2}*\n{a2}},
+        \n{s} = {\n1+\n2+\n3},
+        \n1 = {\n1/\n{s}},
+        \n2 = {\n2/\n{s}},
+        \n3 = {\n3/\n{s}},
+      in ({\n1*\x1+\n2*\x2+\n3*\x3,\n1*\y1+\n2*\y2+\n3*\y3})
+    }
+  },
+  % centroid coordinate
+  centroid/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+      in ({(\x1+\x2+\x3)/3},{(\y1+\y2+\y3)/3})
+    }
+  },
+  % nine-pint center coordinate
+  nine-point center/.style args={#1,#2,#3}{
+    insert path={
+      let
+        \p1 = (#1), \p2 = (#2), \p3 = (#3),
+        \p{AB} = ($(#2)-(#1)$),
+        \p{BC} = ($(#3)-(#2)$),
+        \p{CA} = ($(#1)-(#3)$),
+        \n{a} = {veclen(\x{BC}, \y{BC})},
+        \n{b} = {veclen(\x{CA}, \y{CA})},
+        \n{c} = {veclen(\x{AB}, \y{AB})},
+        \n{m} = {max(max(\n{a},\n{b}),\n{c})},
+        \n{a} = {\n{a}/\n{m}},
+        \n{a} = {\n{a}*\n{a}},
+        \n{b} = {\n{b}/\n{m}},
+        \n{b} = {\n{b}*\n{b}},
+        \n{c} = {\n{c}/\n{m}},
+        \n{c} = {\n{c}*\n{c}},
+        \n1 = {\n{a}*(\n{b}+\n{c})-(\n{b}-\n{c})*(\n{b}-\n{c})},
+        \n2 = {\n{b}*(\n{c}+\n{a})-(\n{c}-\n{a})*(\n{c}-\n{a})},
+        \n3 = {\n{c}*(\n{a}+\n{b})-(\n{a}-\n{b})*(\n{a}-\n{b})},
+        \n{s} = {\n1+\n2+\n3},
+        \n1 = {\n1/\n{s}},
+        \n2 = {\n2/\n{s}},
+        \n3 = {\n3/\n{s}},
+      in ({\n1*\x1+\n2*\x2+\n3*\x3,\n1*\y1+\n2*\y2+\n3*\y3})
+    }
+  },
+  % intersection coordinate of the line (#1 -- #2) and the line (#3 -- #4) 
+  % https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
+  intersect/.style args={#1,#2,#3,#4}{
+    insert path={
+      let 
+        \p1 = (#1), \p2 = (#2), \p3 = (#3), \p4 = (#4), 
+        \n1 = {intersectll(\x1,\y1,\x2,\y2,\x3,\y3,\x4,\y4)},
+      in ($(\p1)!{\n1}!(\p2)$)
+    }
+  },
+  % circle with the center (#1) through #2
+  circle/.style args={#1,#2}{
+    insert path={
+      let
+        \p1 = (#1),
+        \p2 = ($(#1)-(#2)$),
+        \n1 = {veclen(\p2)}
+      in (\p1) circle ({\n1})
+    }
+  },
+  % 从圆[圆心 O(#1),圆上一点 A(#2)]外一点 P(#3) 作圆的切线, 
+  % 返回切点为 T 的坐标, 点 T 在 OP 的逆时针方向
+  tangent point/.style args={#1,#2,#3}{
+    insert path={
+      let 
+        \p1 = (#1),
+        \p2 = (#3),
+        \p3 = ($(#2)-(#1)$), % 半径
+        \p4 = ($(#3)-(#1)$), 
+        \n1 = {veclen(\p3)},
+        \n2 = {veclen(\p4)},
+        \n3 = {scalar(\n1/\n2)}
+      in ($(\p1)!\n3!{acos(\n1/\n2)}:(\p2)$)
+    }
+  },
+  % 两圆的位似中心 Homothetic center
+  % external center, #1,#2: 圆心1和圆1上任一点, #3,#4: 圆心2和圆2上任一点
+  external center/.style args={#1,#2,#3,#4}{
+    insert path={
+      let 
+        \p1 = (#1),
+        \p2 = (#3),
+        \p3 = ($(#2)-(#1)$), % 半径1
+        \p4 = ($(#4)-(#3)$), % 半径2
+        \n1 = {veclen(\p3)},
+        \n2 = {veclen(\p4)},
+        \n3 = {scalar(\n1/(\n1-\n2))}
+      in ($(\p1)!\n3!(\p2)$)
+    }
+  },
+  % 两圆的位似中心 Homothetic center
+  % internal center, #1,#2: 圆心1和圆1上任一点, #3,#4: 圆心2和圆2上任一点
+  internal center/.style args={#1,#2,#3,#4}{
+    insert path={
+      let 
+        \p1 = (#1),
+        \p2 = (#3),
+        \p3 = ($(#2)-(#1)$), % 半径1
+        \p4 = ($(#4)-(#3)$), % 半径2
+        \n1 = {veclen(\p3)},
+        \n2 = {veclen(\p4)},
+        \n3 = {scalar(\n1/(\n1+\n2))}
+      in ($(\p1)!\n3!(\p2)$)
+    }
+  },
+}
+% -----------------------------------------------------------------------------
+
+% -------------------------------- unit ---------------------------------------
+\RequirePackage{siunitx}
+% -----------------------------------------------------------------------------
+
+% ------------------------------- quotation -----------------------------------
+\newenvironment{quoted}[1]%
+  {\newcommand\quotesource{#1}%
+    \begin{quotation}}%
+    {\par\hfill -- \textit{\quotesource}%
+    \end{quotation}}
+% -----------------------------------------------------------------------------
+
+% ---------------------------------- list -------------------------------------
+\RequirePackage{enumitem}
+% 仿照 enumerate 环境定义可二级嵌套的 newenumerate
+\newlist{newenumerate}{enumerate}{2} 
+% 第一级编号使用数字: (1) (2) (3) ...
+\setlist[newenumerate,1]{leftmargin=2em,labelwidth=2em,itemindent=2em,topsep=0pt,
+itemsep=0pt,parsep=0pt,label=\arabic*.} 
+% 第二级编号使用字母: (a) (b) (c) ...
+\setlist[newenumerate,2]{itemindent=2ex,topsep=0pt,
+itemsep=0pt,parsep=0pt,label=\alph*.}
+
+% 定义紧凑的列表
+\newenvironment{newitemize}{
+  \begin{list}{\textbullet}{
+    \setlength\leftmargin{2em}
+    \setlength\labelwidth{1em}
+    \setlength\itemindent{1em}
+    \setlength\topsep{0pt}
+    \setlength\itemsep{0pt}
+    \setlength\parsep{0pt}
+  }}
+  {\end{list}}
+% -----------------------------------------------------------------------------

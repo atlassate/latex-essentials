@@ -1,0 +1,368 @@
+\ProvidesPackage{compositor}[2023/01/01 v1.0 a latex template]
+
+\makeatletter%
+\@ifclassloaded{book}% 对于 documentclass 为 ctexbook, book
+{
+  \ctexset{chapter/number=\arabic{chapter}} % 使用数字
+}
+\makeatother%
+
+% 中文中的一些特殊括号
+% https://unicode-table.com/en/blocks/cjk-symbols-and-punctuation/
+\def \LeftAngleBracket {\symbol{"3008}}              % 〈
+\def \RightAngleBracket {\symbol{"3009}}             %  〉
+\def \LeftBlackLenticularBracket {\symbol{"3010}}    % 【
+\def \RightBlackLenticularBracket {\symbol{"3011}}   %  】
+\def \LeftTortoiseShellBracket {\symbol{"3014}}      % 〔
+\def \RightTortoiseShellBracket {\symbol{"3015}}     %  〕
+\def \LeftWhiteLenticularBracket {\symbol{"3016}}    % 〖
+\def \RightWhiteLenticularBracket {\symbol{"3017}}   %  〗
+% \def \LeftWhiteTortoiseShellBracket {\symbol{"3018}} % 〘
+% \def \RightWhiteTortoiseShellBracket {\symbol{"3019}}%  〙
+\def \LeftDoubleAngleBracket {\symbol{"300A}}        % 《
+\def \RightDoubleAngleBracket {\symbol{"300B}}       %  》
+\def \LeftCornerBracket {\symbol{"300C}}             % 「
+\def \RightCornerBracket {\symbol{"300D}}            %  」
+\def \LeftWhiteCornerBracket {\symbol{"300E}}        % 『
+\def \RightWhiteCornerBracket {\symbol{"300F}}       %  』
+% \def \LeftWhiteSquareBracket {\symbol{"301A}}        % 〚
+% \def \RightWhiteSquareBracket {\symbol{"301B}}       %  〛
+% \def \IdeographicHalfFillSpace {\symbol{"303F}}      %  〿
+
+\RequirePackage{geometry}
+\geometry{left=3cm,right=3cm}
+\RequirePackage{booktabs}
+
+% 颜色名
+\RequirePackage[dvipsnames,svgnames,x11names]{xcolor}
+
+% color box
+\RequirePackage[most]{tcolorbox}
+\tcbset{colback=cyan!5!white,colframe=cyan!75!black}
+
+% 图片位于主文件目录下的 images 中
+\RequirePackage{graphicx}            
+\graphicspath{{images/}}
+
+% 文件路径
+\RequirePackage[obeyspaces,spaces]{url}
+
+% 目录中显示参考文献、索引、链接(不能改变包的引入顺序) 
+\RequirePackage[nottoc]{tocbibind}   % nottoc 不包含目录本身
+\RequirePackage{imakeidx}      
+\RequirePackage[hyperindex]{hyperref}
+\hypersetup{
+    colorlinks=true,  % set true if you want colored links
+    linktoc=all,      % set to all if you want both sections and subsections linked
+    linkcolor=blue,   % choose some color if you want links to stand out
+}
+
+% 参考文件格式
+\bibliographystyle{unsrt}  
+
+\RequirePackage{caption}
+
+% --------------------------------- minted ------------------------------------
+% To control how LATEX counts the listing floats, you can pass either the
+% section or chapter option when loading the minted package.
+
+% 代码标题在 listing 中的上部(float 默认是在下部)
+% https://tex.stackexchange.com/questions/57353/how-to-get-caption-above-listing-with-minted
+\makeatletter%
+\@ifclassloaded{book}% 对于 documentclass 为 ctexbook, book
+{
+  \RequirePackage[chapter,newfloat]{minted}
+}{
+  \RequirePackage[section,newfloat]{minted}  
+}
+\makeatother%
+
+% 源代码抄录环境配置 minted
+\usemintedstyle{xcode}
+
+% listing envrioment for large source file page breaking
+% https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540#53540
+\newenvironment{codelisting}{\captionsetup{type=listing}}{}
+\setminted{
+    bgcolor=DarkSeaGreen2, % xcolor 颜色名
+    breaklines=true,
+    breakafter=-/,         % 在空格, ‘-’ 或 ‘/’ 之后断行
+}
+% line number font size
+\renewcommand\theFancyVerbLine{\small\arabic{FancyVerbLine}}
+
+% 在抄录环境下高亮显示特定行, 语言选择 text
+% https://tex.stackexchange.com/questions/393526/bold-letters-within-minted-bash-text
+
+% ---------------- command and environment with key-value options -------------
+% https://tex.stackexchange.com/questions/34312/how-to-create-a-command-with-key-values
+
+
+% -------------------------------- listings -----------------------------------
+% listings 包设置 与 JavaScript 语言设置 (listings 可以作为 minted 的替代)
+\RequirePackage{listings}
+% Code Styles
+\lstset{ 
+  basicstyle=\ttfamily,                         % the size of the fonts that are used for the code
+  backgroundcolor=\color{DarkSeaGreen2}, 
+  breaklines=true,                              % sets automatic line breaking
+  commentstyle=\color{Green}\rmfamily\itshape,  % comment style
+  emphstyle=\color{red},   
+  firstnumber=1,                                % start line enumeration with line 1000
+  %frame=single,	                                % adds a frame around the code
+  keepspaces=true,                              % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle={[1]\color{Indigo}\bfseries},    % keyword style
+  keywordstyle={[2]\color{DarkMagenta}},
+  identifierstyle=\color{Blue},   
+  numbers=left,                                 % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=10pt,                               % how far the line-numbers are from the code
+  numberstyle=\color{Gray}\rmfamily,            % the style that is used for the line-numbers
+  rulecolor=\color{black},                      % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                             % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,                       % underline spaces within strings only
+  showtabs=false,                               % show tabs within strings adding particular underscores
+  stepnumber=1,                                 % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{ForestGreen}\ttfamily,     % string literal style
+  tabsize=2,	                                  % sets default tabsize to 2 spaces
+  title=\lstname                                % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% JavaScript language
+\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{
+    as,async,await,break,case,catch,class,const,continue,
+    debugger,default,delete,do,else,enum,export,extends,
+    false,finally,for,from,function,if,implements,import,
+    in,interface,instanceof,let,new,null,of,package,private,
+    protected,public,return,set,static,super,switch,target,
+    this,throw,true,try,typeof,undefined, var,void,while,with,yield
+  },  % JavaScript ES6 keywords
+  morekeywords=[2]{
+    console, Array, Boolean, DataView, Date, Error,
+    EvalError, Float32Array, Float64Array, forEach, FulfillPromise, Function,
+    Infinity, Int8Array, Int16Array, Int32Array, 
+    IsPromise, Iterable, JSON, localeCompare, Map, Math, Number, Object, 
+    Promise, Proxy, RangeError, ReferenceError, Reflect, Reflection, RegExp,
+    Set, String, Symbol, SyntaxError, then,  
+    TriggerPromiseReactions, TypeError, Uint8Array, Uint8ClampedArray, 
+    Uint16Array, Uint32Array, URIError, 
+    WeakMap, WeakSet
+  },  % JavaScript extended keywords
+  sensitive=true,
+  morestring=[b]",                                    % String definition
+  morestring=[d]',
+  morestring=[s][\color{ForestGreen}\ttfamily]{`}{`},
+  morecomment=[l]{//},                                % Comment definition
+  morecomment=[s]{/*}{*/},
+  morecomment=[s]{/**}{*/},
+  emph={
+    props,methods,computed,mutations,actions,template
+  }                                                   % Vue.js
+}
+
+\lstalias{ES6}{JavaScript}
+\lstalias{ECMAScript2015}{JavaScript}
+\lstalias{js}{JavaScript}
+% -----------------------------------------------------------------------------
+
+% minted 与 listings 混合使用时的编号问题
+% https://tex.stackexchange.com/questions/269491/mixing-minted-with-lstlisting
+
+\renewcommand{\lstlistingname}{代码}
+%\renewcommand{\listingscaption}{代码}%使用newfloat之后失效
+%\renewcommand{\listoflistingscaption}{代码清单}%使用newfloat之后失效
+\SetupFloatingEnvironment{listing}{name=代码}
+\SetupFloatingEnvironment{listing}{listname=代码清单}
+\AtBeginEnvironment{listing}{\setcounter{listing}{\value{lstlisting}}}
+\AtEndEnvironment{listing}{\stepcounter{lstlisting}}
+
+% --------------------------------- List latex code ---------------------------
+\RequirePackage{ifthen}
+% \inputlatexcode 命令用于显示 latex 代码文件和渲染后的效果, 参数是文件名 
+% 注意: 在主文件定义 input 的搜索路径, 对 inputminted 不起作用
+% algorithm 与 tcolorbox 存在冲突
+\newcommand{\inputlatexcode}[2][colorbox]{
+  \inputminted[linenos=true]{latex}{#2}
+  \ifthenelse{\equal{#1}{colorbox}}{
+    \begin{tcolorbox}
+    \input{#2}
+    \end{tcolorbox}
+  }{}
+  \ifthenelse{\equal{#1}{nobox}}{
+    \input{#2}
+  }{}
+}
+
+% 渲染 tikz 绘图代码文件, 参数 2 是 caption
+\newcommand{\inputtikz}[3][withoutcode]{
+  \ifthenelse{\equal{#1}{withcode}}{
+    \inputminted[linenos=true]{latex}{#3}
+  }{}
+  \begin{figure}[H]
+    \centering
+    \input{#3}
+    \caption{#2}
+  \end{figure}
+}
+
+% 参考 https://tex.stackexchange.com/questions/37792/write-environment-body-verbatim-to-a-file
+% \newenvironment{latexcode}
+%   {\typeout{Writing file \jobname.latexcode}\VerbatimOut{\jobname.latexcode}}
+%   {\endVerbatimOut\inputminted{latex}{\jobname.latexcode}\input{\jobname.latexcode}}
+
+% 显示 LaTeX 代码并渲染, 先将环境中的代码写入文件, 随后读入
+\newenvironment{latexcode}[1]% 不要设置默认参数, 否则出现 FancyVerb Error: Extraneous input ...
+  { % start part
+    \newcommand\boxstyle{#1}% end part 不能直接访问参数
+    \typeout{Writing file \jobname.latexcode}
+    \VerbatimOut{\jobname.latexcode}}% 最后一个花括号不要另起一行, 否则也出错
+  { % end part
+    \endVerbatimOut
+    \inputminted{latex}{\jobname.latexcode}
+    \ifthenelse{\equal{\boxstyle}{colorbox}}{
+    \begin{tcolorbox}
+    \input{\jobname.latexcode}
+    \end{tcolorbox}
+    }{}
+    \ifthenelse{\equal{\boxstyle}{nobox}}{
+      \input{\jobname.latexcode}
+    }{}}
+
+% latexcode 环境也可以利用 tcblisting 环境来实现
+% \tcbuselibrary{minted}
+% \newtcblisting{latexcode}{%
+%   breakable,%listing outside text,
+%   colback=cyan!5!white,colframe=cyan!75!black,
+%   listing engine=minted,minted language=latex,
+%   minted options={mathescape,fontsize=\normalsize},  
+% }
+% -----------------------------------------------------------------------------
+
+% ------------------------------------ math -----------------------------------
+\RequirePackage{amsmath}  % include commands: \cfrac
+\RequirePackage{amsthm}   % AMS 定理环境
+\RequirePackage{amssymb}  % AMS 符号
+\RequirePackage{fourier}  % AMS 符号
+\RequirePackage{bm}
+\allowdisplaybreaks       % 允许 align 等环境跨页显示公式
+
+% 自定义 thm 环境(由文档示例修改):
+%   1. 将 punctuation 改为 空格
+%   2. 定理名称粗体字
+\newtheoremstyle{note}% ⟨name ⟩ 
+{3pt}% ⟨Space above ⟩1 
+{3pt}% ⟨Space below ⟩1
+{}% ⟨Body font ⟩
+{}% ⟨Indent amount ⟩2
+{\bf}% ⟨Theorem head font⟩
+{}% ⟨Punctuation after theorem head ⟩
+{.5em}% ⟨Space after theorem head ⟩3
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{note}
+
+% 重新定义 proof 环境(由文档示例修改):
+%   1. 将 addpunct 由 . 改为 空格
+\makeatletter
+\renewenvironment{proof}[1][\indent \proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item\relax
+{\itshape #1\@addpunct{ }}\hspace\labelsep\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% 中文定理环境设置(来自知乎), 包括定理, 引理, 命题, 例题, 证明等环境, 
+% 说明:
+%   1. \indent 为了段前空两格, 似乎未起作用
+%   2. [] 内参数: [chapter] 指的是包含章的编号, 如: 1.1, 1.2, ...; 
+%      [section] 指的是包含章的编号, 如: 1.1.1, 1.1.2, ...;
+%      不含参数[] 指的是编号为: 1, 2, ...
+%   3. 下面的英文版定义的环境有 bug, 如 theorem, lemma
+%      使用了同一编号计算器, 应该各自独立编号
+%   4. proof 默认以 QED 符号结束, 而 solution 去掉了 QED 符号
+\makeatletter%
+\@ifclassloaded{book}% 对于 documentclass 为 ctexbook, book
+{
+  \newtheorem{theorem}{\indent 定理}[chapter] 
+  \newtheorem{lemma}{\indent 引理}[chapter]
+  \newtheorem{proposition}{\indent 命题}[chapter]
+  \newtheorem{corollary}{\indent 推论}[chapter]
+  \newtheorem{definition}{\indent 定义}[chapter]
+  \newtheorem{example}{\indent 例}[chapter]
+  \newtheorem{remark}{\indent 注}[] 
+  \newtheorem*{remark*}{\indent 注} % unnumbered
+  \newtheorem{problem}{\indent 问题}[chapter]
+  \newtheorem*{problem*}{\indent 问题}
+  \newtheorem{solution}{\indent 解}
+  \newtheorem*{solution*}{\indent 解}
+  \renewcommand{\proofname}{\indent\bf 证明}
+  %\renewcommand{\qedsymbol}{}
+}{ % 其它 documentclass
+  \newtheorem{theorem}{\indent 定理}[section] 
+  \newtheorem{lemma}{\indent 引理}[section]
+  \newtheorem{proposition}{\indent 命题}[section]
+  \newtheorem{corollary}{\indent 推论}[section]
+  \newtheorem{definition}{\indent 定义}[section]
+  \newtheorem{example}{\indent 例}[section]
+  \newtheorem{remark}{\indent 注}[] 
+  \newtheorem*{remark*}{\indent 注} % unnumbered
+  \newtheorem{problem}{\indent 问题}[section]
+  \newtheorem*{problem*}{\indent 问题}
+  \newtheorem{solution}{\indent 解}
+  \newtheorem*{solution*}{\indent 解}
+  \renewcommand{\proofname}{\indent\bf 证明}
+  %\renewcommand{\qedsymbol}{}
+}
+\makeatother%
+
+% % English theorem environment
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{definition}{Definition}[section]
+% \newtheorem{remark}{Remark}[section]
+% \newtheorem{example}{Example}[section]
+% \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% cases
+\newenvironment{rcase}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% -----------------------------------------------------------------------------
+
+% 算法排版, algorithm 与 tcolorbox 存在冲突
+% 当同时引入 algpseudocode 和 algpascal, 必须使用
+% \alglanguage{pseudocode} 或 \alglanguage{pascal}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{algpascal}
+
+% 对于长算法跨页显示
+% https://tex.stackexchange.com/questions/428001/long-algorithm-cannot-split-into-two-pages
+% https://tex.stackexchange.com/questions/33866/algorithm-tag-and-page-break/33869#33869
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother

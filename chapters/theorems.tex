@@ -1,0 +1,77 @@
+\chapter{定理与证明的排版}
+
+
+
+\section{使用 {\AmS} amsthm 包}
+
+在 compositors 宏包中定义了 {\ttfamily theorem，
+lemma，
+proposition，
+corollary，
+definition，
+example，
+remark，
+remark*，
+solution，
+solution*，
+proof}环境。
+
+\begin{latexcode}{colorbox}
+\begin{definition}[Hypotenuse]
+  The longest side of a triangle with a right angle is called the \emph{hypotenuse}.
+\end{definition}
+\end{latexcode}
+
+\begin{latexcode}{colorbox}
+\begin{remark}
+  The other sides are called \emph{catheti}, or \emph{legs}.
+\end{remark}
+\end{latexcode}
+
+\begin{latexcode}{colorbox}
+\begin{theorem}[Pythagoras]
+  \label{pythagoras}
+  In any right triangle, the square of the hypotenuse equals the sum of the squares of the other sides.
+\end{theorem}
+\end{latexcode}
+
+\begin{latexcode}{colorbox}
+\begin{proof}
+  The proof has been given in Euclid's Elements,
+  Book 1, Proposition 47. Refer to it for details.
+  The converse is also true, see lemma \ref{converse}. 
+\end{proof}
+\end{latexcode}
+
+\begin{latexcode}{colorbox}
+\begin{lemma}
+  \label{converse}
+  For any three positive numbers \(x\), \(y\),
+  and \(z\) with \(x^2 + y^2 = z^2\), there is a triangle with side lengths \(x\), \(y\) and \(z\). Such triangle has a right angle, and the hypotenuse has the length \(z\).
+\end{lemma}
+\end{latexcode}
+
+\begin{latexcode}{colorbox}
+\begin{remark*}
+  This is the converse of theorem \ref{pythagoras}.
+\end{remark*}
+\end{latexcode}
+
+\section{例题与解的排版}
+
+\begin{latexcode}{colorbox}
+\begin{example}
+  求方程 $$ x^2 - x - 12 = 0 $$ 的根.
+\end{example}
+  
+\begin{solution*}
+  对方程左边进行因式分解:
+  \begin{gather*}
+    (x-4)(x+3) = 0 \\
+    \intertext{因此,}
+    x-4=0 \text{\quad 或 \quad} x+3=0 \\
+    \intertext{所以, 方程的根是:}
+    x_1 = 4, \quad x_2 = -3
+  \end{gather*}
+\end{solution*}
+\end{latexcode}

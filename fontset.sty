@@ -1,0 +1,52 @@
+\ProvidesPackage{fontset}[2023/01/01 v1.0 a latex template]
+
+% 中文排版, 可以直接使用 ctexart, ctexbook
+% \RequirePackage[UTF8]{ctex}   
+
+% [Deprecated] texlive 自带 Fandol 楷体, 该字库的"仓"误为"仑", 故不用.
+% \setCJKmainfont[
+%   BoldFont=FandolHei-Regular.otf,
+%   ItalicFont=FandolSong-Regular.otf,
+%   BoldItalicFont=FandolFang-Regular.otf
+% ]{FandolKai-Regular.otf}  
+
+% 中文默认字体 rffamily
+\setCJKmainfont[
+  BoldFont=方正黑体简体.TTF,
+  ItalicFont=方正楷体简体.TTF,
+  BoldItalicFont=方正行楷简体.TTF
+]{方正书宋简体.TTF}  
+
+% 中文无衬线字体 sffamily
+\setCJKsansfont[
+  Extension      = .otf,
+  UprightFont    = *-Regular,
+  BoldFont       = *-Bold,
+  ItalicFont     = *-Light,
+  BoldItalicFont = *-Medium
+]{NotoSansSC}
+
+% 中文等宽字体 ttfamily
+\setCJKmonofont[
+  BoldFont=方正清仿宋简体-Bold.TTF,
+  ItalicFont=方正清仿宋简体-Light.TTF,
+  BoldItalicFont=方正聚珍新仿简体.TTF
+]{方正仿宋简体.TTF}
+
+\setCJKfamilyfont{宋体}{方正书宋简体.TTF}
+\setCJKfamilyfont{圆体}{方正准圆简体.TTF}
+\setCJKfamilyfont{仿宋}{方正仿宋简体.TTF}
+\setCJKfamilyfont{楷体}{方正楷体简体.TTF}
+\setCJKfamilyfont{黑体}{方正黑体简体.TTF}
+\setCJKfamilyfont{隶书}{方正隶书简体.TTF}
+\setCJKfamilyfont{行楷}{方正行楷简体.TTF}
+\setCJKfamilyfont{行书}{字酷堂松雪行书简体.TTF}
+\setCJKfamilyfont{NotoSansSC}{NotoSansSC-Regular.otf}
+\newcommand{\notosanssc}{\CJKfamily{NotoSansSC}}
+\setCJKfamilyfont{NotoSerifSC}{NotoSerifSC-Regular.otf}
+\newcommand{\notoserifsc}{\CJKfamily{NotoSerifSC}}
+
+% setmainfont, setsansfont, setmonofont等
+% 在此处设置无效, 需要在 .tex 文件定义
+% \RequirePackage{fontspec}
+% \setmainfont{Arial} 
