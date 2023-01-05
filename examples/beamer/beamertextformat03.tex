@@ -1,0 +1,52 @@
+% Text decorations in Beamer
+\documentclass{ctexbeamer}
+
+% Theme choice
+\usetheme{CambridgeUS}
+
+% Required package
+\usepackage{ulem}
+
+% Use Chinese fonts effect
+\usepackage{CJKfntef}
+
+\begin{document}
+
+\begin{frame}{Text decorations provided by the
+\texttt{ulem} package}
+
+\uline{Underlined that breaks at the end of lines if
+they are too too long because the author won’t stop
+writing.} \\~\\
+
+\uuline{Double-Underlined text} \\~\\
+
+\uwave{Wavy-Underlined text} \\~\\
+
+\sout{Strikethrough text} \\~\\
+
+\xout{Struck with Hatching text} \\~\\
+
+\dashuline{Dashed Underline text} \\~\\ 
+
+\dotuline{Dotted Underline text} 
+
+\end{frame}
+
+\begin{frame}{使用 \texttt{CJKfntef} 宏包修饰中文字体}
+
+\CJKunderline{鉴于对人类家庭所有成员的固有尊严及其平等的和不移的权利的承认,乃是世界自由、正义与和平的基础.} \\~\\
+
+\CJKunderdblline{世界自由、正义与和平的基础} \\~\\
+
+\CJKunderwave{世界自由、正义与和平的基础} \\~\\
+
+\CJKsout{世界自由、正义与和平的基础} \\~\\
+
+\CJKxout{世界自由、正义与和平的基础} \\~\\
+
+\CJKunderdot{世界自由、正义与和平的基础} 
+
+\end{frame}
+
+\end{document}

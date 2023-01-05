@@ -1,0 +1,48 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+
+\usetheme{Madrid}
+\useoutertheme{miniframes} % Alternatively: miniframes, infolines, split
+\useinnertheme{circles}
+
+\definecolor{UBCblue}{rgb}{0.04706, 0.13725, 0.26667} % UBC Blue (primary)
+\definecolor{UBCgrey}{rgb}{0.3686, 0.5255, 0.6235} % UBC Grey (secondary)
+
+\setbeamercolor{palette primary}{bg=UBCblue,fg=white}
+\setbeamercolor{palette secondary}{bg=UBCblue,fg=white}
+\setbeamercolor{palette tertiary}{bg=UBCblue,fg=white}
+\setbeamercolor{palette quaternary}{bg=UBCblue,fg=white}
+\setbeamercolor{structure}{fg=UBCblue} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=UBCblue} % TOC sections
+
+% Override palette coloring with secondary
+\setbeamercolor{subsection in head/foot}{bg=UBCgrey,fg=white}
+
+\title[Title Without Rambling]{My Rambling Presentation Title}
+\date{\today}
+\author[R.A.]
+{Rambling Academic}
+\institute[RamblingAcademic.com]{RamblingAcademic.com\\Nuts and Bolts of Research. Plus Some Rambling.}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+\section{Rambling Section}
+
+\subsection{First Subsection}
+
+\begin{frame}
+  Here is some rambling text
+  \begin{enumerate}
+  \item List item 1
+  \item List item 2
+  \end{enumerate}
+\end{frame}
+
+\end{document}

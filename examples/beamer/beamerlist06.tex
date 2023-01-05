@@ -1,0 +1,25 @@
+% Spacing between list items
+\documentclass{ctexbeamer}
+
+% Theme choice:
+\usetheme{Warsaw}
+
+% Item spacing
+\setbeamertemplate{itemize/enumerate subbody begin}{\vspace{0.5cm}}
+\setbeamertemplate{itemize/enumerate subbody end}{\vspace{1cm}}
+
+\begin{document}
+
+\begin{frame}{修改列表项目间距}
+
+\begin{itemize}
+  \item Item one
+  \begin{itemize}
+    \item Sub item
+  \end{itemize}
+\item Item two
+\end{itemize}
+
+\end{frame}
+
+\end{document}

@@ -14,15 +14,24 @@
 \begin{frame}
 \begin{tikzpicture}[remember picture,overlay]
   \draw[magenta,fill=magenta] (current page.east) circle (.25);
-  \node at ($(current page.east)+(-2,0)$) {$(current page.east)$};
+  \node at ($(current page.east)+(-2.5,0)$) {$(current\ page.east)$};
   \draw[magenta,fill=magenta] (current page.west) circle (.25);
-  \node at ($(current page.west)+(2,0)$) {$(current page.west)$};
+  \node at ($(current page.west)+(2.5,0)$) {$(current\ page.west)$};
   \draw[magenta,fill=magenta] (current page.south) circle (.25);
-  \node at ($(current page.south)+(0,0.5)$) {$(current page.south)$};
+  \node at ($(current page.south)+(0,0.5)$) {$(current\ page.south)$};
   \draw[magenta,fill=magenta] (current page.north) circle (.25);
-  \node at ($(current page.north)+(0,-0.5)$) {$(current page.north)$};
+  \node at ($(current page.north)+(0,-0.5)$) {$(current\ page.north)$};
   \draw[magenta,fill=magenta] (current page.center) circle (.25);
-  \node at ($(current page.center)+(0,-0.5)$) {$(current page.center)$};
+  \node at ($(current page.center)+(0,-0.5)$) {$(current\ page.center)$};
+
+  \draw[magenta,fill=magenta] (current page.north east) circle (.25);
+  \node at ($(current page.north east)+(-2.5,-0.5)$) {$(current\ page.north\ east)$};
+  \draw[magenta,fill=magenta] (current page.north west) circle (.25);
+  \node at ($(current page.north west)+(2.5,-0.5)$) {$(current\ page.north\ west)$};
+  \draw[magenta,fill=magenta] (current page.south east) circle (.25);
+  \node at ($(current page.south east)+(-2.5,0.5)$) {$(current\ page.south\ east)$};
+  \draw[magenta,fill=magenta] (current page.south west) circle (.25);
+  \node at ($(current page.south west)+(2.5,0.5)$) {$(current\ page.south\ west)$};
 \end{tikzpicture}
 \end{frame}
 
@@ -32,25 +41,25 @@
   \coordinate (O) at (current page.center);
   \coordinate (A) at (current page.east);
   \draw[magenta,fill=magenta] (current page.center) circle (.25);
-  \node at ($(current page.center)+(-2,0)$) {$(current page.center)$};
+  \node at ($(current page.center)+(-2.5,0)$) {$(current\ page.center)$};
   \draw[thick,red] (current page.center) -- (current page.east);
 
   \coordinate (B) at (current page.-45);
   \draw[orange,fill=orange] (B) circle (.25);
   \draw[thick,orange] (current page.center) -- (B);
-  \node at ($(B)+(-2,0.5)$) {$(current page.-45)$};
+  \node at ($(B)+(-2.5,0.5)$) {$(current\ page.-45)$};
   \pic ["$-45^\circ$",latex-,draw=orange,angle radius=1.25cm,angle eccentricity=1.5] {angle=B--O--A};
 
   \coordinate (C) at (current page.30);
   \draw[green,fill=green] (C) circle (.25);
   \draw[thick,green] (current page.center) -- (C);
-  \node at ($(C)+(-2,0.5)$) {$(current page.30)$};
+  \node at ($(C)+(-2.5,0.5)$) {$(current\ page.30)$};
   \pic ["$30^\circ$",-latex,draw=green,angle radius=1.25cm,angle eccentricity=1.5] {angle=A--O--C};
 
   \coordinate (D) at (current page.120);
   \draw[purple,fill=purple] (D) circle (.25);
   \draw[thick,purple] (current page.center) -- (D);
-  \node at ($(D)+(-2,-0.5)$) {$(current page.120)$};
+  \node at ($(D)+(-2.5,-0.5)$) {$(current\ page.120)$};
   \pic ["$120^\circ$",-latex,draw=purple,angle radius=1cm,angle eccentricity=1.5] {angle=A--O--D};
 \end{tikzpicture}
 \end{frame}

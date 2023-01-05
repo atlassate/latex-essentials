@@ -1,0 +1,46 @@
+% Change color of Beamer blocks
+\documentclass{beamer}
+
+% Change example block colors
+
+% 1- Block title (background and text)
+\setbeamercolor{block title example}{fg=white, bg=teal}
+
+% 2- Block body (background and text)
+\setbeamercolor{block body example}{ bg=teal!25}
+
+% Change alert block colors
+
+% 1- Block title (background and text)
+\setbeamercolor{block title alerted}{fg=white, bg=orange}
+
+% 2- Block body (background and text)
+\setbeamercolor{block body alerted}{ bg=orange!25}
+
+% Change standard block colors
+
+% 1- Block title (background and text)
+\setbeamercolor{block title}{bg=cyan, fg=white}
+
+% 2- Block body (background)
+\setbeamercolor{block body}{bg=cyan!10}
+
+\begin{document}
+
+\begin{frame}{Basic Blocks Example}
+
+\begin{block}{Standard block}
+  Observation through sound or listening can tell us about our surrounding environment.
+\end{block}
+
+\begin{alertblock}{Alert block}
+  A-weighting mirrors the range of hearing, with frequencies of 20 Hz to 20,000 Hz.
+\end{alertblock}
+
+\begin{exampleblock}{Example block}
+  Recommendations for leisure noise in 2018 were conditional and based on the equivalent sound pressure level during an average 24 hour period in a year without weights for nighttime noise.
+\end{exampleblock}
+
+\end{frame}
+
+\end{document}
