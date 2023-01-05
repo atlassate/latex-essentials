@@ -15,7 +15,8 @@ int main(int argc, char **argc) {
 \end{verbatim}
 \end{latexcode}
 
-\verb|\verb| 命令可以使用行内的代码显示，如：\verb!\verb|message = "hello,world"|!。
+\verb|\verb| 命令可以使用行内的代码显示\footnote{行内长串代码显示存在换行的问题，可以使用 {\ttfamily \textbackslash ttfamily} 作为替代方案。}
+，如：\verb!\verb|message = "hello,world"|!。
 
 实际上使用 \verb|{\ttfamily message = "hello,world"}| 也可以达到类似的效果；
 并且 \verb|\verb| 命令不能出现章节标题之中。
@@ -158,10 +159,10 @@ xcode，igor，rrt。
 \section{{\ttfamily latexcode} 环境与{\ttfamily \textbackslash inputlatexcode} 命令}
 为了显示{\LaTeX}代码和现实渲染结果
 \footnote{实现类似{\ttfamily tcblisting}环境的功能}，可以采用：
-\begin{itemize}
+\begin{compactitems}
   \item {\ttfamily latexcode} 环境：工作过程是将代码输出到文件，读取并渲染该文件
   \item {\ttfamily \textbackslash inputlatexcode} 命令：直接读取并渲染该文件
-\end{itemize}
+\end{compactitems}
 
 显示并渲染代码：
 

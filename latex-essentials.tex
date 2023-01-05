@@ -18,6 +18,10 @@
 
 \begin{document}
 
+% 设置顶部对齐，防止文字与图片混排时出现多余的空白
+% book 默认是两端对齐
+\raggedbottom 
+
 \frontmatter
 
 \maketitle
@@ -45,6 +49,7 @@
 \input{chapters/theorems.tex}
 \input{chapters/formulas.tex}
 \input{chapters/beamer.tex}
+%\input{chapters/tikz.tex}
 
 \backmatter
 

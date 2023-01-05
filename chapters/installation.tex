@@ -6,7 +6,7 @@
 \footnote{中文的 CTEX 套装已不再更新}: Windows 平台的 MiKTeX 和 macOS 平台的 MacTex. 
 后面几个版本不如官方版本稳定, 推荐安装官方版本.
 
-\begin{itemize}
+\begin{compactitems}
     \item{在 Debian 中安装 {\TeX} Live}
 
     不要使用 apt 安装, 这个安装的是 Debian 社区维护的版本, 使用 tlmgr 时会出现一些问题, 
@@ -16,7 +16,7 @@
     \item{在 macOS 中安装 {\TeX} Live}
 
     尽管 \href{https://tug.org/}{TUG} 推荐安装 MacTex, 但是使用 install-tl 安装脚本可以保证与 Linux 安装一致. 
-\end{itemize}
+\end{compactitems}
 
 \section{安装 {\TeX}}
 
@@ -24,11 +24,11 @@
 
 官方主页: \url{https://www.ctan.org/}, 国内镜像网站\footnote{北京交通大学镜像比清华大学镜像快.}:
 
-\begin{itemize}
+\begin{compactitems}
     \item \url{https://mirror.bjtu.edu.cn/CTAN/systems/texlive/tlnet}
     \item \url{https://mirrors.aliyun.com/CTAN/systems/texlive/tlnet}
     \item \url{http://mirrors.cloud.tencent.com/CTAN/systems/texlive/tlnet}
-\end{itemize}
+\end{compactitems}
 
 国内从 \href{https://mirror.bjtu.edu.cn/CTAN/systems/texlive/tlnet}{北京交通大学镜像} 下载较快, 
 下载其中的 install-tl.zip, 并解压缩, 该文件包含了各平台(Linux, macOS, Windows)的安装脚本.
@@ -74,7 +74,7 @@ $ ./install-tl --no-gui --repository https://mirror.bjtu.edu.cn/CTAN/systems/tex
 安装结束后将 {\TeX}  Live 命令行目录加到 PATH, macOS 修改 \url{~/.bash_profile};
 Debian 修改 \url{/etc/profile} (对所有用户生效):
 
-\begin{itemize}
+\begin{compactitems}
 
     \item  2020 版 for macOS
     \mint{bash}|export PATH=/usr/local/texlive/2020/bin/x86_64-darwin:$PATH|
@@ -84,7 +84,7 @@ Debian 修改 \url{/etc/profile} (对所有用户生效):
 
     \item Debian
     \mint{bash}|export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH|
-\end{itemize}
+\end{compactitems}
 
 \section{CTAN 镜像使用帮助}
 

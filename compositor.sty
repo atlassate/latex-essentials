@@ -57,6 +57,22 @@
     linkcolor=blue,   % choose some color if you want links to stand out
 }
 
+% 使 LaTeX 文稿中的 URL 正确换行
+% https://liam.page/2017/05/17/help-the-url-command-from-hyperref-to-break-at-line-wrapping-point/
+\makeatletter
+\def\UrlAlphabet{%
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+  \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+  \do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+  \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+  \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+  \do\Y\do\Z}
+\def\UrlDigits{\do\1\do\2\do\3\do\4\do\5\do\6\do\7\do\8\do\9\do\0}
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\g@addto@macro{\UrlBreaks}{\UrlAlphabet}
+\g@addto@macro{\UrlBreaks}{\UrlDigits}
+\makeatother
+
 % 参考文件格式
 \bibliographystyle{unsrt}  
 
@@ -366,3 +382,40 @@
    \end{center}
   }
 \makeatother
+
+% -------------------------------- unit ---------------------------------------
+\RequirePackage{siunitx}
+% -----------------------------------------------------------------------------
+
+% ------------------------------- quotation -----------------------------------
+\newenvironment{quoted}[1]%
+  {\newcommand\quotesource{#1}%
+    \begin{quotation}}%
+    {\par\hfill -- \textit{\quotesource}%
+    \end{quotation}}
+% -----------------------------------------------------------------------------
+
+% ---------------------------------- list -------------------------------------
+\RequirePackage{enumitem}
+% 仿照 enumerate 环境定义可二级嵌套的 newenumerate
+\newlist{newenumerate}{enumerate}{2} 
+% 第一级编号使用数字: (1) (2) (3) ...
+\setlist[newenumerate,1]{leftmargin=2em,labelwidth=2em,itemindent=2em,topsep=0pt,
+itemsep=0pt,parsep=0pt,label=\arabic*.} 
+% 第二级编号使用字母: (a) (b) (c) ...
+\setlist[newenumerate,2]{itemindent=2ex,topsep=0pt,
+itemsep=0pt,parsep=0pt,label=\alph*.}
+
+% 定义紧凑的列表
+\newenvironment{compactitems}{
+  \begin{list}{\textbullet}{
+    \setlength\leftmargin{2em}
+    \setlength\labelwidth{1em}
+    \setlength\itemindent{1em}
+    \setlength\topsep{0pt}
+    \setlength\itemsep{0pt}
+    \setlength\parsep{0pt}
+  }}
+  {\end{list}}
+% -----------------------------------------------------------------------------
+

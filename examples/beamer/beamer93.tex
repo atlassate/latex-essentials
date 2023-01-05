@@ -1,0 +1,25 @@
+% Customize figure caption in Beamer
+\documentclass{beamer}
+
+% Theme choice
+\usetheme{AnnArbor}
+
+% customize the caption
+\setbeamerfont{caption}{size=\large}
+\setbeamercolor{caption}{fg=blue}
+\setbeamercolor{caption name}{fg=red}
+
+\begin{document}
+
+\begin{frame}{Customized caption}
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.25\textwidth]{Ques}
+    \caption{My first figure in beamer.}
+    \label{fig:question}
+\end{figure}
+
+\end{frame}
+
+\end{document}

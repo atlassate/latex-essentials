@@ -326,38 +326,3 @@
 }
 % -----------------------------------------------------------------------------
 
-% -------------------------------- unit ---------------------------------------
-\RequirePackage{siunitx}
-% -----------------------------------------------------------------------------
-
-% ------------------------------- quotation -----------------------------------
-\newenvironment{quoted}[1]%
-  {\newcommand\quotesource{#1}%
-    \begin{quotation}}%
-    {\par\hfill -- \textit{\quotesource}%
-    \end{quotation}}
-% -----------------------------------------------------------------------------
-
-% ---------------------------------- list -------------------------------------
-\RequirePackage{enumitem}
-% 仿照 enumerate 环境定义可二级嵌套的 newenumerate
-\newlist{newenumerate}{enumerate}{2} 
-% 第一级编号使用数字: (1) (2) (3) ...
-\setlist[newenumerate,1]{leftmargin=2em,labelwidth=2em,itemindent=2em,topsep=0pt,
-itemsep=0pt,parsep=0pt,label=\arabic*.} 
-% 第二级编号使用字母: (a) (b) (c) ...
-\setlist[newenumerate,2]{itemindent=2ex,topsep=0pt,
-itemsep=0pt,parsep=0pt,label=\alph*.}
-
-% 定义紧凑的列表
-\newenvironment{newitemize}{
-  \begin{list}{\textbullet}{
-    \setlength\leftmargin{2em}
-    \setlength\labelwidth{1em}
-    \setlength\itemindent{1em}
-    \setlength\topsep{0pt}
-    \setlength\itemsep{0pt}
-    \setlength\parsep{0pt}
-  }}
-  {\end{list}}
-% -----------------------------------------------------------------------------
