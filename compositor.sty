@@ -100,9 +100,9 @@
 % https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540#53540
 \newenvironment{codelisting}{\captionsetup{type=listing}}{}
 \setminted{
-    bgcolor=DarkSeaGreen2, % xcolor 颜色名
-    breaklines=true,
-    breakafter=-/,         % 在空格, ‘-’ 或 ‘/’ 之后断行
+  bgcolor=DarkSeaGreen2,          % xcolor 颜色名
+  breaklines=true,
+  breakafter=-/\#\{\}\%\[\]\\,     % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
 }
 % line number font size
 \renewcommand\theFancyVerbLine{\small\arabic{FancyVerbLine}}
@@ -407,7 +407,7 @@ itemsep=0pt,parsep=0pt,label=\arabic*.}
 itemsep=0pt,parsep=0pt,label=\alph*.}
 
 % 定义紧凑的列表
-\newenvironment{compactitems}{
+\renewenvironment{itemize}{
   \begin{list}{\textbullet}{
     \setlength\leftmargin{2em}
     \setlength\labelwidth{1em}

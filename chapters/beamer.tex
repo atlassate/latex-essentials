@@ -1,18 +1,26 @@
 \chapter{Beamer 演示文稿}
 
-Beamer 在德语中是投影仪的意思。该教程参考: \url{https://latex-beamer.com/tutorials/}
+Beamer 在德语中是投影仪的意思。相关教程请参考：
 
-\begin{compactitems}
-  \item Beamer 内置主题与颜色预览 \href{https://mpetroff.net/files/beamer-theme-matrix/}{examples/beamer/Beamer Theme Matrix}
-  \item Metropolis 主题 \href{https://github.com/matze/mtheme}{examples/beamer/Beamer Theme Metropolis}
-  \item Solarized 颜色 \href{https://github.com/jrnold/beamercolorthemesolarized}{examples/beamer/Beamer Color Theme Solarized}
-\end{compactitems}
+\begin{itemize}
+  \item \url{https://latex-beamer.com/tutorials/}
+  \item \url{https://www.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_1)%E2%80%94Getting_Started}
+  \item \url{https://userpages.umbc.edu/~rostamia/beamer/}
+\end{itemize}
+
+其它资源：
+
+\begin{itemize}
+  \item Beamer 内置主题与颜色预览 \href{https://mpetroff.net/files/beamer-theme-matrix/}{Beamer Theme Matrix}
+  \item Metropolis 主题 \href{https://github.com/matze/mtheme}{Beamer Theme Metropolis}
+  \item Solarized 颜色 \href{https://github.com/jrnold/beamercolorthemesolarized}{Beamer Color Theme Solarized}
+\end{itemize}
 
 Beamer 中的 \verb|\pause|，\verb|\pausesections| 和列表动画会产生额外的页面, 这点在打印文稿时需注意.
 
 设计演示文件时应注意:
 
-\begin{compactitems}
+\begin{itemize}
   \item Keep time constraints in mind; a frame per minute is a good rule of thumb.
   \item Use few sections, logically split in subsections; it is better to avoid subsections.
   \item Use self-explanatory titles for sectioning and frames.
@@ -23,7 +31,7 @@ reference to theorem 2.6 during a talk.
   \item Graphics, such as diagrams, help the audience with visualization.   
   \item Slides should support your talk, not the other way round. Did you
 already bear with a presentation where the speaker just read aloud the text from the slides and used fancy transition effects? You can do it better.
-\end{compactitems}
+\end{itemize}
 
 % -----------------------------------------------------------------------------
 \section{制作封面}
@@ -35,13 +43,13 @@ already bear with a presentation where the speaker just read aloud the text from
 \inputminted[linenos=true]{latex}{examples/beamer/beamertitle01.tex}
 
 在这段代码中，
-\begin{compactitems}
+\begin{itemize}
   \item \verb|\usetheme{AnnArbor}| 指定 Beamer 主题（theme）
-  \item \verb|\title{}| 指定演示文稿的标题
-  \item \verb|\subtitle{}| 指定演示文稿的副标题
-  \item \verb|\author{}| 指定演示文稿的作者
-  \item \verb|\date{}| 指定演示文稿的日期，\verb|\today|将产生编译时候的日期
-\end{compactitems}
+  \item \verb|\title| 指定演示文稿的标题
+  \item \verb|\subtitle| 指定演示文稿的副标题
+  \item \verb|\author| 指定演示文稿的作者
+  \item \verb|\date| 指定演示文稿的日期，\verb|\today|将产生编译时候的日期
+\end{itemize}
 
 \begin{remark*}
 通过创建一帧（frame），并将 \verb|\titlepage| 插入其中，我们得到了演示文稿的封面。
@@ -53,7 +61,7 @@ already bear with a presentation where the speaker just read aloud the text from
 
 \subsection{多个作者}
 
-In the previous example, we used \verb|\author{}| to add the presenter name to the title page. Using the same command, we can add more authors. Check the following code:
+In the previous example, we used \verb|\author| to add the presenter name to the title page. Using the same command, we can add more authors. Check the following code:
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamertitle02.tex}
 
@@ -66,7 +74,7 @@ Using this line code in the above code, we get the following result:
 
 \subsection{作者及单位}
 
-Adding an affiliation can be achieved using the command \verb|\institute{}| to the document preamble.
+Adding an affiliation can be achieved using the command \verb|\institute| to the document preamble.
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamertitle03.tex}
 
@@ -78,7 +86,7 @@ If you would like to add multiple lines affiliation, you can simply use \verb|\\
 
 \subsection{多个作者及单位}
 
-If there are several affiliations or more than one author with different affiliations, we add the command \verb|\inst{}| inside \verb|\author{}| and \verb|\institute{}| commands. Here is an illustrative example of two authors with different affiliations:
+If there are several affiliations or more than one author with different affiliations, we add the command \verb|\inst| inside \verb|\author| and \verb|\institute| commands. Here is an illustrative example of two authors with different affiliations:
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamertitle04.tex}
 
@@ -102,7 +110,7 @@ Output:
 
 \subsection{为所以页添加 logo}
 
-Adding a logo in beamer can be achieved using the \verb|\logo{}| command where we include between braces a graphic using \verb|\includegraphics| command, or any text. It should be noted that the logo position is determined by the current theme.
+Adding a logo in beamer can be achieved using the \verb|\logo| command where we include between braces a graphic using \verb|\includegraphics| command, or any text. It should be noted that the logo position is determined by the current theme.
 
 Check the following code:
 
@@ -142,11 +150,11 @@ which yields the following title page:
 
 To position our logo at any place of the title page (or slides in general), we will use TikZ package. Here is the steps that we should follow:
 
-\begin{compactitems}
-  \item Use \verb|\logo{}| command if we would like to add the logo to all slides or \verb|\titlegraphic{}| command to display it only on the title page.
-  \item Create a tikzpicture environment inside one of the above commands (\verb|\logo{}| or \verb|\titlegraphic{}|)
+\begin{itemize}
+  \item Use \verb|\logo| command if we would like to add the logo to all slides or \verb|\titlegraphic| command to display it only on the title page.
+  \item Create a tikzpicture environment inside one of the above commands (\verb|\logo| or \verb|\titlegraphic|)
   \item Create a node image and position it with respect to the current slide.
-\end{compactitems}
+\end{itemize}
   
 Here is an example of top right logo positioning in Beamer:
 
@@ -156,10 +164,10 @@ Here is an example of top right logo positioning in Beamer:
 
 Comments:
 
-\begin{compactitems}
+\begin{itemize}
   \item \verb|tikzpicture| environment has the following parameters: \verb|overlay| and \verb|remember picture| which are used to create an overlay above the current slide (title page).
   \item a node is created using \verb|\node| command which is positioned at 0.2cm left of the coordinate \verb|(current page.30)|. The latter corresponds to the {\bfseries border point} that makes 30 degrees from the horizontal line passing through the center of the slide.
-\end{compactitems}
+\end{itemize}
 
 Here is an example of top left logo positioning in Beamer:
 
@@ -184,7 +192,7 @@ We have chosen 30 degrees and 150 degrees, you can choose any value to get the c
 
 \subsection{创建目录帧}
 
-Creating the table of contents in Beamer can be done with the same manner as in standard {\LaTeX}. The first thing that we should do is to structure our presentation using the commands \verb|\section{}| and \verb|\subsection{}| (\verb|\section*{}| and \verb|\subsection*{}|, to hide it from table of contents). It should be noted that with beamer class these commands will not create a heading at the position where we use them.
+Creating the table of contents in Beamer can be done with the same manner as in standard {\LaTeX}. The first thing that we should do is to structure our presentation using the commands \verb|\section| and \verb|\subsection| (\verb|\section*| and \verb|\subsection*|, to hide it from table of contents). It should be noted that with beamer class these commands will not create a heading at the position where we use them.
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamertoc01.tex}
 
@@ -207,7 +215,7 @@ we get the following presentation outline:
 
 \includegraphics[page=2]{examples/beamer/beamertoc02.pdf}
 
-\subsection{高亮显示当前标题}
+\subsection{重现当前标题}
 
 If you wish to show table of contents with highlighted current section before starting every section you can use the following code:
 
@@ -443,14 +451,18 @@ Compiling this code yields:
 
 \subsection{修改列表项目符号}
 
-There are various templates in beamer to change this itemized list appearance. The command \verb|\setbeamertemplate| is used on itemize items to change the shape of item markers.
+There are various templates in beamer to change this itemized list appearance. The command 
+\mint{latex}|\setbeamertemplate{itemize itmes}[<shape>]| 
+is used on itemize items to change the shape of item markers.
 
-\begin{compactitems}
-  \item \verb|\setbeamertemplate{itemize items}[default]| : the default item marker is a triangle.
-  \item \verb|\setbeamertemplate{itemize items}[circle]| : sets the item marker to a small filled circle.
-  \item \verb|\setbeamertemplate{itemize items}[square]| : sets the item marker to a small filled square.
-  \item \verb|\setbeamertemplate{itemize items}[circle]| : sets the item marker to a ball shape.
-\end{compactitems}
+\verb|<shape>| options:
+
+\begin{itemize}
+  \item \verb|default| : the default item marker is a triangle.
+  \item \verb|circle| : sets the item marker to a small filled circle.
+  \item \verb|square| : sets the item marker to a small filled square.
+  \item \verb|circle| : sets the item marker to a ball shape.
+\end{itemize}
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamerlist07.tex}
 
@@ -593,13 +605,15 @@ Using {\ttfamily Boadilla} theme instead of {\ttfamily Copenhagen}, we get the f
 
 \subsection{自定义文字块}
 
-We can modify blocks’ shapes by playing with the command: \verb|\setbeamertemplate{blocks}[Options]|. Here are available pre-defined options for this command:
+We can modify blocks’ shapes by playing with the command: 
+\mint{latex}|\setbeamertemplate{blocks}[<options>]|
+. Here are available pre-defined options for this command:
 
-\begin{compactitems}
-  \item \verb|[default]|: This default value typesets the block title on its line.
-  \item \verb|[rounded]|: makes the blocks’ corners rounded.
-  \item \verb|[shadow=true]|: If the shadow is set as true, a shadow is portrayed behind the block.
-\end{compactitems}
+\begin{itemize}
+  \item \verb|default|: This default value typesets the block title on its line.
+  \item \verb|rounded|: makes the blocks’ corners rounded.
+  \item \verb|shadow=true|: If the shadow is set as true, a shadow is portrayed behind the block.
+\end{itemize}
 
 Here is an illustrative example:
 
@@ -793,14 +807,14 @@ that are often used are : regular and bold. The bold text is used to create emph
 In this section, we will learn the different pre-defined font themes in beamer. These themes can be used to change the global structure of the presentation.
 
 To change the font family of a theme, we use the command \verb|\usefonttheme| together with one of these font themes:
-\begin{compactitems}
+\begin{itemize}
   \item \verb|default|,
   \item \verb|dserif|,
   \item \verb|dprofessionalfonts|,
   \item \verb|dstructurebold|,
   \item \verb|dstructureitalicserif|,
   \item \verb|dstructuresmallcapsserif|.
-\end{compactitems}
+\end{itemize}
 
 \subsubsection{Theme font: {\ttfamily default}}
 
@@ -938,10 +952,10 @@ When only one of these options is set, the other dimension is scaled so that the
 
 Other less common options are also provided:
 
-\begin{compactitems}
+\begin{itemize}
   \item \verb|angle| can be passed a rotation angle in degrees, and the image will be rotated this amount counter-clockwise,
   \item \verb|keepaspectratio| is a boolean that forces the image to preserve its aspect ratio.
-\end{compactitems}
+\end{itemize}
 
 But if you want to do very fancy things, like both rescaling and rotating an image, be aware that the order in which the options are given matters. The package graphicx interprets the keys from left to right; this means that rotating and then scaling is not the same as scaling and then rotating.
 
@@ -1050,12 +1064,12 @@ The following code highlights the idea of absolute positioning of an image in Be
 
 Comments:
 
-\begin{compactitems}
+\begin{itemize}
   \item We loaded the TikZ package using the command: \verb|\usepackage{tikz}|
   \item We created a TikZ environment inside a frame that we would like to add an image to it. This is achieved by \verb|tikzpicture| environment.
   \item The parameters of the TikZ environment \verb|[remember picture, overlay]| allows us to work on the frame and use absolute positioning.
   \item We created a node at the center of the frame, (current page.center), which has an image a content.
-\end{compactitems}
+\end{itemize}
 
 Compiling the above code yields:
 
@@ -1115,10 +1129,10 @@ which produces the following output:
 
 Observe that the {\ttfamily wrapfigure} environment works as the figure environment, in the sense that it makes the image floating, and you can add a \verb|\caption| and a \label to the figure. However, this command accepts two mandatory arguments:
 
-\begin{compactitems}
+\begin{itemize}
   \item the first one is to select where we want the image, it can be r or l, that is, right or left;
   \item the second one is the width to be reserved for the image.
-\end{compactitems}
+\end{itemize}
 
 \subsection{文字在图片上}
 
@@ -1130,14 +1144,16 @@ This can also be done inside a beamer frame, but for that purpose, we have to lo
 
 Let’s dissection the commands used in this example:
 
-\begin{compactitems}
+\begin{itemize}
   \item First, we insert an image inside the {\ttfamily tikzpicture} environment as a node called ({\ttfamily image}).
   \item Then, we create a second node where its content is aligned at centre, with options to use a white, huge and bold font. Moreover, we added the option {\ttfamily fill=teal} to fill the node with a teal color.
   \item The key is that we position this node at the centre of the previous one; this position is easily identified with {\ttfamily (image.center)}.
   \item Finally, we create the contents of the node itself, which are just the text string {\ttfamily A beautiful photo!}.
-\end{compactitems}
+\end{itemize}
 
 \subsection{图片作为帧的背景}
+
+nature1.jpg 和 nature2.jpg 来自 \url{https://pixabay.com/}。
 
 It is easy to use an image as a frame background in beamer, both globally and locally. In the following example, we put both into practice:
 
@@ -1159,13 +1175,13 @@ Here is the obtained result:
 
 \includegraphics{examples/beamer/beamerfigure12.pdf}
 
-\begin{compactitems}
+\begin{itemize}
   \item As you can see, first we create a usual figure environment with its corresponding \verb|\caption| and \verb|\label|.
   \item Then, inside of it, for every subfigure we create a \verb|subfigure| environment, which works essentially as a figure environment, with its corresponding \verb|\includegraphics| to insert the image, its \verb|\caption| and its \verb|\label|.
   \item However, this environment takes a mandatory argument, which is the space to be allocated for the corresponding image (in the previous example, \verb|0.4\textwidth|) and also an optional argument, which determines the positioning of the image inside its allocated space. This argument can be either c, t or b, standing for centre, top and bottom.
   \item By default the image is centred, but in the previous example I have used t and b, so that you can see the difference between the two options.
   \item As you can see, different labels enable us to reference either each one of the subfigures or the figure as a whole.
-\end{compactitems}
+\end{itemize}
 
 \subsection{图片作为封面}
 
@@ -1203,10 +1219,10 @@ The second method takes a little bit of tinkering with {\ttfamily setbeamercolor
 
 The first decision is to pick a color(s). I suggest defining two colors for variety, where one is your primary and one is your secondary. However, only one color is needed for the {\ttfamily usecolortheme} method. There are two ways to pick colors:
 
-\begin{compactitems}
+\begin{itemize}
   \item Choose from the list of known Beamer colors. By default, Beamer uses the xcolor package, so you can immediately use any of xcolor‘s pre-defined colors. As of this writing, these colors are listed in Section 2.4 of the official xcolor documentation. For example, the list includes blue, red, green, yellow, etc. A list of 68 colors is available if you load xcolor with the {\ttfamily dvipsnames} option when you load Beamer ({\ttfamily documentclass[xcolor=dvipsnames]\{beamer\}}).
   \item Define your own custom colors. Use the {\ttfamily definecolor} command to assign a custom name and then define the parameters for your color (such as RGB values). This is handy if you want to use a very specific color, as I did.
-\end{compactitems}
+\end{itemize}
 
 \section{使用 {\ttfamily usecolortheme} 命令修改 Beamer 颜色}
 
@@ -1231,11 +1247,11 @@ If you just want a break from the default color themes, then {\ttfamily usecolor
 
 A key find was Thierry Masson’s \href{http://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf}{Beamer appearance cheat sheet}. This document lists many of the properties that you can manipulate. Page 1 of the sheet lists things that you can color using {\ttfamily setbeamercolor}. You can play around with it, but here is a quick method to color your entire presentation:
 
-\begin{compactitems}
+\begin{itemize}
   \item Set the background color of ALL FOUR palettes to your primary color. Set the foreground color of each palette to your desired text color (most likely black or white).
   \item Set the color of elements that are not defined by the palettes. You can use your primary or secondary color. This might be the hardest step and could take some trial and error to catch everything. The most important one is {\ttfamily structure} (for bullets and numbers in lists). If you have a table of contents, then you will also want to set {\ttfamily section} in {\ttfamily toc}. Anything you don’t catch will appear in the default colour theme.
   \item (optional) Select some palette elements where you would like to see the secondary color and set the color for just those elements. For example, setting {\ttfamily subsection} in {\ttfamily head/foot} to the secondary color has a nice clean appearance in themes that use a header or footer. Why not set a whole palette to the secondary color? You can, but I’ve found that you can end up with some undesirable results in headers.
-\end{compactitems}
+\end{itemize}
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamercolor02.tex}
 
@@ -1246,9 +1262,164 @@ Compiling this code yields:
 \includegraphics[page=2]{examples/beamer/beamercolor02.pdf}
 
 % -----------------------------------------------------------------------------
-\section{放映 Overlay}
+\section{超链接与按钮}
 
-button
+\subsection{超链接{\ttfamily \textbackslash hyperlink}}
+
+首先使用 \verb|\label| 命令标记需要链接的地方，然后使用
+
+\mint{latex}|\hyperlink{<label>}{<text>}|
+插入超链接：
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamerhyperlink01.tex}
+
+\includegraphics[page=1]{examples/beamer/beamerhyperlink01.pdf}
+
+\includegraphics[page=2]{examples/beamer/beamerhyperlink01.pdf}
+
+\subsection{按钮}
+
+按钮和超链接是类似的：
+
+\begin{minted}{latex}
+\hyperlink{<label>}{\beamerbutton{<text>}}
+\hyperlink{<label>}{\beamergotobutton{<text>}}
+\hyperlink{<label>}{\beamerskipbutton{<text>}}
+\hyperlink{<label>}{\beamerreturnbutton{<text>}}
+\end{minted}
+
+\includegraphics[page=2]{examples/beamer/beamerhyperlink02.pdf}
+
+% -----------------------------------------------------------------------------
+\section{放映顺序 Overlay}
+
+\subsection{{\ttfamily \textbackslash pause} 命令}
+
+Often when when doing a presentation we'll want to reveal parts of a frame one after the other. The simplest way to do this is to use the \verb|\pause| command. For example, by entering the \verb|\pause| command before every entry in a list we can reveal the list point-by-point:
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay01.tex}
+
+This brings us on to the difference between a frame and a slide. A single frame is defined as what we build up in a single frame environment, whereas a slide is a single page in the resulting PDF. This means that a frame can be made up of multiple slides. For example, this frame with the list that we've just animated is made up of five slides, but the frame number in the bottom-right-hand corner of each slide remains unchanged for all of the five.
+The fully exposed slide looks like this:
+
+\includegraphics[page=5]{examples/beamer/beameroverlay01.pdf}
+
+The use of the \verb|\pause| command is not restricted to itemized lists; you may use it anywhere in a slide. For example:
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay02.tex}
+
+A pdf viewer will expose the resulting file one paragraph at a time. The fully exposed slide looks like this:
+
+\includegraphics[page=4]{examples/beamer/beameroverlay02.pdf}
+
+\subsection{放映顺序说明 Overlay specifications}
+
+The \verb|\pause| command is useful but isn't very versatile. To get more flexibility we use what beamer calls overlay specifications. These specifications can be added to compatible commands using pointed brackets after the command name. For example I can add them to the \verb|\item| command in a list structure like this.
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay03.tex}
+
+The numbers inside the pointed brackets tell LaTeX which slides the item should appear on. For example, in this list we've told each list item which slide number it should first appear on and then told them to appear on all subsequent slides in the frame using the dash. Here's an example of a more complicated overlay:
+
+\mint{latex}|\item<-2,4-5,7>|
+
+This makes the item appear on slides 1,2,4,5 \& 7.
+
+\includegraphics[page=1]{examples/beamer/beameroverlay03.pdf}
+
+There are a number of commands that enable us to use overlays on text. The main one is the \verb|\onslide| command which can be configured to achieve a few different outcomes, details of these can be found in the \href{http://mirrors.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{documentation}.
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay04.tex}
+
+When we simply give this command text as an argument, it acts in the same way as the \verb|\uncover| command making the text fully appear only on the specified slides. On unspecified slides the text is covered, so will still take up space but won't be visible.
+
+\includegraphics[page=1]{examples/beamer/beameroverlay04.pdf}
+
+\includegraphics[page=2]{examples/beamer/beameroverlay04.pdf}
+
+\includegraphics[page=3]{examples/beamer/beameroverlay04.pdf}
+
+To make the text transparent on unspecified slides we use the \verb|\setbeamercovered| command and enter the keyword transparent above the code where we want it to have an effect:
+
+\mint{latex}|\setbeamercovered{transparent}|
+
+\includegraphics[page=1]{examples/beamer/beameroverlay05.pdf}
+
+\includegraphics[page=2]{examples/beamer/beameroverlay05.pdf}
+
+\includegraphics[page=3]{examples/beamer/beameroverlay05.pdf}
+
+Please be aware that this command will affect all of the code following it, so if we want to change it back to the default setting later in the presentation we can simply use the same command again but with the keyword invisible.
+
+Another command we can use is the \verb|\visible| command which does the same as \verb|\uncover| except it leaves the space blank on unspecified slides instead of transparent even if we've set the transparency as we did a moment ago.
+
+The \verb|\invisble| command does the exact opposite to of the \verb|\visible| command. The \verb|\only| command does the same as the \verb|\visible| command except it doesn't take any space up. This means that if we change the \verb|\onslide| commands to \verb|\only| commands and get rid of the dashes in the overlay specifications our three lines of text will appear in the same place on the frame in turn.
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay06.tex}
+
+\includegraphics[page=1]{examples/beamer/beameroverlay06.pdf}
+
+\includegraphics[page=2]{examples/beamer/beameroverlay06.pdf}
+
+\includegraphics[page=3]{examples/beamer/beameroverlay06.pdf}
+
+\subsection{Overlays and text formatting}
+
+There are a number of commands to do with text formatting that are compatible with overlay specifications. These commands are simply ignored on slides not declared in the specification and will therefore just print the text as normal. Here are some examples:
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay07.tex}
+
+Which will produce text like this on the first slide:
+
+\includegraphics[page=1]{examples/beamer/beameroverlay07.pdf}
+
+And then like this on the second slide:
+
+\includegraphics[page=2]{examples/beamer/beameroverlay07.pdf}
+
+First the \verb|\textbf| command which makes the text bold, then \verb|\textit| which puts the text in italics, then \verb|\textsl| which make it slanted, \verb|\textrm| which uses the roman font family, \verb|\textsf| which uses the sans serif font family but this doesn't change anything because we are already using this font. Next the \verb|\textcolor| command which puts it in the specified colour, then \verb|\alert| which puts the text in red by default and finally the \verb|\structure| command which formats the text in a way that indicates the presentation's structure.
+
+\subsection{Overlays and environments}
+
+Overlay specifications often work with environments as well. For example, we could animate the environments on the maths blocks page like this:
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay08.tex}
+
+\includegraphics[page=1]{examples/beamer/beameroverlay08.pdf}
+
+\includegraphics[page=2]{examples/beamer/beameroverlay08.pdf}
+
+You will also notice that turning the transparency setting on earlier in the document has affected the overlays here.
+
+\subsection{Overlays and tables}
+
+Finally we may want to animate a table so that the rows appear slide by slide. To do this we use the \verb|\onslide| command and make sure we reset the \verb|\setbeamercovered| command to the default for this to work:
+
+\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay09.tex}
+
+\includegraphics[page=1]{examples/beamer/beameroverlay09.pdf}
+
+\includegraphics[page=2]{examples/beamer/beameroverlay09.pdf}
+
+
+
 
 % -----------------------------------------------------------------------------
 \section{分发 Handout}
+
+Now let's briefly look at creating handouts for our presentation. To do this we add the keyword \verb|handout| into square brackets in the document class command. We then use the pgfpages package to help us print multiple slides on a page. After loading the package we use the \verb|\pgfpagesuselayout| command. In the curly brackets we specify how many frames we want on a sheet. In the square brackets we specify the paper size and how much border shrink we want:
+
+\begin{minted}{latex}
+\documentclass[handout]{beamer}
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+\end{minted}
+
+If we wanted to put four frames on a sheet we could simply change the 2 to a 4 and then add the landscape keyword into the square brackets:
+
+\mint{latex}|\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]|
+
+This concludes our discussion on themes and handouts and also our series on creating presentations with beamer. If you want to play around with the presentation we created in this series you can access it here.
+
+\includegraphics[page=1,scale=.45]{examples/beamer/handout/pythagorean-theorem.pdf}
+
+\includegraphics[page=2,scale=.45]{examples/beamer/handout/pythagorean-theorem.pdf}

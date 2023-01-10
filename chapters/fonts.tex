@@ -17,28 +17,28 @@
 
 OpenType 字体格式由微软和 Adobe 联合开发，它有以下特点：
 
-\begin{compactitems}
+\begin{itemize}
   \item 字体编码基于 Unicode
   \item 描述字体轮廓时，既可以用三次 Bézier 曲线（PostScript 轮廓），也可以用二次 Bézier 曲线（TrueType 轮廓）
   \item 支持合字（也叫连字，ligature）、小型大写字母（small caps）、多种数字样式、上下标、上下文替换等高级字体排印功能，并可用于复杂语言排版
   \item 在 Windows、macOS、Linux 等多种平台下均可使用
-\end{compactitems}
+\end{itemize}
 
 OpenType 字体的文件扩展名可为 .otf、.ttf、.ttc，它们的区别如下：
 
-\begin{compactitems}
+\begin{itemize}
   \item .otf：单个字体，使用 PostScript 轮廓
   \item .ttf：单个字体，使用 TrueType 轮廓
   \item .ttc：字体集合（TrueType/OpenType Collection），在单个文件中打包多个字体，允许使用 TrueType 或 PostScript 轮廓
-\end{compactitems}
+\end{itemize}
 
 LATEX 中使用 OpenType 字体，主要依靠下列宏包：
 
-\begin{compactitems}
+\begin{itemize}
   \item fontspec：通用字体选取
   \item CTeX：LATEX 中文排版框架，依据引擎的不同，底层分别利用 xeCJK 宏包（X⁠E⁠TEX）和 luatexja 宏包（Lua­TEX）来处理
   \item unicode-math：实验性的 Unicode 数学排版功能
-\end{compactitems}
+\end{itemize}
 
 考虑到 Ap­TEX 仍处于开发状态，尚未提供良好的用户接口，因此下文仅适用于 X⁠E⁠TEX 和 Lua­TEX 引擎。
 
@@ -62,12 +62,12 @@ LATEX 中使用 OpenType 字体，主要依靠下列宏包：
 
 直立、正体的字型通常被称为罗马体（Roman type）。除此之外，一套完整的字体往往还具有若干其他字型。
 
-\begin{compactitems}
+\begin{itemize}
   \item 意大利体（italic type）：字形稍向右倾，笔画带有手写体的风格。它不是罗马体的简单倾斜
   \item 斜体（oblique/slant type）：大部分是原字形的简单倾斜，少数设计精良的字体（如 Univers、Helvetica 等）也会再额外进行视觉修正
   \item 字重（weight）：表示字体的粗细，除了常规体（regular），还有粗体（bold）、细体（light），以及半粗、半细、超粗、超细、特粗、特细等。现代字体也流行以数字区分不同字重，典型例子如 Univers
   \item 小型大写（small caps）：顾名思义，形状是大写字母，但尺寸略小（一般接近小写字母）。西文中，全大写字母组成的单词（如 WHO）常用小型大写的形式
-\end{compactitems}
+\end{itemize}
 
 \subsection{中文字体}
 
@@ -76,23 +76,23 @@ LATEX 中使用 OpenType 字体，主要依靠下列宏包：
 正文中常用的中文字体主要有宋、黑、楷、仿四种。括号中给出的是对应的日文名称
 \footnote{方正书宋简体不能正确显示这些日文名称，此处使用了 Noto Serif SC 字体。}。
 
-\begin{compactitems}
+\begin{itemize}
   \item 宋体（{\notoserifsc 明朝体}）：实际上诞生于明朝，因而也叫明体。特点是笔画硬朗、横细竖粗，笔画末端带有类似「衬线」的装饰三角形。宋体习惯用于正文排版，适合与衬线的西文字体搭配
   \item 黑体（{\notoserifsc ゴシック体}）：笔画粗细变化较小，横竖对比也较小，常与无衬线西文字体搭配
   \item 楷体（{\notoserifsc 楷書体}）：来源于传统书法，字形端庄，对应与西文字体中的手写体
   \item 仿宋（{\notoserifsc 宋朝体}）：源自于宋朝的刻书字体，但实际成形于民国初年。特点是兼有宋体的结构与楷体的笔画，较为清秀挺拔
-\end{compactitems}
+\end{itemize}
 
 CTeX 宏默认的字库配置基于以下逻辑：
 
-\begin{compactitems}
+\begin{itemize}
   \item 宋体对应到 \verb|\rmfamily| 的 \verb|\upshape|
   \item 黑体（或微软雅黑、苹方等现代黑体）对应到 \verb|\sffamily| 的 \verb|\upshape|
   \item 楷体对应到 \verb|\rmfamily| 的 \verb|\itshape|
   \item 仿宋对应到 \verb|\ttfamily| 的 \verb|\upshape|
   \item 如果以上某种字体有相应的粗体，则将其对应到 \verb|\bfseries|，如果没有则不做特殊处理；特别地，加粗宋体如果不存在的话，则会改用黑体（但不使用现代黑体）
   \item 最后使用 \verb|\setCJKfamilyfont| 命令定义额外的的字体命令，如 \verb|\songti|、\verb|\heiti| 等；此时如果有隶书和圆体，也会用同样方式定义字体命令
-\end{compactitems}
+\end{itemize}
 
 \section{下载和安装字体}
 
@@ -110,21 +110,21 @@ texlive 自带的中文字体比较有限，如其自带 Fandol 楷体, 该字�
 
 字体可以安装在下列目录中:
 
-\begin{compactitems}
+\begin{itemize}
   \item \url{/usr/share/fonts}
   \item \url{/usr/local/share/fonts}
   \item \url{~/.fonts}
-\end{compactitems}
+\end{itemize}
 
 \subsection{macOS}
 
 字体可以安装在下列目录中:
 
-\begin{compactitems}
+\begin{itemize}
   \item \url{/System/Library/Fonts}
   \item \url{/Library/Fonts}
   \item \url{~/Library/Fonts}
-\end{compactitems}
+\end{itemize}
 
 \section{修改环境变量 {\ttfamily OSFONTDIR}}
 
@@ -194,34 +194,34 @@ OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
 
 这是正文的默认字体，也可以使用 \mintinline{tex}|\textrm{文字内容}| 或 \mintinline{tex}|{\rmfamily 文字内容}|重新设置文字的字体.
 
-\begin{compactitems}
+\begin{itemize}
   \item Normal: {\rmfamily \mdseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item Bold: {\rmfamily \bfseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item Italic: {\rmfamily \itshape 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item BoldItalic: {\rmfamily \bfseries \itshape 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
-\end{compactitems}
+\end{itemize}
 
 \subsection{无衬线字体族 Sans serif family}
 
 使用 \mintinline{tex}|\textsf{文字内容}| 或 \mintinline{tex}|{\sffamily 文字内容}|设置文字的字体.
 
-\begin{compactitems}
+\begin{itemize}
   \item Normal: {\sffamily \mdseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item Bold: {\sffamily \bfseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item Italic: {\sffamily \itshape 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item BoldItalic: {\sffamily \bfseries \itshape 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
-\end{compactitems}
+\end{itemize}
 
 \subsection{打字机字体族 Typewriter family}
 
 通常代码抄录使用该字体族，使用 \mintinline{tex}|\texttt{文字内容}| 或 \mintinline{tex}|{\ttfamily 文字内容}|设置文字的字体.
 
-\begin{compactitems}
+\begin{itemize}
   \item Normal: {\ttfamily \mdseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item Bold: {\ttfamily \bfseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item Italic: {\ttfamily \itshape 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
   \item BoldItalic: {\ttfamily \bfseries \itshape 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
-\end{compactitems}
+\end{itemize}
 
 \subsection{中文字体族的定义与使用}
 
