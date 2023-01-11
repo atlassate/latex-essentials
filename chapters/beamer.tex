@@ -1291,6 +1291,164 @@ Compiling this code yields:
 \includegraphics[page=2]{examples/beamer/beamerhyperlink02.pdf}
 
 % -----------------------------------------------------------------------------
+\section{Beamer 主题}
+
+\subsection{Standard Beamer themes}
+
+Beamer comes with a large selection of themes. Themes are named after various cities, such as Boadilla, Madrid, Copenhagen, and Singapore, where Beamer’s author and his collaborators have given Beamer presentations.
+
+Beamer themes which are named after cities, such as Boadilla and Pittsburgh, are complete themes in the sense that they control just about every aspect of a slide’s appearance. Think of these as major themes. These are invoked with the \verb|\usetheme| command, as in {\ttfamily \textbackslash usetheme\{Pittsburgh\}}.
+
+Beamer also provides what may be thought of as minor themes. These control somewhat narrowly defined aspects of a slide’s appearance. You may invoke one or more of these minor themes in conjunction with a major theme to alter/modify the major theme’s characteristics.
+
+Beamer’s “minor themes” fall into 4 categories: outer, inner, font and color themes.
+
+default 主题
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme01.tex}
+
+\includegraphics{examples/beamer/beamertheme01.pdf}
+
+Boadilla 主题
+
+\includegraphics{examples/beamer/beamertheme02.pdf}
+
+Rochester 主题
+
+\mint{latex}|\usetheme[height=7mm]{Rochester}|
+
+修改标题栏的高度
+
+\includegraphics{examples/beamer/beamertheme03.pdf}
+
+\subsection{outer themes}
+
+control a slide’s decorations, such as text and graphics that appear in a slide’s header and footer sections. For example, {\ttfamily \textbackslash useoutertheme \{shadow\}} adds a 3-D shadow to some header elements.
+
+\subsection{inner themes}
+
+control a slide’s inner area, such as markers/bullets for itemization lists and boxes placed around theorems. For example, {\ttfamily \textbackslash useinnertheme \{rounded\}} gives a rounded and 3-D look to theorem-containing boxes and itemization markers.
+
+\subsection{font themes}
+
+control font shapes and sizes of various elements of a slide show. For example, {\ttfamily \textbackslash usefonttheme \{serif\}} changes the document’s fonts to serif. (The default is sans-serif.)
+
+\subsection{color themes}
+
+control the colors of title, frame title, itemization bullets, and many other elements of a slide show. For example, {\ttfamily \textbackslash usecolortheme \{albatross\}} changes the Beamer’s default colors in quite a drastic way.
+
+% -----------------------------------------------------------------------------
+\section{自定义主题}
+
+\subsection{{\ttfamily structure} 颜色}
+
+\begin{remark*} 
+  下面的代码会产生{\ttfamily Package xcolor: Undefined color `beamer@structure@color'}错误：
+  \mint{latex}|\documentclass[xcolor=dvipsnames]{beamer}|
+  应该使用：
+  \mint{latex}|\documentclass[dvipsnames]{beamer}|
+\end{remark*}
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme04.tex}
+
+\includegraphics{examples/beamer/beamertheme04.pdf}
+
+通过 RGB 值设置颜色
+
+\mint{latex}|\usecolortheme[RGB={205,173,0}]{structure}| 
+
+\subsection{删除导航图标}
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme05.tex}
+
+\includegraphics{examples/beamer/beamertheme05.pdf}
+
+\subsection{添加底部信息栏}
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme06.tex}
+
+\includegraphics{examples/beamer/beamertheme06.pdf}
+
+\subsection{修改默认文本颜色}
+
+Beamer’s normal text is black on white background. The following command in the preamble changes all normal text to purple:
+
+\mint{latex}|\setbeamercolor{normal text}{fg=purple}|
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme07.tex}
+
+\includegraphics{examples/beamer/beamertheme07.pdf}
+
+The fg in command above sets the normal text’s foreground color. It is also possible to set the normal text’s background color. The background color of a slide is inherited from the normal text’s background, therefore changing the normal text’s background color amounts to changing the slide’s background color. See  Setting the background to a solid color for an illustration.
+
+Remark: Normal text is the text in the main body of a slide. A slide’s header and footer are not normal text. The colors of those elements are controlled by the structure color. For instance, the following command changes slide titles (and several other things) to purple:
+
+\mint{latex}|\setbeamercolor{structure}{fg=purple}| 
+
+\subsection{修改背景颜色}
+
+The background color of a Beamer slide is white by default. In the following example I will describe a few ways to change the default background.
+
+
+Setting the background to a solid color
+
+This example shows how to set the background to a light shade of pink:
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme08.tex}
+
+\includegraphics{examples/beamer/beamertheme08.pdf}
+
+\subsection{背景颜色渐变}
+
+Gradually shaded backgrounds are possible as well. In the following example, the background varies from light red at the bottom to light yellow at the top.
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme09.tex}
+
+\includegraphics{examples/beamer/beamertheme09.pdf}
+
+\subsection{背景图片}
+
+The following example shows how to fill the background of a Beamer slide with the scaled version of an image using the command:
+
+\mint{latex}|\setbeamertemplate{background canvas}{...}|
+
+Note how I have changed the structure color and the default font color to achieve a reasonable contrast between text and background.
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme10.tex}
+
+\includegraphics{examples/beamer/beamertheme10.pdf}
+
+\subsection{背景图片的透明度}
+
+通过 tikz 绘图来设置图片的透明度：
+
+\inputminted[linenos=true]{latex}{examples/beamer/beamertheme11.tex}
+
+\includegraphics{examples/beamer/beamertheme11.pdf}
+
+\subsection{限制背景设置在单个帧}
+
+To limit the background setting to a single slide, enclose the 
+
+\mint{latex}|\setbeamertemplate{background canvas}{...}|
+command in braces, as in:
+
+\begin{minted}{latex}
+{ % brace to limit the scope of \setbeamertemplate 
+\setbeamertemplate{navigation symbols}{}  % optionally hide navigation buttons 
+\setbeamertemplate{background canvas}{\includegraphics 
+	[width=\paperwidth,height=\paperheight]{alps.jpg}} 
+\begin{frame}[plain] 
+... 
+\end{frame} 
+} % closing brace 
+\end{minted}
+
+\includegraphics[page=1]{examples/beamer/beamertheme12.pdf}
+
+\includegraphics[page=2]{examples/beamer/beamertheme12.pdf}
+
+% -----------------------------------------------------------------------------
 \section{放映顺序 Overlay}
 
 \subsection{{\ttfamily \textbackslash pause} 命令}
@@ -1399,9 +1557,6 @@ Finally we may want to animate a table so that the rows appear slide by slide. T
 \includegraphics[page=1]{examples/beamer/beameroverlay09.pdf}
 
 \includegraphics[page=2]{examples/beamer/beameroverlay09.pdf}
-
-
-
 
 % -----------------------------------------------------------------------------
 \section{分发 Handout}
