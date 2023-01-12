@@ -1348,7 +1348,17 @@ control the colors of title, frame title, itemization bullets, and many other el
   \mint{latex}|\documentclass[xcolor=dvipsnames]{beamer}|
   应该使用：
   \mint{latex}|\documentclass[dvipsnames]{beamer}|
+
+  下面的代码会产生产生 {\ttfamily LaTeX Error: Option clash for package xcolor.} 错误：
+  \mint{latex}|\usepackege[dvipsnames]{xcolor}| 
+  This above syntax may result in an error if you are using beamer with tikz. To go around it, include usenames and dvipsnames options when defining the document class. 见\url{https://en.wikibooks.org/wiki/LaTeX/Colors#The_68_standard_colors_known_to_dvips}
+  \mint{latex}|\documentclass[usenames,dvipsnames]{beamer}|
+
+  其它解决方法：使用 \verb|\definecolor| 自定义颜色；如果要使用 hex 值定义颜色，则使用不带选项的 xcolor 包，如：
+  \mint{latex}|\definecolor{BlueGreen}{HTML}{00B3B8}|
 \end{remark*}
+
+
 
 \inputminted[linenos=true]{latex}{examples/beamer/beamertheme04.tex}
 
@@ -1473,6 +1483,20 @@ According to the guide, Beamer presentations have five flavours of themes
   \item Inner themes – Design the elements that are “inside” the frame like the environments, theorems, blocks etc.
   \item Outer themes – Design the outer space of the frame like the headline, footline, sidebar etc. 
 \end{itemize}
+
+修改 Beamer 首页的背景方法\footnote{\href{https://latex-beamer.com/tutorials/beautiful-title/}{How to create beautiful title slide in Beamer?}}：
+
+\inputminted[linenos=true]{latex}{examples/beamer/themes/background/beautiful-title.tex}
+
+我们可以修改上面的代码得到一个简单的 Beamer 主题，能够设定 Beamer 背景图片：
+
+\inputminted[linenos=true]{latex}{examples/beamer/themes/background/beamerthemenovel.sty}
+
+使用该主题的示例:
+
+\includegraphics[page=1]{examples/beamer/themes/background/sample01.pdf}
+
+\includegraphics[page=1]{examples/beamer/themes/background/sample02.pdf}
 
 % -----------------------------------------------------------------------------
 \section{覆盖 Overlay}

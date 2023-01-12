@@ -1,0 +1,60 @@
+% beautiful title slide in Beamer
+\documentclass[aspectratio=169]{beamer}
+
+% Remove navigation bar
+\setbeamertemplate{navigation symbols}{}
+
+% Tikz package
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+% Title slide frame
+\begin{frame}[plain]
+
+\begin{tikzpicture}[remember picture,overlay]
+
+% Background image
+\node[above right,inner sep=0pt] at (current page.south west)
+{
+\includegraphics[width=\paperwidth]{background01.png}
+};
+  
+% Title & Subtitle
+\node
+[
+  above=0.5cm,
+  align=center,
+  fill=brown!20,
+  rounded corners,
+  inner xsep=15pt,
+  inner ysep=10pt, 
+  minimum width=0.7\textwidth,
+  text width=0.6\textwidth
+] (title) at (current page.center)
+{
+  \LARGE Best customized Beamer Themes  \\[5pt]
+  \small Beautiful title slides: Model 1
+};
+
+% Author 
+\node[ below=0.5cm] (author) at (title.south){LaTeX-beamer.com};
+
+% Date
+\node[below=0.5cm] (date) at (author.south){\large \today};
+
+% Logo
+\node
+[
+  below right =0.25cm and 0.5cm
+] at (current page.north west)
+{
+  \includegraphics[width=3.5cm]{logo.png}
+};
+
+\end{tikzpicture}
+  
+\end{frame}
+
+\end{document}

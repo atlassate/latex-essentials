@@ -1,11 +1,83 @@
-\ProvidesPackage{beamerthemenovel1}[2023/01/12]
+\ProvidesPackage{beamerthemenovel}[2023/01/12]
 
-%\RequirePackage{ifthen}
-%\RequirePackage{tikz}
+\RequirePackage{ifthen}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
 
-\newcommand{\beamerbackground}{background01.png} % default
+%\RequirePackage[dvipsnames]{xcolor}% LaTeX Error: Option clash for package xcolor.
+\RequirePackage{xcolor}
+\definecolor{Dandelion}{HTML}{FDBC42}
+\definecolor{Emerald}{HTML}{00A99D}
+\definecolor{RoyalBlue}{HTML}{0071BC}
+\definecolor{OliveGreen}{HTML}{3C8031}
+\definecolor{OrangeRed}{HTML}{ED135A}
 
-\setbeamertemplate{background}{%
-  \includegraphics[height=\paperheight]{\beamerbackground}
+\newcommand{\@BeamerBackground}{}% default
+\newcommand{\beamerbackground}[1]{
+  \renewcommand{\@BeamerBackground}{#1}
+}
+
+\AtBeginDocument{% Execute it when \begin{document} is executed, at the very end of the preamble
+  \ifdefempty{\@BeamerBackground}{% Draw default background if empty
+    \setbeamertemplate{background}{
+      \begin{tikzpicture}[overlay,remember picture]
+
+        % Background color
+        \fill[black!2]
+        (current page.south west) rectangle (current page.north east);
+
+        % Rectangles
+        \shade[
+        left color=Dandelion, 
+        right color=Dandelion!40,
+        transform canvas ={rotate around ={45:($(current page.north west)+(0,-.25*\paperwidth)$)}}] 
+        ($(current page.north west)+(0,-.25*\paperwidth)$) rectangle ++(9,1);
+
+        \shade[
+        left color=OliveGreen,
+        rounded corners=0.3cm,
+        transform canvas ={rotate around ={45:($(current page.north west)+(.5,-.25*\paperheight)$)}}] 
+        ($(current page.north west)+(1.5,-9.55)$) rectangle ++(7,.6);
+
+        \shade[
+        left color=OrangeRed!80,
+        right color=OrangeRed!60,
+        rounded corners=0.4cm,
+        transform canvas ={rotate around ={45:($(current page.north)+(-1.5,-3)$)}}]
+        ($(current page.north)+(-1.5,-3)$) rectangle ++(9,0.8);
+
+        \shade[
+        left color=RoyalBlue,
+        right color=Emerald,
+        rounded corners=0.9cm,
+        transform canvas ={rotate around ={45:($(current page.north)+(-3,-8)$)}}] ($(current page.north)+(-3,-8)$) rectangle ++(15,1.8);
+
+        \shade[
+        left color=orange,
+        right color=purple,
+        rounded corners=0.9cm,
+        transform canvas ={rotate around ={45:($(current page.north west)+(4,-15.5)$)}}]
+        ($(current page.north west)+(4,-15.5)$) rectangle ++(30,1.8);
+
+        \shade[
+        left color=lightgray,
+        rounded corners=0.4cm,
+        transform canvas ={rotate around ={45:($(current page.north west)+(19,-5.65)$)}}]
+        ($(current page.north west)+(19,-5.65)$) rectangle ++(15,0.8);
+
+        \shade[
+        left color=OrangeRed,
+        right color=red!80,
+        rounded corners=0.6cm,
+        transform canvas ={rotate around ={45:($(current page.north west)+(20,-9)$)}}] 
+        ($(current page.north west)+(20,-9)$) rectangle ++(14,1.2);
+
+      \end{tikzpicture}
+    }
+  }{
+    \setbeamertemplate{background}{%
+      \includegraphics[height=\paperheight]{\@BeamerBackground}
+    }
+  }
 }
   
