@@ -6,6 +6,7 @@ Beamer 在德语中是投影仪的意思。相关教程请参考：
   \item \url{https://latex-beamer.com/tutorials/}
   \item \url{https://www.overleaf.com/learn/latex/Beamer_Presentations%3A_A_Tutorial_for_Beginners_(Part_1)%E2%80%94Getting_Started}
   \item \url{https://userpages.umbc.edu/~rostamia/beamer/}
+  \item \url{https://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}
 \end{itemize}
 
 其它资源：
@@ -1449,7 +1450,32 @@ command in braces, as in:
 \includegraphics[page=2]{examples/beamer/beamertheme12.pdf}
 
 % -----------------------------------------------------------------------------
-\section{放映顺序 Overlay}
+\section{创建自己的 Beamer 主题}
+
+参考实例:
+
+\begin{itemize}
+  \item Metropolis theme \url{https://github.com/matze/mtheme}
+  \item Bruno theme \url{https://forge.delab.re/matteo/beamertheme-bruno}
+  \item THK theme \url{https://github.com/Markus-de-Koster/LaTeX-beamer-TH-Koeln}
+  \item Amurmaple theme \url{https://plmlab.math.cnrs.fr/mchupin/mcbeamertheme}
+  \item SINTEF theme \url{https://www.overleaf.com/latex/templates/sintef-presentation/jhbhdffczpnx}
+  \item Lucid theme \url{https://www.overleaf.com/latex/examples/building-a-custom-beamer-theme/hkbgktmpjckz}
+  \item Beamer Templates \url{https://latex-beamer.com/beamer-template/}
+\end{itemize}
+
+According to the guide, Beamer presentations have five flavours of themes
+
+\begin{itemize}
+  \item Presentation themes – Every aspect of the presentation is detailed here. The colour, the font, the way the bullets look. The way the enumeration goes. The size and position of the logo etc.
+  \item Colour themes – Just of the colour details. This can be created as a separate file from the presentation theme and then later called with other presentation themes. I will explain this below. In fact, let’s just enumerate the other three and jump to the explanation of how all this connects.
+  \item Font themes
+  \item Inner themes – Design the elements that are “inside” the frame like the environments, theorems, blocks etc.
+  \item Outer themes – Design the outer space of the frame like the headline, footline, sidebar etc. 
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\section{覆盖 Overlay}
 
 \subsection{{\ttfamily \textbackslash pause} 命令}
 
@@ -1470,7 +1496,7 @@ A pdf viewer will expose the resulting file one paragraph at a time. The fully e
 
 \includegraphics[page=4]{examples/beamer/beameroverlay02.pdf}
 
-\subsection{放映顺序说明 Overlay specifications}
+\subsection{覆盖说明 Overlay specifications}
 
 The \verb|\pause| command is useful but isn't very versatile. To get more flexibility we use what beamer calls overlay specifications. These specifications can be added to compatible commands using pointed brackets after the command name. For example I can add them to the \verb|\item| command in a list structure like this.
 

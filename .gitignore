@@ -275,7 +275,6 @@ TSWLatexianTemp*
 # Makeindex log files
 *.lpz
 
-*.pdf
 playground/
 *.latexcode
 *.pdf_tex
