@@ -1,0 +1,59 @@
+\chapter{{\LaTeX 编程}}
+
+\section{新建命令 {\ttfamily newcommand}}
+
+\section{{\ttfamily def}}
+
+\section{新建环境 {\ttfamily newenvironment}}
+
+\section{key-value 参数}
+
+关于 key-value 参数的实现 请参考 Joseph Wright 和 Christian Feuersänger 的文章\cite{TUGBOAT2009}。
+
+\subsection{{\ttfamily \textbackslash define@key}}
+
+\mint{latex}|\define@key{<family>}{<key>}{<handler>}|
+
+{\ttfamily \textbackslash define@key} 有三个参数：{\ttfamily <family>}，
+{\ttfamily <key>} 和 {\ttfamily <handler>}。
+
+\subsection{{\ttfamily \textbackslash setkeys}}
+
+{\ttfamily \textbackslash setkeys} 用于设置 key-value。The input to {\ttfamily \textbackslash setkeys} is a comma-separated list: each comma-separated {\ttfamily <key>=<value>} pair is therefore processed in turn. 
+
+\subsection{ keyval 包}
+
+下面的例子由 keyval 文档示例修改得到：
+
+\inputminted[linenos]{latex}{examples/programming/keyval-commands-with-parameters.tex}
+
+编译时在终端输出：
+
+\begin{minted}{text}
+Setting height (4 in)
+Setting width (5 in)
+Setting scale (.85)
+Setting bounding box (20 20 300 400)
+Setting clip (false)
+Lorem ipsum dolor sit amet
+Setting height (4 in)
+Setting width (5 in)
+Setting clip (true)
+Lorem ipsum dolor sit amet
+\end{minted}
+
+从上面的输出可以看出，当参数列表未包含的参数时不会调用相关的{\ttfamily <handler>}；
+对于有默认值的参数，可以不给值，但是需要列出该参数。
+
+为了使键值对参数时可选的，我们可以将值进行存储，如下例：
+
+\inputminted[linenos]{latex}{examples/programming/keyval-commands-with-optional-parameters1.tex}
+
+其中定义命令的方式也可以采用 {\ttfamily newcommand}：
+
+\inputminted[firstline=30,lastline=42]{latex}{examples/programming/keyval-commands-with-optional-parameters2.tex}
+
+
+
+参考\cite{WIKIBOOKS}
+

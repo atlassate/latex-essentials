@@ -1,0 +1,22 @@
+% Beamer hyperlinks
+\documentclass{ctexbeamer}
+
+\title{Beamer 按钮}
+\subtitle{在 Beamer 中定义按钮}
+\author{latex-essential}
+
+\begin{document}
+
+\begin{frame}
+  \label{first}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Beamer 按钮}
+  \hyperlink{first}{\beamerbutton{start}}
+  \hyperlink{first}{\beamergotobutton{start}}
+  \hyperlink{first}{\beamerskipbutton{start}}  
+  \hyperlink{first}{\beamerreturnbutton{start}}
+\end{frame}
+
+\end{document}

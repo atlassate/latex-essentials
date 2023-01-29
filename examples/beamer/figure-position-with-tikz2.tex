@@ -1,0 +1,29 @@
+%  Exact image positioning in Beamer
+\documentclass{beamer}
+
+% Required package
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{frame}{Exact positioning in Beamer (left)}
+% Create TikZ picture environment
+\begin{tikzpicture}[remember picture, overlay]
+  \node[left] at (current page.east) 
+  {
+    \includegraphics[width=0.5\textwidth]{Ques}
+  };
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Exact positioning in Beamer (left=1cm)}
+% Create TikZ picture environment
+\begin{tikzpicture}[remember picture, overlay]
+  \node[left=1cm] at (current page.east) 
+  {
+    \includegraphics[width=0.5\textwidth]{Ques}
+  };
+\end{tikzpicture}
+\end{frame}
+
+\end{document}

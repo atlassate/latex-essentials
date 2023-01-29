@@ -1,0 +1,36 @@
+% Logo positioning in Beamer
+\documentclass{ctexbeamer}
+
+% Theme choice:
+\usetheme{AnnArbor}
+\usecolortheme{beaver}
+
+% Title page details: 
+\title{为演示文稿添加 logo} 
+\author{latex-beamer.com}
+\date{\today}
+
+% Load TikZ
+\usepackage{tikz}
+\titlegraphic { 
+  \begin{tikzpicture}[overlay,remember picture]
+  \node[right=0.2cm] at (current page.150){
+    \includegraphics[width=3cm]{latex-project-logo.pdf}
+  };
+  \node[left=0.2cm] at (current page.30){
+    \includegraphics[width=3cm]{latex-project-logo.pdf}
+  };
+  \end{tikzpicture}
+}
+
+\begin{document}
+
+% Title page frame
+\begin{frame}
+  \titlepage 
+\end{frame}
+
+\begin{frame}{Frame Title}
+\end{frame}
+
+\end{document}

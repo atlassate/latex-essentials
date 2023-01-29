@@ -1,0 +1,69 @@
+% Commands with key-value opitonal parameters(由 keyval 文档改写)
+\documentclass{article}
+
+\usepackage{keyval}
+
+\makeatletter
+
+% 定义键
+\define@key{dpc}{bounding box}{
+  \typeout{Setting bounding box (#1)}
+  \def\dpc@Box{#1}
+}
+\define@key{dpc}{width}{
+  \typeout{Setting width (#1)}
+  \def\dpc@Width{#1}
+}
+\define@key{dpc}{height}{
+  \typeout{Setting height (#1)}
+  \def\dpc@Height{#1}
+}
+\define@key{dpc}{scale}{
+  \typeout{Setting scale (#1)}
+  \def\dpc@Scale{#1}
+}
+\define@key{dpc}{clip}[true]{
+  \typeout{Setting clip (#1)}
+  \def\dpc@Clip{#1}
+}
+
+% 定义命令
+\newcommand\dpcgraphics[2][]{
+  {%\begin{group}
+    \setkeys{dpc}{#1}
+    KEY VALUES:\\
+    \indent\indent bounding box({\tt\dpc@Box})\\
+    \indent\indent width({\tt\dpc@Width})\\
+    \indent\indent height({\tt\dpc@Height})\\
+    \indent\indent scale({\tt\dpc@Scale})\\
+    \indent\indent clip({\tt\dpc@Clip})\par
+    INPUT: #2
+  }%\end{group}
+}
+
+\makeatother
+
+% 设置默认值
+\setkeys{dpc}{height = 4 in, width = 3 in,scale = .75,bounding box = 20 20 350 400,clip = true,}
+
+\begin{document}
+
+\dpcgraphics{Lorem ipsum dolor sit amet}
+
+\dpcgraphics
+[ height = 4 in,
+  width = 3 in,
+  scale = .85,
+  bounding box = 20 20 300 400,
+  clip,
+]{Lorem ipsum dolor sit amet}
+
+\dpcgraphics
+[ height = 4 in,
+  width = 3 in,
+  scale = .85,
+  %bounding box = 20 80 300 400,
+  %clip,
+]{Lorem ipsum dolor sit amet}
+
+\end{document}

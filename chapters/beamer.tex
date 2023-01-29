@@ -41,7 +41,7 @@ already bear with a presentation where the speaker just read aloud the text from
 
 下面的代码是创建一个简单 Beamer 演示文稿的封面，包含了标题，作者和日期：
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertitle01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/title-page-simple.tex}
 
 在这段代码中，
 \begin{itemize}
@@ -58,17 +58,17 @@ already bear with a presentation where the speaker just read aloud the text from
 
 编译结果：
 
-\includegraphics{examples/beamer/beamertitle01.pdf}
+\includegraphics{examples/beamer/title-page-simple.pdf}
 
 \subsection{多个作者}
 
 In the previous example, we used \verb|\author| to add the presenter name to the title page. Using the same command, we can add more authors. Check the following code:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertitle02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/title-page-multiple-authors.tex}
 
 Using this line code in the above code, we get the following result:
 
-\includegraphics{examples/beamer/beamertitle02.pdf}
+\includegraphics{examples/beamer/title-page-multiple-authors.pdf}
 
 对于多个作者的情况，我们使用 \verb|\and| 命令
 \footnote{注意：为了保证 first name 和 last name 在换行时不被分开，这里使用 \textasciitilde 来连接。}。
@@ -77,11 +77,11 @@ Using this line code in the above code, we get the following result:
 
 Adding an affiliation can be achieved using the command \verb|\institute| to the document preamble.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertitle03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/title-page-affliation.tex}
 
 Compiling this code yields the following result:
 
-\includegraphics{examples/beamer/beamertitle03.pdf}
+\includegraphics{examples/beamer/title-page-affliation.pdf}
 
 If you would like to add multiple lines affiliation, you can simply use \verb|\\| to create a new line.
 
@@ -89,22 +89,22 @@ If you would like to add multiple lines affiliation, you can simply use \verb|\\
 
 If there are several affiliations or more than one author with different affiliations, we add the command \verb|\inst| inside \verb|\author| and \verb|\institute| commands. Here is an illustrative example of two authors with different affiliations:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertitle04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/title-page-multiple-affliations.tex}
 
 Here is the obtained result:
 
-\includegraphics{examples/beamer/beamertitle04.pdf}
+\includegraphics{examples/beamer/title-page-multiple-affliations.pdf}
 
 \subsection{修改脚注信息}
 
 前面的示例我们看到当标题、作者等信息较长时，无法完整显示。我们可以重新定义脚注显示的信息
 \footnote{方括号中可以为空，这样脚注就不显示文本。}：
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertitle05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/title-page-footer.tex}
 
 Output:
 
-\includegraphics{examples/beamer/beamertitle05.pdf}
+\includegraphics{examples/beamer/title-page-footer.pdf}
 
 % -----------------------------------------------------------------------------
 \section{为演示文稿添加 logo}
@@ -115,13 +115,13 @@ Adding a logo in beamer can be achieved using the \verb|\logo| command where we 
 
 Check the following code:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlogo01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/logo-for-all-pages.tex}
 
 Compiling this code yields:
 
-\includegraphics[page=1]{examples/beamer/beamerlogo01.pdf}
+\includegraphics[page=1]{examples/beamer/logo-for-all-pages.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerlogo01.pdf}
+\includegraphics[page=2]{examples/beamer/logo-for-all-pages.pdf}
 
 The logo will appear at the bottom right corner of each slide of this theme.
 
@@ -129,23 +129,23 @@ The logo will appear at the bottom right corner of each slide of this theme.
 
 In this part, we will learn how to add a logo in the first page only using \verb|\titlegraphic| command. Replacing the above \verb|\logo| line code by the following code:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlogo02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/logo-for-title-page.tex}
 
 We get the following output:
 
-\includegraphics[page=1]{examples/beamer/beamerlogo02.pdf}
+\includegraphics[page=1]{examples/beamer/logo-for-title-page.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerlogo02.pdf}
+\includegraphics[page=2]{examples/beamer/logo-for-title-page.pdf}
 
 \subsection{添加多个 logo}
 
 Adding multiple logos can be done by including multiple images using \verb|\includegraphics| command. We can add spacing between logos using \verb|\hspace| command. Here is an illustrative example:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlogo03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/logo-multiple.tex}
 
 which yields the following title page:
 
-\includegraphics[page=1]{examples/beamer/beamerlogo03.pdf}
+\includegraphics[page=1]{examples/beamer/logo-multiple.pdf}
 
 \subsection{设置 logo 的位置}
 
@@ -159,9 +159,9 @@ To position our logo at any place of the title page (or slides in general), we w
   
 Here is an example of top right logo positioning in Beamer:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlogo04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/logo-position1.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerlogo04.pdf}
+\includegraphics[page=1]{examples/beamer/logo-position1.pdf}
 
 Comments:
 
@@ -172,19 +172,19 @@ Comments:
 
 Here is an example of top left logo positioning in Beamer:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlogo05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/logo-position2.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerlogo05.pdf}
+\includegraphics[page=1]{examples/beamer/logo-position2.pdf}
 
 where the logo is positioned at 0.2 cm right of the point with coordinates (current page.150)
 
 Here is another example of top left and top right logo positioning in Beamer:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlogo06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/logo-position3.tex}
 
 The above code combines the previous line codes and here is the obtained title page:
 
-\includegraphics[page=1]{examples/beamer/beamerlogo06.pdf}
+\includegraphics[page=1]{examples/beamer/logo-position3.pdf}
 
 We have chosen 30 degrees and 150 degrees, you can choose any value to get the coordinates of the slide border, then use right or left parameters with desired distances to properly position your logo!
 
@@ -195,7 +195,7 @@ We have chosen 30 degrees and 150 degrees, you can choose any value to get the c
 
 Creating the table of contents in Beamer can be done with the same manner as in standard {\LaTeX}. The first thing that we should do is to structure our presentation using the commands \verb|\section| and \verb|\subsection| (\verb|\section*| and \verb|\subsection*|, to hide it from table of contents). It should be noted that with beamer class these commands will not create a heading at the position where we use them.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertoc01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/outline.tex}
 
 \begin{remark*}
   这里 \verb|\section|，\verb|\subsection|只是起到锚定作用，并不像 book， article 等文档类一样创建标题，
@@ -204,33 +204,33 @@ Creating the table of contents in Beamer can be done with the same manner as in 
 
 Compiling this code yields:
 
-\includegraphics[page=2]{examples/beamer/beamertoc01.pdf}
+\includegraphics[page=2]{examples/beamer/outline.pdf}
 
 \subsection{在目录中隐藏 {\ttfamily subsection} 标题}
 
 Sometimes, it’s convenient to remove all subsections from the table of contents. This can be done easily using the following line code:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertoc02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/outline-hidesubsections.tex}
 
 we get the following presentation outline:
 
-\includegraphics[page=2]{examples/beamer/beamertoc02.pdf}
+\includegraphics[page=2]{examples/beamer/outline-hidesubsections.pdf}
 
 \subsection{重现当前标题}
 
 If you wish to show table of contents with highlighted current section before starting every section you can use the following code:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertoc03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/outline-recurring.tex}
 
-\includegraphics[page=3]{examples/beamer/beamertoc03.pdf}
+\includegraphics[page=3]{examples/beamer/outline-recurring.pdf}
 
 \subsection{逐节显示目录：{\ttfamily pausesections}}
 
 If we would like to show the table of contents in an incremental way, we can add the option {\ttfamily pausesections} to the \verb|\tableofcontents| command. Here is the corresponding {\LaTeX} code:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertoc04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/outline-pausesections.tex}
 
-\includegraphics[page=2]{examples/beamer/beamertoc04.pdf}
+\includegraphics[page=2]{examples/beamer/outline-pausesections.pdf}
 
 % -----------------------------------------------------------------------------
 \section{Beamer 的环境}
@@ -390,11 +390,11 @@ The end line of a the proof is symbolized by a qed symbol. By default, this symb
 
 Ordered lists have a numbering before every list item. To create an ordered list in beamer, we use enumerate environment. Inside this environment, the list entries can be updated using the \verb|\item| command. A simple ordered list example is presented below.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-ordered.tex}
 
 Compiling this code yields the following frame:
 
-\includegraphics{examples/beamer/beamerlist01.pdf}
+\includegraphics{examples/beamer/list-ordered.pdf}
 
 \subsection{无序列表}
 
@@ -402,11 +402,11 @@ Unordered lists have a marker, such as a bullet, before every list item. To crea
 
 A simple unordered list example is presented below.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-unordered.tex}
 
 Output:
 
-\includegraphics{examples/beamer/beamerlist02.pdf}
+\includegraphics{examples/beamer/list-unordered.pdf}
 
 \subsection{嵌套列表}
 
@@ -414,41 +414,41 @@ Sometimes you also have to list things, which have some kind of sub-category. Fo
 
 A simple nested list example is presented below.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-nested.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerlist03.pdf}
+\includegraphics{examples/beamer/list-nested.pdf}
 
 \subsection{跨帧列表}
 
 The idea is to define a counter \verb|currentenumi| that stores the value of the last enumerated item in a given frame. Then on the next frame, the \verb|enumi| counter can easily be set to the value of \verb|currentenumi| to continue numbering.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-entries-shifted-to-next-frame.tex}
 
 which yields the following result:
 
-\includegraphics[page=1]{examples/beamer/beamerlist04.pdf}
+\includegraphics[page=1]{examples/beamer/list-entries-shifted-to-next-frame.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerlist04.pdf}
+\includegraphics[page=2]{examples/beamer/list-entries-shifted-to-next-frame.pdf}
 
 \subsection{修改列表项目间距}
 
 The spacing between the list items can be easily altered using the \verb|\vspace| command. The other way to change the spacing globally is to use the following command \verb|\setbeamertemplate|. Here is an illustrative example:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-item-space1.tex}
 
 Output:
 
-\includegraphics{examples/beamer/beamerlist05.pdf}
+\includegraphics{examples/beamer/list-item-space1.pdf}
 
 Here is another version of spacing between nested lists:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-item-space2.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerlist06.pdf}
+\includegraphics{examples/beamer/list-item-space2.pdf}
 
 \subsection{修改列表项目符号}
 
@@ -465,15 +465,15 @@ is used on itemize items to change the shape of item markers.
   \item \verb|circle| : sets the item marker to a ball shape.
 \end{itemize}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist07.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-item-marker1.tex}
 
-\includegraphics{examples/beamer/beamerlist07.pdf}
+\includegraphics{examples/beamer/list-item-marker1.pdf}
 
 使用 pifont 包
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist08.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-item-marker2.tex}
 
-\includegraphics{examples/beamer/beamerlist08.pdf}
+\includegraphics{examples/beamer/list-item-marker2.pdf}
 
 \subsection{字母，数字和罗马数字编号}
 
@@ -481,9 +481,9 @@ is used on itemize items to change the shape of item markers.
 
 Under the enumerate environment, the numbering style can be changed using the enumitem package. From the next example, you can notice that three different styles, alphabet, Roman, and Arabic are used to denote the list item numbers. Meanwhile, you can also separate the enumeration from the item content by enclosing them inside bracket/brackets or a dot.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerlist09.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/list-enumitem-label.tex}
 
-\includegraphics{examples/beamer/beamerlist09.pdf}
+\includegraphics{examples/beamer/list-enumitem-label.pdf}
 
 % -----------------------------------------------------------------------------
 \section{分栏}
@@ -494,31 +494,31 @@ To create columns in beamer, we use the columns environment. Then, at the point 
 
 In the following example, we have created two columns with different widths:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolumn01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/column-different-widths.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamercolumn01.pdf}
+\includegraphics{examples/beamer/column-different-widths.pdf}
 
 \subsection{文字配图}
 
 With the same manner as above, we can add text and image in the same slide as follows:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolumn02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/column-figure-next-to-text.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamercolumn02.pdf}
+\includegraphics{examples/beamer/column-figure-next-to-text.pdf}
 
 \subsection{垂直分隔线}
 
 To distinctively separate the two (or more) columns from each other we can create a vertical line between them. This can be done simply by adding a \verb|\rule| command in an intermediate column with a small width. In the example below two columns are separated with a vertical line using this method.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolumn03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/column-vertical-line.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamercolumn03.pdf}
+\includegraphics{examples/beamer/column-vertical-line.pdf}
 
 \subsection{垂直方向对齐}
 
@@ -526,21 +526,21 @@ The vertical alignment of column content is very important for the beautificatio
 
 \subsubsection{Top alignment}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolumn04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/column-top-alignment.tex}
 
-\includegraphics{examples/beamer/beamercolumn04.pdf}
+\includegraphics{examples/beamer/column-top-alignment.pdf}
 
 \subsubsection{Center alignment}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolumn05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/column-center-alignment.tex}
 
-\includegraphics{examples/beamer/beamercolumn05.pdf}
+\includegraphics{examples/beamer/column-center-alignment.pdf}
 
 \subsubsection{Bottom alignment}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolumn06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/column-bottom-alignment.tex}
 
-\includegraphics{examples/beamer/beamercolumn06.pdf}
+\includegraphics{examples/beamer/column-bottom-alignment.pdf}
 
 % -----------------------------------------------------------------------------
 \section{{\ttfamily block} 环境}
@@ -549,15 +549,15 @@ The vertical alignment of column content is very important for the beautificatio
 
 It can be useful to treat some content differently by putting it into a block. In Beamer, we can separate a specific section of text or graphics from the rest of the frame using {\ttfamily block} environment:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerblock01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/block-simple1.tex}
 
 We used {\ttfamily Madrid} theme for our presentation and inside a frame we added a block environment with title “Block title“. Here is the obtained result:
 
-\includegraphics{examples/beamer/beamerblock01.pdf}
+\includegraphics{examples/beamer/block-simple1.pdf}
 
 It should be noted that the block style depends on the used theme and theme color. Let us consider the same code as above and we change only the them to {\ttfamily Bergen}. The obtained result is shown below:
 
-\includegraphics{examples/beamer/beamerblock02.pdf}
+\includegraphics{examples/beamer/block-simple2.pdf}
 
 \subsection{文字块类型}
 
@@ -567,7 +567,7 @@ The following table illustrates different blocks with sample code syntax in beam
 
 \begin{table}[!h]
 \begin{center}
-\caption{examples/beamer/Beamer 文字块类型}
+\caption{Beamer 文字块类型}
 \begin{tabular}{cc}
   \toprule
   Content type &  Block\\
@@ -588,21 +588,21 @@ The following table illustrates different blocks with sample code syntax in beam
 
 Here is an example code using different types of blocks in a Beamer presentation:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerblock03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/block-styles1.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerblock03.pdf}
+\includegraphics[page=1]{examples/beamer/block-styles1.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerblock03.pdf}
+\includegraphics[page=2]{examples/beamer/block-styles1.pdf}
 
-\includegraphics[page=3]{examples/beamer/beamerblock03.pdf}
+\includegraphics[page=3]{examples/beamer/block-styles1.pdf}
 
 Using {\ttfamily Boadilla} theme instead of {\ttfamily Copenhagen}, we get the following style for different beamer blocks:
 
-\includegraphics[page=1]{examples/beamer/beamerblock04.pdf}
+\includegraphics[page=1]{examples/beamer/block-styles2.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerblock04.pdf}
+\includegraphics[page=2]{examples/beamer/block-styles2.pdf}
 
-\includegraphics[page=3]{examples/beamer/beamerblock04.pdf}
+\includegraphics[page=3]{examples/beamer/block-styles2.pdf}
 
 \subsection{自定义文字块}
 
@@ -618,9 +618,9 @@ We can modify blocks’ shapes by playing with the command:
 
 Here is an illustrative example:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerblock05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/block-shapes.tex}
 
-\includegraphics{examples/beamer/beamerblock05.pdf}
+\includegraphics{examples/beamer/block-shapes.pdf}
 
 \subsection{修改文字块颜色}
 
@@ -630,9 +630,9 @@ For each block (e.g. \verb|alertblock| ), we distinguish two parts: the \verb|ti
 
 In the next example, we changed colors of standard block, alert block and example block. 
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerblock06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/block-change-colors.tex}
 
-\includegraphics{examples/beamer/beamerblock06.pdf}
+\includegraphics{examples/beamer/block-change-colors.pdf}
 
 % -----------------------------------------------------------------------------
 \section{文字格式}
@@ -641,17 +641,17 @@ Beamer 中文字格式修饰可以和 {\LaTeX} 其它文档一样，包括粗体
 在中文 Beamer 中默认是使用 \verb|\setCJKsansfamily| 定义的字体，
 还也可以使用 \verb|\setCJKfamily| 定义中文字体：
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertextformat01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/text-bold-italic-underline.tex}
 
-\includegraphics{examples/beamer/beamertextformat01.pdf}
+\includegraphics{examples/beamer/text-bold-italic-underline.pdf}
 
 \subsection{Bold Math in Beamer}
 
 As a side note, maybe it is also worth commenting that sometimes we want to use a bold font inside math mode, for instance to denote vectors or matrices. To do so we cannot use the \verb|\textbf| command, but instead we have to load the package bm (which stands for “bold math”) and use the \verb|\bm| command.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertextformat02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/text-bold-math.tex}
 
-\includegraphics{examples/beamer/beamertextformat02.pdf}
+\includegraphics{examples/beamer/text-bold-math.pdf}
 
 \subsection{Text Decorations in Beamer}
 
@@ -682,11 +682,11 @@ But the ulem package capabilities don’t stop here, since it provides another s
 
 对于中文字体修饰可以使用 CJKfntef 宏包，被修饰的文本不要使用 \verb|\CJKfamily| 指定字体，如：\verb|\CJKunderline{{\CJKfamily{楷体}中文}}|。
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertextformat03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/text-decorations.tex}
 
-\includegraphics[page=1]{examples/beamer/beamertextformat03.pdf}
+\includegraphics[page=1]{examples/beamer/text-decorations.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamertextformat03.pdf}
+\includegraphics[page=2]{examples/beamer/text-decorations.pdf}
 
 \subsection{文字对齐}
 
@@ -696,13 +696,13 @@ However, there is no built-in environment in LaTeX for fully justified text; and
 
 The following example shows how to use the different text alignments:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertextformat04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/text-alignment.tex}
 
-\includegraphics[page=1]{examples/beamer/beamertextformat04.pdf}
+\includegraphics[page=1]{examples/beamer/text-alignment.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamertextformat04.pdf}
+\includegraphics[page=2]{examples/beamer/text-alignment.pdf}
 
-\includegraphics[page=3]{examples/beamer/beamertextformat04.pdf}
+\includegraphics[page=3]{examples/beamer/text-alignment.pdf}
 
 \subsection{调整行距}
 
@@ -710,9 +710,9 @@ If you want to use larger interline spacing in your beamer presentation, you can
 
 \verb|\linespread{factor}|
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertextformat05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/text-line-space.tex}
 
-\includegraphics{examples/beamer/beamertextformat05.pdf}
+\includegraphics{examples/beamer/text-line-space.pdf}
 
 % -----------------------------------------------------------------------------
 \section{Beamer 字体}
@@ -726,15 +726,15 @@ Beamer has set 11 pts as the normal size of the font. This is the size which is 
 
 The following code highlight different Beamer font size that can be obtained using the above commands:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfont01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/font-size.tex}
 
-\includegraphics{examples/beamer/beamerfont01.pdf}
+\includegraphics{examples/beamer/font-size.pdf}
 
 Font sizes can also be changed using the beamer class options. We have the sizes: [8pt], [9pt], [10pt], [11pt], [12pt], [14pt], [17pt], [20pt], [bigger], and [small].
 
 Replacing \verb|\documentclass{beamer}| to \verb|\documentclass[14pt]{beamer}|, all font sizes will be shifted where the normal size now is 14pt instead of 11pt. Here is the obtained result:
 
-\includegraphics{examples/beamer/beamerfont02.pdf}
+\includegraphics{examples/beamer/font-change-normal-size.pdf}
 
 In the process of making our presentation we may face a cramped frame, in which we want to reduce the font size and the line skip, so that all the contents can fit inside. To do so, we can make use of the command
 
@@ -774,9 +774,9 @@ Font family is the second most important property of a Beamer font. Beamer types
 
 Check the following code to get an idea about setting the font family in Beamer:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfont03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/font-family.tex}
 
-\includegraphics{examples/beamer/beamerfont03.pdf}
+\includegraphics{examples/beamer/font-family.pdf}
 
 We added the option \verb|[fragile]| to be able to use verbatim inside a frame, a more details can be found in \href{https://latex-beamer.com/tutorials/beamer-code/}{“Beamer Code Listing — Syntax highlighter”} lesson.
 
@@ -788,9 +788,9 @@ Besides the font family, beamer has two font series which decide the stroke inte
 
 Beamer supports four types of font shapes: upright, slanted, italics and small caps. Check the example below!
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfont04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/font-shape.tex}
 
-\includegraphics{examples/beamer/beamerfont04.pdf}
+\includegraphics{examples/beamer/font-shape.pdf}
 
 The upright shape is the default shape for the normal text. The slanted and italics text are seldom used in presentations. The italics font will look same as slant font if the sans-serif font family is used. To have a Times italics effect, the serif font family is mandatory. Italics font shape is used for math. However, the practice of using bold colored text for highlighting is recommended.
 
@@ -823,52 +823,52 @@ The default font theme installs sans serif font for all text of the presentation
 
 Consider the following code that loads the default font theme:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfont05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/font-theme-default.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerfont05.pdf}
+\includegraphics[page=1]{examples/beamer/font-theme-default.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfont05.pdf}
+\includegraphics[page=2]{examples/beamer/font-theme-default.pdf}
 
 \subsubsection{Theme font: {\ttfamily professionalfonts}}
 
 Using \verb|\usefonttheme{professionalfonts}| instead of \verb|\usefonttheme{default}| in the above code, we get the following result:
 
-\includegraphics[page=1]{examples/beamer/beamerfont06.pdf}
+\includegraphics[page=1]{examples/beamer/font-theme-professionalfonts.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfont06.pdf}
+\includegraphics[page=2]{examples/beamer/font-theme-professionalfonts.pdf}
 
 \subsubsection{Theme font: {\ttfamily serif}}
 
 This theme causes all text to be typeset using the default serif font.
 
-\includegraphics[page=1]{examples/beamer/beamerfont07.pdf}
+\includegraphics[page=1]{examples/beamer/font-theme-serif.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfont07.pdf}
+\includegraphics[page=2]{examples/beamer/font-theme-serif.pdf}
 
 \subsubsection{Theme font: {\ttfamily structurebold}}
 
 This font theme will cause titles and text in the headlines, footlines , and sidebars to be typeset in a bold font.
 
-\includegraphics[page=1]{examples/beamer/beamerfont08.pdf}
+\includegraphics[page=1]{examples/beamer/font-theme-structurebold.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfont08.pdf}
+\includegraphics[page=2]{examples/beamer/font-theme-structurebold.pdf}
 
 \subsubsection{Theme font: {\ttfamily structureitalicserif}}
 
 This theme is similarly as the structurebold font theme, but where structurebold makes text bold, this theme typesets it in italics and in the
 standard serif font.
 
-\includegraphics[page=1]{examples/beamer/beamerfont09.pdf}
+\includegraphics[page=1]{examples/beamer/font-theme-structureitalicserif.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfont09.pdf}
+\includegraphics[page=2]{examples/beamer/font-theme-structureitalicserif.pdf}
 
 \subsubsection{Theme font: {\ttfamily structuresmallcapsserif}}
 
 Again, this theme does exactly the same as the structurebold font theme, only this time text is set using small caps and a serif font.
 
-\includegraphics[page=1]{examples/beamer/beamerfont10.pdf}
+\includegraphics[page=1]{examples/beamer/font-theme-structuresmallcapsserif.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfont10.pdf}
+\includegraphics[page=2]{examples/beamer/font-theme-structuresmallcapsserif.pdf}
 
 \subsection{Change Math Font style in Beamer}
 
@@ -876,9 +876,9 @@ To make the math in beamer look like the usual {\LaTeX} math, you only have to i
 
 The following illustration is obtained with the standard Beamer font:
 
-\includegraphics{examples/beamer/beamerfont11.pdf}
+\includegraphics{examples/beamer/font-theme-change-math-font-style1.pdf}
 
-\includegraphics{examples/beamer/beamerfont12.pdf}
+\includegraphics{examples/beamer/font-theme-change-math-font-style2.pdf}
 
 % -----------------------------------------------------------------------------
 \section{Code Listing in Beamer}
@@ -893,9 +893,9 @@ To make this environments work, you just have to pass the {\ttfamily fragile} op
 
 To highlight the use of minted package for code syntax highlighting, we consider the following example:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercodelisting01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/code-listing-with-minted.tex}
 
-\includegraphics{examples/beamer/beamercodelisting01.pdf}
+\includegraphics{examples/beamer/code-listing-with-minted.pdf}
 
 你会发现并没有显示行号，原因在于边距的问题，行号在边距之外。见：
 
@@ -909,17 +909,17 @@ modify to
 
 \mint{latex}|\setbeamersize{text margin left=1cm,text margin right=1cm}|
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercodelisting02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/code-listing-change-text-margin.tex}
 
-\includegraphics{examples/beamer/beamercodelisting02.pdf}
+\includegraphics{examples/beamer/code-listing-change-text-margin.pdf}
 
 也可以修改 minted 行号的间隔，见：
 
 \url{https://tex.stackexchange.com/questions/525570/minted-line-numbers-outside-frame-and-outside-margin}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercodelisting03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/code-listing-change-numbersep.tex}
 
-\includegraphics{examples/beamer/beamercodelisting03.pdf}
+\includegraphics{examples/beamer/code-listing-change-numbersep.pdf}
 
 \subsection{{\ttfamily fragile} 选项详解}
 
@@ -964,11 +964,11 @@ Illustrative example:
 
 In the following example, you can see the difference:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-rotation.tex}
 
 which produces:
 
-\includegraphics{examples/beamer/beamerfigure01.pdf}
+\includegraphics{examples/beamer/figure-rotation.pdf}
 
 Observe how the two images are slightly different.
 
@@ -984,11 +984,11 @@ Illustrative example:
 
 In the following example, we show how to use the figure environment to insert images:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-caption1.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerfigure02.pdf}
+\includegraphics{examples/beamer/figure-caption1.pdf}
 
 Observe that I have added the declaration:
 
@@ -1003,21 +1003,21 @@ Usually, you will not need the number, since every frame will contain one, at mo
 
 We have already seen how to slightly change the caption appearance, by adding a number to it or not. But we can further customize it by changing its font size and color. The following example shows the beamer theme options that we have to modify in order to customize our caption:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-caption2.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerfigure03.pdf}
+\includegraphics{examples/beamer/figure-caption2.pdf}
 
 \subsection{文字与图片分栏}
 
 It is common to write a frame with a figure next to a certain explanation. For this purpose, we can use beamer’s columns environment, as it is done in the following example:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-next-to-text.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerfigure04.pdf}
+\includegraphics{examples/beamer/figure-next-to-text.pdf}
 
 Observe that the \verb|\textwidth| command in the line:
 
@@ -1037,13 +1037,13 @@ To easily centre the image, as we have been doing throughout all the tutorial, w
 
 Let me show you a complete minimal example of how this would work:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-alignment-inside-frame.tex}
 
 Compiling this code yields:
 
-\includegraphics[page=1]{examples/beamer/beamerfigure05.pdf}
+\includegraphics[page=1]{examples/beamer/figure-alignment-inside-frame.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfigure05.pdf}
+\includegraphics[page=2]{examples/beamer/figure-alignment-inside-frame.pdf}
 
 And going further we can apply the same principles for the vertical alignment. By default, the image will be vertically centered. However, we can use the \verb|\vfill| command to fill in vertical space, and thus move the image up and down. If we use it before the image, it will be aligned at the bottom, and if we use it after the image, it will be aligned at the top.
 
@@ -1061,7 +1061,7 @@ Moreover, we can access the frame border using angles as shown below:
 
 The following code highlights the idea of absolute positioning of an image in Beamer using TikZ package:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-position-with-tikz1.tex}
 
 Comments:
 
@@ -1074,9 +1074,9 @@ Comments:
 
 Compiling the above code yields:
 
-\includegraphics[page=1]{examples/beamer/beamerfigure06.pdf}
+\includegraphics[page=1]{examples/beamer/figure-position-with-tikz1.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfigure06.pdf}
+\includegraphics[page=2]{examples/beamer/figure-position-with-tikz1.pdf}
 
 Use left, right, below and above for relative positioning
 
@@ -1086,11 +1086,11 @@ So to solve the above issue, we can add left option, relative to (current page.e
 
 You can also specify how much left distance by using left=<value> instead of left. 
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure07.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-position-with-tikz2.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerfigure07.pdf}
+\includegraphics[page=1]{examples/beamer/figure-position-with-tikz2.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfigure07.pdf}
+\includegraphics[page=2]{examples/beamer/figure-position-with-tikz2.pdf}
 
 You can do the same with right, below and above parameters!
 
@@ -1102,11 +1102,11 @@ This option is especially interesting when combined with beamer overlay specific
 
 The following example shows a small implementation of this idea:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure08.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-opacity-with-tikz.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerfigure08.pdf}
+\includegraphics[page=1]{examples/beamer/figure-opacity-with-tikz.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfigure08.pdf}
+\includegraphics[page=2]{examples/beamer/figure-opacity-with-tikz.pdf}
 
 In the above code, we placed the image 1 cm far from the left side of the frame using absolute positioning provided by TikZ. The first version of the image has 30\% opacity and the second one has 100\% opacity.
 
@@ -1122,11 +1122,11 @@ will make the image.png file appear only on slides 2 to 4.
 
 In beamer, we can wrap text around a figure, but not with beamer built-in commands. We have to use the external wrapfig package. In the following example, we use the environment wrapfigure that this package provides to wrap text around a figure:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure09.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-text-wrapping.tex}
 
 which produces the following output:
 
-\includegraphics{examples/beamer/beamerfigure09.pdf}
+\includegraphics{examples/beamer/figure-text-wrapping.pdf}
 
 Observe that the {\ttfamily wrapfigure} environment works as the figure environment, in the sense that it makes the image floating, and you can add a \verb|\caption| and a \label to the figure. However, this command accepts two mandatory arguments:
 
@@ -1139,9 +1139,9 @@ Observe that the {\ttfamily wrapfigure} environment works as the figure environm
 
 This can also be done inside a beamer frame, but for that purpose, we have to load the versatile TikZ package. In the following example, we illustrate an easy way to do it:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure10.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-text-over-image.tex}
 
-\includegraphics{examples/beamer/beamerfigure10.pdf}
+\includegraphics{examples/beamer/figure-text-over-image.pdf}
 
 Let’s dissection the commands used in this example:
 
@@ -1158,11 +1158,11 @@ nature1.jpg 和 nature2.jpg 来自 \url{https://pixabay.com/}。
 
 It is easy to use an image as a frame background in beamer, both globally and locally. In the following example, we put both into practice:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure11.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-background.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerfigure11.pdf}
+\includegraphics[page=1]{examples/beamer/figure-background.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerfigure11.pdf}
+\includegraphics[page=2]{examples/beamer/figure-background.pdf}
 
 You can see that the procedure is very intuitive: we just change the background canvas option of the beamer theme to the image that we want to use as background. However, when importing it we should make sure that the size is adjusted to the frame size; otherwise, we will get undesired results.
 
@@ -1170,11 +1170,11 @@ You can see that the procedure is very intuitive: we just change the background 
 
 With the subcaption package, we can build floating figure environments that contain more than one image, each with its corresponding caption and label. The following example shows how to do so:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure12.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-titlepage2.tex}
 
 Here is the obtained result:
 
-\includegraphics{examples/beamer/beamerfigure12.pdf}
+\includegraphics{examples/beamer/figure-titlepage2.pdf}
 
 \begin{itemize}
   \item As you can see, first we create a usual figure environment with its corresponding \verb|\caption| and \verb|\label|.
@@ -1190,11 +1190,11 @@ Here is the obtained result:
 
 The following minimal working example shows how on can include an image in the title page using \verb|\titlegraphics| command:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure13.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-titlepage1.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerfigure13.pdf}
+\includegraphics{examples/beamer/figure-titlepage1.pdf}
 
 It should be noted that titlegraphics content will move the title page details (title, author, institute, etc) to the above. So sometimes we need to fix also the height of the image in the \verb|\includegraphics| command using height=<value> (e.g. \verb|height=0.5\textwidth|).
 
@@ -1202,11 +1202,11 @@ It should be noted that titlegraphics content will move the title page details (
 
 As the title of a presentation is positioned at the top of a title slide, we can include an image just before the title text inside \title{} command:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerfigure14.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/figure-titlepage1.tex}
 
 Compiling this code yields:
 
-\includegraphics{examples/beamer/beamerfigure14.pdf}
+\includegraphics{examples/beamer/figure-titlepage2.pdf}
 
 % -----------------------------------------------------------------------------
 \section{颜色}
@@ -1225,7 +1225,7 @@ The first decision is to pick a color(s). I suggest defining two colors for vari
   \item Define your own custom colors. Use the {\ttfamily definecolor} command to assign a custom name and then define the parameters for your color (such as RGB values). This is handy if you want to use a very specific color, as I did.
 \end{itemize}
 
-\section{使用 {\ttfamily usecolortheme} 命令修改 Beamer 颜色}
+\subsection{使用 {\ttfamily usecolortheme} 命令修改 Beamer 颜色}
 
 The command {\ttfamily usecolortheme} can be used to load any of the default Beamer color themes (as displayed on \url{https://www.hartwork.org/beamer-theme-matrix/}). 
 But this post is about not using the default color themes. You can use {\ttfamily usecolortheme} with any color you want by applying the color to the {\ttfamily structure} of the presentation.
@@ -1234,15 +1234,15 @@ But this post is about not using the default color themes. You can use {\ttfamil
 
 Here is a minimal example. I’ve chosen to use the Madrid theme with the {\ttfamily miniframes} outer theme (to add a header) and the {\ttfamily circles} inner theme (to replace the shiny default circles).
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolor01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/color-usecolortheme.tex}
 
 Compiling this code yields:
 
-\includegraphics[page=1]{examples/beamer/beamercolor01.pdf}
+\includegraphics[page=1]{examples/beamer/color-usecolortheme.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamercolor01.pdf}
+\includegraphics[page=2]{examples/beamer/color-usecolortheme.pdf}
 
-\section{使用 {\ttfamily setbeamercolor} 命令修改 Beamer 颜色}
+\subsection{使用 {\ttfamily setbeamercolor} 命令修改 Beamer 颜色}
 
 If you just want a break from the default color themes, then {\ttfamily usecolortheme} is sufficient. If you want to define exactly what colors are used, then a little more work is required (but not much). My goal was to use UBC’s official colors, so a better solution was needed.
 
@@ -1254,13 +1254,13 @@ A key find was Thierry Masson’s \href{http://www.cpt.univ-mrs.fr/~masson/latex
   \item (optional) Select some palette elements where you would like to see the secondary color and set the color for just those elements. For example, setting {\ttfamily subsection} in {\ttfamily head/foot} to the secondary color has a nice clean appearance in themes that use a header or footer. Why not set a whole palette to the secondary color? You can, but I’ve found that you can end up with some undesirable results in headers.
 \end{itemize}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamercolor02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/color-setbeamercolor.tex}
 
 Compiling this code yields:
 
-\includegraphics[page=1]{examples/beamer/beamercolor02.pdf}
+\includegraphics[page=1]{examples/beamer/color-setbeamercolor.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamercolor02.pdf}
+\includegraphics[page=2]{examples/beamer/color-setbeamercolor.pdf}
 
 % -----------------------------------------------------------------------------
 \section{超链接与按钮}
@@ -1272,11 +1272,11 @@ Compiling this code yields:
 \mint{latex}|\hyperlink{<label>}{<text>}|
 插入超链接：
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamerhyperlink01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/hyperlink-and-button1.tex}
 
-\includegraphics[page=1]{examples/beamer/beamerhyperlink01.pdf}
+\includegraphics[page=1]{examples/beamer/hyperlink-and-button1.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamerhyperlink01.pdf}
+\includegraphics[page=2]{examples/beamer/hyperlink-and-button1.pdf}
 
 \subsection{按钮}
 
@@ -1289,7 +1289,7 @@ Compiling this code yields:
 \hyperlink{<label>}{\beamerreturnbutton{<text>}}
 \end{minted}
 
-\includegraphics[page=2]{examples/beamer/beamerhyperlink02.pdf}
+\includegraphics[page=2]{examples/beamer/hyperlink-and-button2.pdf}
 
 % -----------------------------------------------------------------------------
 \section{Beamer 主题}
@@ -1306,13 +1306,13 @@ Beamer’s “minor themes” fall into 4 categories: outer, inner, font and col
 
 default 主题
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-default.tex}
 
-\includegraphics{examples/beamer/beamertheme01.pdf}
+\includegraphics{examples/beamer/theme-default.pdf}
 
 Boadilla 主题
 
-\includegraphics{examples/beamer/beamertheme02.pdf}
+\includegraphics{examples/beamer/theme-boadilla.pdf}
 
 Rochester 主题
 
@@ -1320,7 +1320,7 @@ Rochester 主题
 
 修改标题栏的高度
 
-\includegraphics{examples/beamer/beamertheme03.pdf}
+\includegraphics{examples/beamer/theme-rochester.pdf}
 
 \subsection{outer themes}
 
@@ -1360,9 +1360,9 @@ control the colors of title, frame title, itemization bullets, and many other el
 
 
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-customize.tex}
 
-\includegraphics{examples/beamer/beamertheme04.pdf}
+\includegraphics{examples/beamer/theme-customize.pdf}
 
 通过 RGB 值设置颜色
 
@@ -1370,15 +1370,15 @@ control the colors of title, frame title, itemization bullets, and many other el
 
 \subsection{删除导航图标}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme05.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-remove-navigation-symbols.tex}
 
-\includegraphics{examples/beamer/beamertheme05.pdf}
+\includegraphics{examples/beamer/theme-remove-navigation-symbols.pdf}
 
 \subsection{添加底部信息栏}
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-footer.tex}
 
-\includegraphics{examples/beamer/beamertheme06.pdf}
+\includegraphics{examples/beamer/theme-footer.pdf}
 
 \subsection{修改默认文本颜色}
 
@@ -1386,9 +1386,9 @@ Beamer’s normal text is black on white background. The following command in th
 
 \mint{latex}|\setbeamercolor{normal text}{fg=purple}|
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme07.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-text-color.tex}
 
-\includegraphics{examples/beamer/beamertheme07.pdf}
+\includegraphics{examples/beamer/theme-text-color.pdf}
 
 The fg in command above sets the normal text’s foreground color. It is also possible to set the normal text’s background color. The background color of a slide is inherited from the normal text’s background, therefore changing the normal text’s background color amounts to changing the slide’s background color. See  Setting the background to a solid color for an illustration.
 
@@ -1405,17 +1405,17 @@ Setting the background to a solid color
 
 This example shows how to set the background to a light shade of pink:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme08.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-background-color.tex}
 
-\includegraphics{examples/beamer/beamertheme08.pdf}
+\includegraphics{examples/beamer/theme-background-color.pdf}
 
 \subsection{背景颜色渐变}
 
 Gradually shaded backgrounds are possible as well. In the following example, the background varies from light red at the bottom to light yellow at the top.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme09.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-background-color-shading.tex}
 
-\includegraphics{examples/beamer/beamertheme09.pdf}
+\includegraphics{examples/beamer/theme-background-color-shading.pdf}
 
 \subsection{背景图片}
 
@@ -1425,17 +1425,17 @@ The following example shows how to fill the background of a Beamer slide with th
 
 Note how I have changed the structure color and the default font color to achieve a reasonable contrast between text and background.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme10.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-background-figure.tex}
 
-\includegraphics{examples/beamer/beamertheme10.pdf}
+\includegraphics{examples/beamer/theme-background-figure.pdf}
 
 \subsection{背景图片的透明度}
 
 通过 tikz 绘图来设置图片的透明度：
 
-\inputminted[linenos=true]{latex}{examples/beamer/beamertheme11.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/theme-background-figure-opacity.tex}
 
-\includegraphics{examples/beamer/beamertheme11.pdf}
+\includegraphics{examples/beamer/theme-background-figure-opacity.pdf}
 
 \subsection{限制背景设置在单个帧}
 
@@ -1455,17 +1455,42 @@ command in braces, as in:
 } % closing brace 
 \end{minted}
 
-\includegraphics[page=1]{examples/beamer/beamertheme12.pdf}
+\includegraphics[page=1]{examples/beamer/theme-background-within-single-frame.pdf}
 
-\includegraphics[page=2]{examples/beamer/beamertheme12.pdf}
+\includegraphics[page=2]{examples/beamer/theme-background-within-single-frame.pdf}
 
 % -----------------------------------------------------------------------------
 \section{创建自己的 Beamer 主题}
 
-参考实例:
+\subsection{Beamer 主题资源}
+
+\href{https://github.com/martinbjeldbak/ultimate-beamer-theme-list}{The Ultimate Beamer Theme List} 列举了许多第三方的 Beamer 主题。比较精美的主题有：  
 
 \begin{itemize}
-  \item Metropolis theme \url{https://github.com/matze/mtheme}
+  \item \href{http://www.win.tue.nl/latex/windows.html}{Eindhoven University of Technology(TU/e) theme}
+  \item \href{https://github.com/barisione/beamer-torino}{Torino theme}
+  \item \href{https://github.com/nschloe/ua-beamer}{University of Antwerp theme}
+  \item \href{https://github.com/uwabami/beamerthemeKansaiDebianMeeting}{Debian theme}
+  \item \href{https://github.com/benjamin-weiss/hsrmbeamertheme}{RheinMain University of Applied Sciences theme}
+  \item \href{https://github.com/ppletscher/beamerthemezurich}{Zurich theme}
+  \item \href{https://github.com/matze/mtheme}{Metropolis theme}
+  \item \href{http://userpages.umbc.edu/~rostamia/beamer/quickstart-Z-H-8.html#node_sec_8}{UMBC themes}
+  \item \href{https://github.com/FuzzyWuzzie/Beamer-Theme-Execushares}{Execushares theme}
+  \item \href{https://www.physics.uci.edu/~tanedo/docs.html}{Flip theme}
+  \item \href{https://pi.math.cornell.edu/~gomez/Research.html}{Cornell theme}
+  \item \href{https://github.com/naiaden/presentations/tree/master/Leuven-9monthsprogress}{KU Leuven theme}
+  \item \href{https://github.com/luistar/unina-beamer}{University of Naples "Federico II" (UniNA) theme}
+\end{itemize}
+
+此外， \href{https://www.overleaf.com/latex/templates/tagged/presentation}{Overleaf} 也有许多 Beamer 主题（模版）。
+
+\subsection{创建 Beamer 主题}
+
+最好的教程是 \href{https://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{Beamer 文档}。
+下面的实例对编写 Beamer 主题有很大帮助：
+
+\begin{itemize}
+  \item \href{https://github.com/famuvie/beamerthemesimple}{A minimalist theme with a watermark in the background, by Facundo Muñoz.}
   \item Bruno theme \url{https://forge.delab.re/matteo/beamertheme-bruno}
   \item THK theme \url{https://github.com/Markus-de-Koster/LaTeX-beamer-TH-Koeln}
   \item Amurmaple theme \url{https://plmlab.math.cnrs.fr/mchupin/mcbeamertheme}
@@ -1482,6 +1507,15 @@ According to the guide, Beamer presentations have five flavours of themes
   \item Font themes
   \item Inner themes – Design the elements that are “inside” the frame like the environments, theorems, blocks etc.
   \item Outer themes – Design the outer space of the frame like the headline, footline, sidebar etc. 
+\end{itemize}
+
+文件名命名规范：
+\begin{itemize}
+  \item beamertheme<name>.sty
+  \item beameroutertheme<name>.sty
+  \item beamerinnertheme<name>.sty
+  \item beamercolortheme<name>.sty
+  \item font-sizetheme<name>.sty
 \end{itemize}
 
 修改 Beamer 首页的背景方法\footnote{\href{https://latex-beamer.com/tutorials/beautiful-title/}{How to create beautiful title slide in Beamer?}}：
@@ -1505,26 +1539,26 @@ According to the guide, Beamer presentations have five flavours of themes
 
 Often when when doing a presentation we'll want to reveal parts of a frame one after the other. The simplest way to do this is to use the \verb|\pause| command. For example, by entering the \verb|\pause| command before every entry in a list we can reveal the list point-by-point:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay01.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-pause1.tex}
 
 This brings us on to the difference between a frame and a slide. A single frame is defined as what we build up in a single frame environment, whereas a slide is a single page in the resulting PDF. This means that a frame can be made up of multiple slides. For example, this frame with the list that we've just animated is made up of five slides, but the frame number in the bottom-right-hand corner of each slide remains unchanged for all of the five.
 The fully exposed slide looks like this:
 
-\includegraphics[page=5]{examples/beamer/beameroverlay01.pdf}
+\includegraphics[page=5]{examples/beamer/overlay-pause1.pdf}
 
 The use of the \verb|\pause| command is not restricted to itemized lists; you may use it anywhere in a slide. For example:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay02.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-pause2.tex}
 
 A pdf viewer will expose the resulting file one paragraph at a time. The fully exposed slide looks like this:
 
-\includegraphics[page=4]{examples/beamer/beameroverlay02.pdf}
+\includegraphics[page=4]{examples/beamer/overlay-pause2.pdf}
 
 \subsection{覆盖说明 Overlay specifications}
 
 The \verb|\pause| command is useful but isn't very versatile. To get more flexibility we use what beamer calls overlay specifications. These specifications can be added to compatible commands using pointed brackets after the command name. For example I can add them to the \verb|\item| command in a list structure like this.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay03.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-list.tex}
 
 The numbers inside the pointed brackets tell LaTeX which slides the item should appear on. For example, in this list we've told each list item which slide number it should first appear on and then told them to appear on all subsequent slides in the frame using the dash. Here's an example of a more complicated overlay:
 
@@ -1532,29 +1566,29 @@ The numbers inside the pointed brackets tell LaTeX which slides the item should 
 
 This makes the item appear on slides 1,2,4,5 \& 7.
 
-\includegraphics[page=1]{examples/beamer/beameroverlay03.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-list.pdf}
 
 There are a number of commands that enable us to use overlays on text. The main one is the \verb|\onslide| command which can be configured to achieve a few different outcomes, details of these can be found in the \href{http://mirrors.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{documentation}.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay04.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-onslide.tex}
 
 When we simply give this command text as an argument, it acts in the same way as the \verb|\uncover| command making the text fully appear only on the specified slides. On unspecified slides the text is covered, so will still take up space but won't be visible.
 
-\includegraphics[page=1]{examples/beamer/beameroverlay04.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-onslide.pdf}
 
-\includegraphics[page=2]{examples/beamer/beameroverlay04.pdf}
+\includegraphics[page=2]{examples/beamer/overlay-onslide.pdf}
 
-\includegraphics[page=3]{examples/beamer/beameroverlay04.pdf}
+\includegraphics[page=3]{examples/beamer/overlay-onslide.pdf}
 
 To make the text transparent on unspecified slides we use the \verb|\setbeamercovered| command and enter the keyword transparent above the code where we want it to have an effect:
 
 \mint{latex}|\setbeamercovered{transparent}|
 
-\includegraphics[page=1]{examples/beamer/beameroverlay05.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-transparent.pdf}
 
-\includegraphics[page=2]{examples/beamer/beameroverlay05.pdf}
+\includegraphics[page=2]{examples/beamer/overlay-transparent.pdf}
 
-\includegraphics[page=3]{examples/beamer/beameroverlay05.pdf}
+\includegraphics[page=3]{examples/beamer/overlay-transparent.pdf}
 
 Please be aware that this command will affect all of the code following it, so if we want to change it back to the default setting later in the presentation we can simply use the same command again but with the keyword invisible.
 
@@ -1562,27 +1596,27 @@ Another command we can use is the \verb|\visible| command which does the same as
 
 The \verb|\invisble| command does the exact opposite to of the \verb|\visible| command. The \verb|\only| command does the same as the \verb|\visible| command except it doesn't take any space up. This means that if we change the \verb|\onslide| commands to \verb|\only| commands and get rid of the dashes in the overlay specifications our three lines of text will appear in the same place on the frame in turn.
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay06.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-only.tex}
 
-\includegraphics[page=1]{examples/beamer/beameroverlay06.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-only.pdf}
 
-\includegraphics[page=2]{examples/beamer/beameroverlay06.pdf}
+\includegraphics[page=2]{examples/beamer/overlay-only.pdf}
 
-\includegraphics[page=3]{examples/beamer/beameroverlay06.pdf}
+\includegraphics[page=3]{examples/beamer/overlay-only.pdf}
 
 \subsection{Overlays and text formatting}
 
 There are a number of commands to do with text formatting that are compatible with overlay specifications. These commands are simply ignored on slides not declared in the specification and will therefore just print the text as normal. Here are some examples:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay07.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-text-format.tex}
 
 Which will produce text like this on the first slide:
 
-\includegraphics[page=1]{examples/beamer/beameroverlay07.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-text-format.pdf}
 
 And then like this on the second slide:
 
-\includegraphics[page=2]{examples/beamer/beameroverlay07.pdf}
+\includegraphics[page=2]{examples/beamer/overlay-text-format.pdf}
 
 First the \verb|\textbf| command which makes the text bold, then \verb|\textit| which puts the text in italics, then \verb|\textsl| which make it slanted, \verb|\textrm| which uses the roman font family, \verb|\textsf| which uses the sans serif font family but this doesn't change anything because we are already using this font. Next the \verb|\textcolor| command which puts it in the specified colour, then \verb|\alert| which puts the text in red by default and finally the \verb|\structure| command which formats the text in a way that indicates the presentation's structure.
 
@@ -1590,11 +1624,11 @@ First the \verb|\textbf| command which makes the text bold, then \verb|\textit| 
 
 Overlay specifications often work with environments as well. For example, we could animate the environments on the maths blocks page like this:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay08.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-environment.tex}
 
-\includegraphics[page=1]{examples/beamer/beameroverlay08.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-environment.pdf}
 
-\includegraphics[page=2]{examples/beamer/beameroverlay08.pdf}
+\includegraphics[page=2]{examples/beamer/overlay-environment.pdf}
 
 You will also notice that turning the transparency setting on earlier in the document has affected the overlays here.
 
@@ -1602,11 +1636,11 @@ You will also notice that turning the transparency setting on earlier in the doc
 
 Finally we may want to animate a table so that the rows appear slide by slide. To do this we use the \verb|\onslide| command and make sure we reset the \verb|\setbeamercovered| command to the default for this to work:
 
-\inputminted[linenos=true]{latex}{examples/beamer/beameroverlay09.tex}
+\inputminted[linenos=true]{latex}{examples/beamer/overlay-table.tex}
 
-\includegraphics[page=1]{examples/beamer/beameroverlay09.pdf}
+\includegraphics[page=1]{examples/beamer/overlay-table.pdf}
 
-\includegraphics[page=2]{examples/beamer/beameroverlay09.pdf}
+\includegraphics[page=2]{examples/beamer/overlay-table.pdf}
 
 % -----------------------------------------------------------------------------
 \section{分发 Handout}

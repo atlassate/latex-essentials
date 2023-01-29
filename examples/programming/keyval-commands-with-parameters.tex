@@ -1,0 +1,53 @@
+% Commands with key-value parameters(由 keyval 文档改写)
+\documentclass{article}
+
+\usepackage{keyval}
+
+\makeatletter
+
+% 定义键
+\define@key{dpc}{bounding box}{
+  \typeout{Setting bounding box (#1)}
+}
+\define@key{dpc}{width}{
+  \typeout{Setting width (#1)}
+}
+\define@key{dpc}{height}{
+  \typeout{Setting height (#1)}
+}
+\define@key{dpc}{scale}{
+  \typeout{Setting scale (#1)}
+}
+\define@key{dpc}{clip}[true]{
+  \typeout{Setting clip (#1)}
+}
+
+% 定义命令
+\def\dpcgraphics{\@ifnextchar[\@dpcgraphics{\@dpcgraphics[]}}
+\def\@dpcgraphics[#1]#2{
+  {%\begin{group}
+    \setkeys{dpc}{#1}
+    \typeout{#2}
+    INPUT: #2
+  }%\end{group}
+}
+
+\makeatother
+
+\begin{document}
+
+\dpcgraphics
+[ height = 4 in,
+  width = 5 in,
+  scale = .85,
+  bounding box = 20 20 300 400,
+  clip = false,
+]{Lorem ipsum dolor sit amet}
+
+\dpcgraphics
+[ height = 4 in,
+  width = 5 in,
+  clip,
+]{Lorem ipsum dolor sit amet}
+
+\end{document}
