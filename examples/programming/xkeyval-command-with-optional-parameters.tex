@@ -1,0 +1,33 @@
+% https://latex.org/forum/viewtopic.php?t=8437
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{xkeyval}
+
+% Declaration of options
+\DeclareOptionX<fooexample>{fcolor}{\def\FrameColor{#1}}
+\DeclareOptionX<fooexample>{bgcolor}{\def\BGColor{#1}}
+
+% Setting default values
+\ExecuteOptionsX<fooexample>{%
+  fcolor=red,%
+  bgcolor=blue!20
+}
+
+% Definition of the command
+\newcommand*\foo[2][]{%
+  \begingroup
+  \setkeys{fooexample}{#1}
+  \fcolorbox{\FrameColor}{\BGColor}{#2}
+  \endgroup
+}
+
+\begin{document}
+
+\foo{Lorem ipsum dolor sit amet}
+
+\foo[fcolor=olive!90,bgcolor=red!30]{Lorem ipsum dolor sit amet}
+
+\foo[bgcolor=yellow]{Lorem ipsum dolor sit amet}
+
+\end{document}

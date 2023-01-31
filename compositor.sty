@@ -71,6 +71,15 @@
 \g@addto@macro{\UrlBreaks}{\UrlOrds}
 \g@addto@macro{\UrlBreaks}{\UrlAlphabet}
 \g@addto@macro{\UrlBreaks}{\UrlDigits}
+
+% 使用特殊字符的网址
+% \newcommand{\Url@tempaddr}{}
+% \newcommand{\Url}[1]{
+%   {
+%     \renewcommand{\Url@tempaddr}{#1}
+%     \url{\Url@tempaddr}
+%   }
+% }
 \makeatother
 
 % 参考文件格式
@@ -102,10 +111,32 @@
 \setminted{
   bgcolor=DarkSeaGreen2,          % xcolor 颜色名
   breaklines=true,
-  breakafter=-/\#\{\}\%\[\]\\,     % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
+  breakafter=-/\#\{\}\%\[\]\\,    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
 }
+
+% The minted package manual reads: 
+%   This option puts \mintinline inside a \colorbox, which does not allow line
+%   breaks. If you want to use \setminted to set background colors, and only want
+%   background colors on minted and \mint, you may use \setmintedinline{bgcolor={}}
+%   to turn off the coloring for inline commands.
+\setmintedinline{
+  bgcolor={},
+  breaklines=true,
+}
+
 % line number font size
 \renewcommand\theFancyVerbLine{\small\arabic{FancyVerbLine}}
+
+% 定义命令 verbum 和 verbum* 
+% \verbum{...} 使用 ttfamily 字体显示文本，如代码中的变量，命令
+% \verbum*{...} 使用 ttfamily 字体显示 latex 命令，自动添加反斜杠
+% 注意: 在包含在其它命令中时, 请在前面加上 \protect 
+% 见: https://tex.stackexchange.com/questions/447076/latex-nesting-verb-in-section
+\makeatletter
+\newcommand{\verbum}{\@ifstar{\verbum@command}{\verbum@text}}
+\newcommand{\verbum@text}[1]{{\typeout{#1}\ttfamily #1}}
+\newcommand{\verbum@command}[1]{{\ttfamily \textbackslash #1}}
+\makeatother
 
 % 在抄录环境下高亮显示特定行, 语言选择 text
 % https://tex.stackexchange.com/questions/393526/bold-letters-within-minted-bash-text
@@ -200,9 +231,9 @@
 \newcommand{\inputlatexcode}[2][colorbox]{
   \inputminted[linenos=true]{latex}{#2}
   \ifthenelse{\equal{#1}{colorbox}}{
-    \begin{tcolorbox}
+    \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
     \input{#2}
-    \end{tcolorbox}
+    \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
   }{}
   \ifthenelse{\equal{#1}{nobox}}{
     \input{#2}
@@ -226,23 +257,94 @@
 %   {\typeout{Writing file \jobname.latexcode}\VerbatimOut{\jobname.latexcode}}
 %   {\endVerbatimOut\inputminted{latex}{\jobname.latexcode}\input{\jobname.latexcode}}
 
-% 显示 LaTeX 代码并渲染, 先将环境中的代码写入文件, 随后读入
+% https://tex.stackexchange.com/questions/9035/how-to-pass-an-optional-argument-to-an-environment-with-verbatim-content
+% 版本 1: 显示 LaTeX 代码并渲染, 先将环境中的代码写入文件, 随后读入
 \newenvironment{latexcode}[1]% 不要设置默认参数, 否则出现 FancyVerb Error: Extraneous input ...
   { % start part
     \newcommand\boxstyle{#1}% end part 不能直接访问参数
     \typeout{Writing file \jobname.latexcode}
-    \VerbatimOut{\jobname.latexcode}}% 最后一个花括号不要另起一行, 否则也出错
+    \VerbatimOut{\jobname.latexcode}}% 最后的括号不要另起行
   { % end part
     \endVerbatimOut
     \inputminted{latex}{\jobname.latexcode}
     \ifthenelse{\equal{\boxstyle}{colorbox}}{
-    \begin{tcolorbox}
-    \input{\jobname.latexcode}
-    \end{tcolorbox}
+      \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
+      \input{\jobname.latexcode}
+      \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
     }{}
     \ifthenelse{\equal{\boxstyle}{nobox}}{
       \input{\jobname.latexcode}
     }{}}
+
+% https://tex.stackexchange.com/questions/9035/how-to-pass-an-optional-argument-to-an-environment-with-verbatim-content
+% 版本 2: (解决VerbatimOut 和 environment 带参数问题) 显示 LaTeX 代码并渲染, 先将环境中的代码写入文件, 随后读入
+% 三种形式:
+%   \begin{texcode} ... \end{texcode} % 默认 colorbox
+%   \begin{texcode}{colorbox} ... \end{texcode}
+%   \begin{texcode}{nobox} ... \end{texcode}
+
+% \makeatletter
+% \newenvironment{texcode}
+%   { % start part
+%     \typeout{Writing file \jobname.latexcode}
+%     \catcode`\^^M=\active
+%     \@ifnextchar[%
+%       {\catcode`\^^M=5 \texcode@}
+%       {\catcode`\^^M=5 \texcode@[colorbox]}}
+%   { % end part
+%     %\typeout{boxstyle: \texcode@boxstyle}
+%     \endVerbatimOut%
+%     \inputminted{latex}{\jobname.latexcode}
+%     \ifthenelse{\equal{\texcode@boxstyle}{colorbox}}{
+%       \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
+%       \input{\jobname.latexcode}
+%       \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
+%     }{}
+%     \ifthenelse{\equal{\texcode@boxstyle}{nobox}}{
+%       \input{\jobname.latexcode}
+%     }{}}
+% \def\texcode@[#1]{%
+%   \newcommand{\texcode@boxstyle}{#1}% end part 不能直接访问参数
+%   \VerbatimEnvironment
+%   \VerbatimOut{\jobname.latexcode}%
+% }
+% \makeatother
+
+% https://tex.stackexchange.com/questions/9035/how-to-pass-an-optional-argument-to-an-environment-with-verbatim-content
+% 版本 3: (使用 key-value 参数) 显示 LaTeX 代码并渲染, 先将环境中的代码写入文件, 随后读入
+% 三种形式:
+%   \begin{texcode} ... \end{texcode} % 默认颜色 teal
+%   \begin{texcode}[color=red] ... \end{texcode}
+%   \begin{texcode}{color={}} ... \end{texcode} % 不画分隔线
+
+\makeatletter
+\define@key{texcode}{color}{\def\texcode@Color{#1}}
+%\setkeys{texcode}{color=teal}
+\newenvironment{texcode}
+  { % start part
+    %\newcommand\boxstyle{colorbox}% end part 不能直接访问参数
+    \typeout{Writing file \jobname.latexcode}
+    \catcode`\^^M=\active
+    \@ifnextchar[%
+      {\catcode`\^^M=5 \texcode@}
+      {\catcode`\^^M=5 \texcode@[color=teal]}}
+  { % end part
+    \endVerbatimOut%
+    \inputminted{latex}{\jobname.latexcode}
+    \ifthenelse{\equal{\texcode@Color}{}}{
+      \input{\jobname.latexcode}
+    }{
+      \par\noindent\textcolor{\texcode@Color}{\rule{\textwidth}{2pt}}
+      \input{\jobname.latexcode}
+      \par\noindent\textcolor{\texcode@Color}{\rule{\textwidth}{2pt}}
+    }
+  }
+\def\texcode@[#1]{%
+  \setkeys{texcode}{#1}
+  \VerbatimEnvironment
+  \VerbatimOut{\jobname.latexcode}%
+}
+\makeatother
 
 % latexcode 环境也可以利用 tcblisting 环境来实现
 % \tcbuselibrary{minted}

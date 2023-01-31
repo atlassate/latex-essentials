@@ -1,13 +1,13 @@
 \chapter{字体}
 
-{\LaTeX} 排版过程中要注意正确配置字体，否则会出现 \verb|'Font not found!'| 错误。
+{\LaTeX} 排版过程中要注意正确配置字体，否则会出现 \mintinline{text}{'Font not found!'} 错误。
 常见的错误主要是：不同平台的字体不一样，如 macOS 平台编译通过的文件在 Debian 平台就可能出现错误；
 或者字体所在目录不在搜索路径上
 \footnote{
-关于 {\LaTeX} 中西字体排版，请参考：在 {\LaTeX} 中使用 OpenType 字体系列
-\href{https://stone-zeng.github.io/2018-08-08-use-opentype-fonts}{（一）}
-\href{https://stone-zeng.github.io/2019-07-06-use-opentype-fonts-ii}{（二）}
-\href{https://stone-zeng.github.io/2020-05-02-use-opentype-fonts-iii/}{（三）}
+关于 {\LaTeX} 中西字体排版，请参考：在 {\LaTeX} 中使用 OpenType 字体系列：
+\href{https://stone-zeng.github.io/2018-08-08-use-opentype-fonts}{I}，
+\href{https://stone-zeng.github.io/2019-07-06-use-opentype-fonts-ii}{II}，
+\href{https://stone-zeng.github.io/2020-05-02-use-opentype-fonts-iii/}{III}。
 }。
 
 \section{字体的基本知识}
@@ -86,12 +86,12 @@ LATEX 中使用 OpenType 字体，主要依靠下列宏包：
 CTeX 宏默认的字库配置基于以下逻辑：
 
 \begin{itemize}
-  \item 宋体对应到 \verb|\rmfamily| 的 \verb|\upshape|
-  \item 黑体（或微软雅黑、苹方等现代黑体）对应到 \verb|\sffamily| 的 \verb|\upshape|
-  \item 楷体对应到 \verb|\rmfamily| 的 \verb|\itshape|
-  \item 仿宋对应到 \verb|\ttfamily| 的 \verb|\upshape|
-  \item 如果以上某种字体有相应的粗体，则将其对应到 \verb|\bfseries|，如果没有则不做特殊处理；特别地，加粗宋体如果不存在的话，则会改用黑体（但不使用现代黑体）
-  \item 最后使用 \verb|\setCJKfamilyfont| 命令定义额外的的字体命令，如 \verb|\songti|、\verb|\heiti| 等；此时如果有隶书和圆体，也会用同样方式定义字体命令
+  \item 宋体对应到 \mintinline{text}{\rmfamily} 的 \mintinline{text}{\upshape}
+  \item 黑体（或微软雅黑、苹方等现代黑体）对应到 \mintinline{text}{\sffamily} 的 \mintinline{text}{\upshape}
+  \item 楷体对应到 \mintinline{text}{\rmfamily} 的 \mintinline{text}{\itshape}
+  \item 仿宋对应到 \mintinline{text}{\ttfamily} 的 \mintinline{text}{\upshape}
+  \item 如果以上某种字体有相应的粗体，则将其对应到 \mintinline{text}{\bfseries}，如果没有则不做特殊处理；特别地，加粗宋体如果不存在的话，则会改用黑体（但不使用现代黑体）
+  \item 最后使用 \mintinline{text}{\setCJKfamilyfont} 命令定义额外的的字体命令，如 \mintinline{text}{\songti}、\mintinline{text}{\heiti} 等；此时如果有隶书和圆体，也会用同样方式定义字体命令
 \end{itemize}
 
 \section{下载和安装字体}
@@ -126,7 +126,7 @@ texlive 自带的中文字体比较有限，如其自带 Fandol 楷体, 该字�
   \item \url{~/Library/Fonts}
 \end{itemize}
 
-\section{修改环境变量 {\ttfamily OSFONTDIR}}
+\section{修改环境变量 \protect\verbum{OSFONTDIR}}
 
 修改 \url{/usr/local/texlive/2021/texmf.cnf}(根据实际安装的 texlive 版本), 添加:
 
@@ -142,7 +142,7 @@ OSFONTDIR = /usr/share/fonts//;/usr/local/share/fonts//;~/.fonts//
 OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
 \end{minted}
 
-\subsection{将字体}
+\subsection{设置字体}
 
 {\LaTeX} 使用本地字库，或者在系统字体目录中安装相应的字体。
 其实，{\LaTeX} 可以实现直接读取字体文件（如存储在项目的\url{fonts/}目录下）来进行文档的渲染工作，也就是项目本身含有字体文件
@@ -192,7 +192,7 @@ OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
 
 \subsection{罗马字体族 Roman family}
 
-这是正文的默认字体，也可以使用 \mintinline{tex}|\textrm{文字内容}| 或 \mintinline{tex}|{\rmfamily 文字内容}|重新设置文字的字体.
+这是正文的默认字体，也可以使用 \mintinline{text}{\textrm{文字内容}} 或 \mintinline{text}{{\rmfamily 文字内容}} 重新设置文字的字体.
 
 \begin{itemize}
   \item Normal: {\rmfamily \mdseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
@@ -203,7 +203,7 @@ OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
 
 \subsection{无衬线字体族 Sans serif family}
 
-使用 \mintinline{tex}|\textsf{文字内容}| 或 \mintinline{tex}|{\sffamily 文字内容}|设置文字的字体.
+使用 \mintinline{text}{\textsf{文字内容}} 或 \mintinline{text}{{\sffamily 文字内容}}设置文字的字体.
 
 \begin{itemize}
   \item Normal: {\sffamily \mdseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
@@ -214,7 +214,7 @@ OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
 
 \subsection{打字机字体族 Typewriter family}
 
-通常代码抄录使用该字体族，使用 \mintinline{tex}|\texttt{文字内容}| 或 \mintinline{tex}|{\ttfamily 文字内容}|设置文字的字体.
+通常代码抄录使用该字体族，使用 \mintinline{text}{\texttt{文字内容}} 或 \mintinline{text}{{\ttfamily 文字内容}} 设置文字的字体.
 
 \begin{itemize}
   \item Normal: {\ttfamily \mdseries 世界自由、正义与和平的基础 Lorem ipsum dolor sat amet}
@@ -225,7 +225,7 @@ OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
 
 \subsection{中文字体族的定义与使用}
 
-使用 \mintinline{tex}|\setCJKfamily{字体名称}{字体文件名}|定义中文字体族
+使用 \mintinline{text}{\setCJKfamily{字体名称}{字体文件名}} 定义中文字体族
 \footnote{这里字体名称采用了中文，也可以使用字母，如 songti，fangsong 等}，如：
 
 \begin{minted}{tex}
@@ -239,7 +239,7 @@ OSFONTDIR = /System/Library/Fonts//;/Library/Fonts//;~/Library/Fonts//
   \setCJKfamilyfont{行书}{字酷堂松雪行书简体.oTF}
 \end{minted}
 
-使用 \mintinline{tex}|\CJKfamily{字体名称}{文字内容}|设置文字的字体。
+使用 \mintinline{text}{\CJKfamily{字体名称}{文字内容}} 设置文字的字体。
 
 \begin{table}[!h]
 \begin{center}

@@ -6,7 +6,7 @@
 find . -name "beamer*.tex" -exec latexmk -xelatex -shell-escape {} \;
 ```
 
-不要使用（在编译 beamerlogo06.tex 没有添加图片）
+不要使用 xelatex（在编译含 pdf 格式的图片时没有添加图片）
 
 ```
 find . -name "beamer*.tex" -exec xelatex -shell-escape {} \;

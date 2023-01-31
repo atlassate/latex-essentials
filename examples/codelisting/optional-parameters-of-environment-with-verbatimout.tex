@@ -1,0 +1,34 @@
+% https://tex.stackexchange.com/questions/9035/how-to-pass-an-optional-argument-to-an-environment-with-verbatim-content
+\documentclass{minimal}
+\usepackage{listings,fancyvrb}
+
+\makeatletter
+\newenvironment{myenv}{%
+  \catcode`\^^M=\active
+  \@ifnextchar[%
+    {\catcode`\^^M=5 \myenv@}
+    {\catcode`\^^M=5 \myenv@[]}
+}{%
+  \end{VerbatimOut}%
+  \lstinputlisting{\jobname.tmp}%
+}
+\def\myenv@[#1]{%
+  *#1*\par
+  \VerbatimEnvironment
+  \begin{VerbatimOut}{\jobname.tmp}%
+}
+\makeatother
+\begin{document}
+\begin{myenv}[optional argument]
+\large a
+\end{myenv}
+
+\begin{myenv}
+\large a
+\end{myenv}
+
+\begin{myenv}
+[Another optional argument]
+\large a
+\end{myenv}
+\end{document}

@@ -1,0 +1,28 @@
+% https://tex.stackexchange.com/questions/462468/how-to-test-if-a-macros-value-set-via-kvoptions-in-a-package-is-empty-or-blan
+\begin{filecontents}[overwrite]{myTestSty.sty}
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{myTestSty}[2018/11/29 v. 1.0 myTestSty]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=@myTestSty,prefix=@myTestSty@}
+
+\DeclareStringOption{myKey}
+
+\def\myKey{\@myTestSty@myKey}
+\ProcessKeyvalOptions*
+\end{filecontents}
+
+
+\documentclass{article}
+
+\usepackage{etoolbox}
+\usepackage[%
+  %myKey={Hello world!},
+  myKey={} %<-- blank?
+  ]{myTestSty}
+
+\begin{document}
+  myKey: --{\myKey}--
+
+  myKey: \ifblank{\myKey}{blank}{not-blank}
+\end{document}

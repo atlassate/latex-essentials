@@ -2,86 +2,86 @@
 
 \section{Inline 公式}
 
-由于输入便捷, \verb|$...$| 更受到欢迎.
+由于输入便捷, \mintinline{text}{$...$} 更受到欢迎.
 
-\subsection{{\ttfamily math} 环境}
+\subsection{\protect\verbum{math} 环境}
 
-使用 {\ttfamily math} 环境：
+使用 \mintinline{text}{math} 环境：
 
 \inputlatexcode{snippets/formulas/inline-quad1.tex}
 
-\subsection{{\ttfamily \textbackslash(...\textbackslash)} 环境}
+\subsection{\protect\verbum*{(}...\protect\verbum*{)} 环境}
 
-使用 \verb|\(...\)| 环境：
+使用 \mintinline{text}{\(...\)} 环境：
 
 \inputlatexcode{snippets/formulas/inline-quad2.tex}
 
-\subsection{{\ttfamily \$...\$} 环境}
+\subsection{\protect\verbum{\$}...\protect\verbum{\$} 环境}
 
-使用 \verb|$...$| 环境：
+使用 \mintinline{text}{$...$} 环境：
 
 \inputlatexcode{snippets/formulas/inline-quad3.tex}
 
 \section{Displayed 公式}
 
-推荐使用 \verb|\[...\]|, 在处理间距更好一些.
+推荐使用 \mintinline{text}{\[...\]}, 在处理间距更好一些.
 
-\subsection{{\ttfamily displaymath} 环境}
+\subsection{\protect\verbum{displaymath} 环境}
 
-使用 {\ttfamily displaymath} 环境：
+使用 \mintinline{text}{displaymath} 环境：
 
 \inputlatexcode{snippets/formulas/displayed-quad1.tex}
 
-\subsection{{\ttfamily \textbackslash[...\textbackslash]} 环境}
+\subsection{\protect\verbum*{[}...\protect\verbum*{]} 环境}
 
-使用 \verb|\[...\]| 环境：
+使用 \mintinline{text}{\[...\]} 环境：
 
 \inputlatexcode{snippets/formulas/displayed-quad2.tex}
 
-\subsection{{\ttfamily \$\$...\$\$} 环境}
+\subsection{\protect\verbum{\$\$}...\protect\verbum{\$\$} 环境}
 
-使用 \verb|$$...$$| 环境：
+使用 \mintinline{text}{$$...$$} 环境：
 
 \inputlatexcode{snippets/formulas/displayed-quad3.tex}
 
-\section{自动编号: {\ttfamily equation} 环境}
+\section{自动编号: \protect\verbum{equation} 环境}
 
-{\ttfamily equantion，align} 等环境默认是自动编号的，如果不需要编号则使用 {\ttfamily equation*，align*} 等环境。
-对应多行公式内容，如果不需要编号则使用 \verb|\\notag|。
+\mintinline{text}{equantion，align} 等环境默认是自动编号的，如果不需要编号则使用 \mintinline{text}{equation*，align*} 等环境。
+对应多行公式内容，如果不需要编号则使用 \mintinline{text}{\\notag}。
 
 \inputlatexcode{snippets/formulas/numbering-equations.tex}
 
 \section{多行公式}
 
-\subsection{{\ttfamily multline} 环境}
+\subsection{\protect\verbum{multline} 环境}
 
 \inputlatexcode{snippets/formulas/amsmath-multline.tex}
 
-\subsection{{\ttfamily gather} 环境}
+\subsection{\protect\verbum{gather} 环境}
 
 \inputlatexcode{snippets/formulas/amsmath-gather.tex}
 
-\subsection{{\ttfamily align} 环境}
+\subsection{\protect\verbum{align} 环境}
 
 \inputlatexcode{snippets/formulas/amsmath-align.tex}
 
-\subsection{{\ttfamily split} 环境}
+\subsection{\protect\verbum{split} 环境}
 
 \inputlatexcode{snippets/formulas/amsmath-split.tex}
 
-\subsection{{\ttfamily flalign} 环境}
+\subsection{\protect\verbum{flalign} 环境}
 
 \inputlatexcode{snippets/formulas/amsmath-flalign.tex}
 
-\subsection{{\ttfamily alignat} 环境}
+\subsection{\protect\verbum{alignat} 环境}
 
 \inputlatexcode{snippets/formulas/amsmath-alignat.tex}
 
 \inputlatexcode{snippets/formulas/amsmath-alignat-text.tex}
 
-注意: \verb|&&|实际上是\verb|& &|。 这里增加了一列水平间距，使得文字能够左对齐。
+注意: \mintinline{text}{&&}实际上是\mintinline{text}{& &}。 这里增加了一列水平间距，使得文字能够左对齐。
 
-\subsection{{\ttfamily algined， gathered， alignedat} 环境}
+\subsection{\protect\verbum{algined}、\protect\verbum{gathered} 和 \protect\verbum{alignedat} 环境}
 
 Used for an aligned block within a math environment. This can be displayed math or in-line math.
 
@@ -89,12 +89,12 @@ Used for an aligned block within a math environment. This can be displayed math 
 
 \section{文本}
 
-To insert some text into a formula, standard LaTeX provides the \verb|\mbox| command. 
+To insert some text into a formula, standard LaTeX provides the \mintinline{text}{\mbox} command. 
 amsmath offers further commands:
 
 \begin{description}
-  \item \verb|\text{words}|: inserts text within a math formula. The size is adjusted according to the current math style, that is, \verb|\text| produces smaller text within subscripts or superscripts.
-  \item \verb|\intertext{text}|: suspends the formula, the text follows in a separate paragraph, then the multi-line formula is resumed, keeping the alignment. Use it for longer text.
+  \item \mintinline{text}{\text{words}}: inserts text within a math formula. The size is adjusted according to the current math style, that is, \mintinline{text}{\text} produces smaller text within subscripts or superscripts.
+  \item \mintinline{text}{\intertext{text}}: suspends the formula, the text follows in a separate paragraph, then the multi-line formula is resumed, keeping the alignment. Use it for longer text.
 \end{description}
 
 \inputlatexcode{snippets/formulas/intertext.tex}
@@ -103,7 +103,7 @@ amsmath offers further commands:
 
 \inputlatexcode{snippets/formulas/cases-left.tex}
 
-\verb|rcase|是自定义的环境：
+\mintinline{text}{rcase} 是自定义的环境：
 
 \begin{minted}{latex}
 \newenvironment{rcase}
@@ -114,5 +114,5 @@ amsmath offers further commands:
 \inputlatexcode{snippets/formulas/cases-right.tex}
 
 \begin{remark*}
-\verb|\,| Include a thin space in math mode.
+\mintinline{text}{\,} Include a thin space in math mode.
 \end{remark*}

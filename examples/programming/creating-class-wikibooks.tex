@@ -1,0 +1,50 @@
+% https://en.wikibooks.org/wiki/LaTeX/Creating_Packages
+\begin{filecontents}[overwrite]{myclass.cls}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{myclass}[2011/12/23 My Class]
+
+%% Article options
+\DeclareOption{10pt}{
+  \PassOptionsToClass{\CurrentOption}{article}
+}
+
+%% Custom package options
+\DeclareOption{sans}{
+  \PassOptionsToPackage{\CurrentOption}{custom}
+}
+\DeclareOption{neverindent}{
+  \PassOptionsToPackage{\CurrentOption}{custom}
+}
+
+%% Fallback
+\DeclareOption*{
+  \ClassWarning{myclass}{Unknown option '\CurrentOption'}
+}
+
+%% Execute default options
+\ExecuteOptions{10pt}
+
+%% Process given options
+\ProcessOptions\relax
+
+%% Load base
+\LoadClass[a4paper]{article}
+
+%% Load additional packages and commands.
+\RequirePackage{custom}
+
+%% Additional TeX/LaTeX code...
+
+\endinput
+\end{filecontents}
+
+
+\documentclass{myclass}
+%\usepackage[neverindent,sans]{custom}
+%...
+
+\begin{document}
+
+Blah...
+
+\end{document}

@@ -1,8 +1,8 @@
 \chapter{源代码排版}
 
-\section{{\ttfamily verbatim} 环境与{\ttfamily \textbackslash verb} 命令}
+\section{\protect\verbum{verbatim} 环境与 \protect\verbum*{verb} 命令}
 
-{\ttfamily verbatim} 环境适合比较简单场合下使用，无法实现代码的高亮显示，如：
+\verbum{verbatim} 环境适合比较简单场合下使用，无法实现代码的高亮显示，如：
 
 \begin{latexcode}{colorbox}
 \begin{verbatim}
@@ -15,15 +15,25 @@ int main(int argc, char **argc) {
 \end{verbatim}
 \end{latexcode}
 
-\verb|\verb| 命令可以使用行内的代码显示\footnote{行内长串代码显示存在换行的问题，可以使用 {\ttfamily \textbackslash ttfamily} 作为替代方案。}
-，如：\verb!\verb|message = "hello,world"|!。
+\verbum*{verb} 命令可以用于代码显示\footnote{行内长串代码显示存在换行的问题，可以使用 \verbum*{ttfamily} 作为替代方案。}
+，如：\mintinline{text}{\verb|message = "hello,world"|}。
 
-实际上使用 \verb|{\ttfamily message = "hello,world"}| 也可以达到类似的效果；
-并且 \verb|\verb| 命令不能出现章节标题之中。
+实际上使用 \mintinline{text}{{\tffamily message = "hello,world"}} 也可以达到类似的效果；
+并且 \verbum*{verb} 命令用在标题中请在前面加上 \verbum*{protect}
+\footnote{\url{https://tex.stackexchange.com/questions/83893/verbatim-inside-a-command}}。
+
+例如：\verbum*{verbum} 在  \verbum*{section} 中，出现错误：
+\mintinline{text}{Token not allowed in a PDF string (Unicode): (hyperref) removing `\new@ifnextchar'.} 
+
+这是因为宏展开导致 hyperref 生成 pdf 书签时产生错误。
+
+\begin{remark*}
+\verbum*{mintinline} 用在章节标题之中，会有一些修饰的文字，也是不适合的。
+\end{remark*}
 
 \section{listings 包}
 
-\subsection{{\ttfamily lstlisting} 环境}
+\subsection{\protect\verbum{lstlisting} 环境}
 
 \begin{latexcode}{colorbox}
 \begin{lstlisting}[language=C,caption={C/C++ 语言},numbers=left]
@@ -35,11 +45,11 @@ int main(int argc, char **argc) {
 \end{lstlisting}
 \end{latexcode}
 
-\subsection{{\ttfamily \textbackslash lstinline} 命令}
+\subsection{\protect\verbum*{lstinline} 命令}
 
-\verb|\lstinline| 命令可以使用行内的代码显示，如：\verb!\lstinline|message = "hello,world"|!
+\verbum*{lstinline} 命令可以使用行内的代码显示，如：\mintinline{text}{\lstinline|message = "hello,world"|}
 
-\subsection{{\ttfamily \textbackslash lstinputlisting} 命令}
+\subsection{\protect\verbum*{lstinputlisting} 命令}
 
 显示代码文件，文件路径为相对于主文件的路径:
 
@@ -59,8 +69,9 @@ console.log(message)
 \end{lstlisting}
 \end{latexcode}
 
-其它的扩展见:
-\href{https://tex.stackexchange.com/questions/224093/adding-keywords-to-existing-language-for-listings-package}{Adding Keywords to Existing Language for Listings Package}
+其它的扩展见 StackOverflow
+\footnote{\url{https://tex.stackexchange.com/questions/224093/adding-keywords-to-existing-language-for-listings-package}}
+。
 
 \section{minted 包}
 
@@ -86,7 +97,7 @@ minted 整体风格比 listings 略胜一筹。
 \href{https://thepythonguru.com/tools/pygments-demo/}{Syntax Highlighter}
 来查看各种代码渲染的风格\footnote{注意：部分风格与一些特殊字符有冲突，比较可靠的风格是 xcode。}。
 
-\subsection{{\ttfamily minted} 环境}
+\subsection{\protect\verbum{minted} 环境}
 
 \begin{latexcode}{colorbox}
 \begin{minted}{c}
@@ -97,18 +108,18 @@ int main{int argc, char **argv} {
 \end{minted}
 \end{latexcode}
 
-\subsection{{\ttfamily \textbackslash mint} 命令}
+\subsection{\protect\verbum*{mint} 命令}
 
-对于单行的代码，可以使用 \verb|\mint| 命令
+对于单行的代码，可以使用 \verbum*{mint}
 \footnote{注意：不是在行内显示代码，而是另起一段显示。}，如：
-\verb!\mint{js}|message = "hello, world"|!。
+\mintinline{text}!\mint{js}|message = "hello, world"|!。
 
-\subsection{{\ttfamily \textbackslash mintinline} 命令}
+\subsection{\protect\verbum*{mintinline} 命令}
 
-可以使用 \verb|\mintinline| 命令来在行内显示代码，如：
-\verb!\mintinline{js}|message = "hello, world"|!。
+可以使用 \verbum*{mintinline} 命令来在行内显示代码，如：
+\mintinline{text}!\mintinline{js}|message = "hello, world"|!。
 
-\subsection{{\ttfamily \textbackslash inputminted} 命令}
+\subsection{\protect\verbum*{inputminted} 命令}
 
 显示代码文件，文件路径为相对于主文件的路径:
 
@@ -116,9 +127,9 @@ int main{int argc, char **argv} {
 \inputminted{c}{snippets/codelistings/helloworld.c}
 \end{latexcode}
 
-\subsection{{\ttfamily listing} 环境}
+\subsection{\protect\verbum{listing} 环境}
 
-minted 提供 {\ttfamily listing} 环境来作为一个浮动体来包裹代码。
+minted 提供 \verbum{listing} 环境来作为一个浮动体来包裹代码。
 
 \begin{latexcode}{colorbox}
 \begin{listing}[H]
@@ -129,39 +140,51 @@ minted 提供 {\ttfamily listing} 环境来作为一个浮动体来包裹代码�
 
 \subsection{Troubleshooting}
 
-\subsubsection{在设置{\ttfamily bgcolor}后{\ttfamily \textbackslash mintinline}不换行}
+\subsubsection{在设置 \protect\verbum{bgcolor} 后 \protect\verbum*{mintinline} 不换行}
 
-在设置{\ttfamily bgcolor}后，对于较长的一行代码使用{\ttfamily \textbackslash mintinline}时不换行，
-见
-\href{https://github.com/gpoore/minted/issues/194}{Github issue 194: breaklines doesn't work with mintinline when other options are set}
-和 
-\href{https://tex.stackexchange.com/questions/419934/breaklines-doesnt-work-with-mintinline}{Stackoverflow: breaklines doesn't work with mintinline}。
+在设置 \verbum{bgcolor} 后，对于较长的一行代码使用 \verbum*{mintinline} 时不换行，
+见 StackOverflow
+\footnote{\url{https://tex.stackexchange.com/questions/9097/background-colour-with-minted-package-code-misplaced}}
+\footnote{\url{https://tex.stackexchange.com/questions/419934/breaklines-doesnt-work-with-mintinline}}
+和 GitHub
+\footnote{\url{https://github.com/gpoore/minted/issues/194}}。
 
 The documentation mentions this as a limitation of bgcolor. The standard ways to put a background behind inline text don't work with line wrapping.
 
+The documentation reads:
+
+\begin{quote}
+  Automatic line breaks are limited with Pygments styles that use a colored background behind large chunks of text. This coloring is accomplished with \verbum*{color},
+  which cannot break across lines. It may be possible to create an alternative to
+  \verbum*{color} that supports line breaks, perhaps with TikZ, but the author is unaware
+  of a satisfactory solution. The only current alternative is to redefine \verbum*{color} so
+  that it does nothing. 
+\end{quote}
+
 \subsubsection{代码的换页}
 
-见
-\href{https://tex.stackexchange.com/questions/368864/pagebreak-for-minted-in-figure}{Stackoverflow: Pagebreak for minted in figure}
-和
-\href{https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540#53540}{Code spanning over two pages with minted, inside listing with caption}。
+见 StackOverflow
+\footnote{\url{https://tex.stackexchange.com/questions/368864/pagebreak-for-minted-in-figure}}
+\footnote{\url{https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540}}
+。
 
 \subsubsection{一些字符出现红色方框}
 
-见
-\href{https://tex.stackexchange.com/questions/343494/minted-red-box-around-greek-characters}{Minted red box around greek characters}
-和 
-\href{https://tex.stackexchange.com/questions/424421/code-validation-in-minted-package-how-to-disable-it}{Code validation in minted package? How to disable it?}。
+见 StackOverflow
+\footnote{\url{https://tex.stackexchange.com/questions/343494/minted-red-box-around-greek-characters}}
+\footnote{\url{https://tex.stackexchange.com/questions/424421/code-validation-in-minted-package-how-to-disable-it}}
+。
 
 解决方法，使用下面的风格：
 xcode，igor，rrt。
 
-\section{{\ttfamily latexcode} 环境与{\ttfamily \textbackslash inputlatexcode} 命令}
+\section{\protect\verbum{latexcode} 环境与 \protect\verbum*{inputlatexcode} 命令}
+
 为了显示{\LaTeX}代码和现实渲染结果
-\footnote{实现类似{\ttfamily tcblisting}环境的功能}，可以采用：
+\footnote{实现类似\verbum{tcblisting}环境的功能}，可以采用：
 \begin{itemize}
-  \item {\ttfamily latexcode} 环境：工作过程是将代码输出到文件，读取并渲染该文件
-  \item {\ttfamily \textbackslash inputlatexcode} 命令：直接读取并渲染该文件
+  \item \verbum{latexcode} 环境：工作过程是将代码输出到文件，读取并渲染该文件
+  \item \verbum*{inputlatexcode} 命令：直接读取并渲染该文件
 \end{itemize}
 
 显示并渲染代码：
@@ -184,6 +207,3 @@ xcode，igor，rrt。
 \begin{minted}{tex}
 \inputlatexcode[nobox]{.tex文件路径}
 \end{minted}
-
-
-

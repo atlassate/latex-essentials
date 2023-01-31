@@ -1,0 +1,15 @@
+% https://tex.stackexchange.com/questions/376375/using-ifstar-to-define-a-star-variant
+\documentclass{article}
+
+\makeatletter
+\newcommand{\foo}{\@ifstar{\@foob}{\@fooi}}
+\newcommand{\@foob}[1]{\textbf{#1}}
+\newcommand{\@fooi}[1]{\textit{#1}}
+\makeatother
+
+\begin{document}
+
+\foo{test}
+\foo*{test}
+
+\end{document}

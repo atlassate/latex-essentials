@@ -1,0 +1,47 @@
+% https://tex.stackexchange.com/questions/158631/need-help-to-understand-xkeyval-example
+\begin{filecontents}[overwrite]{myemph.sty}
+
+\ProvidesPackage{myemph}[2011/03/12 v1.0 a test package]
+
+\providecommand\my@emphstyle{\em}
+
+% Note that the argument must be expandable,
+% or use xkvltxp package before \documentclass (see manual of xkeyval)
+\RequirePackage{xkeyval}
+\DeclareOptionX{style}{%
+  \def\my@emphstyle{\csname my@style@#1\endcsname}}
+% predefined styles
+\providecommand\my@style@default{\em}
+\providecommand\my@style@bold{\bfseries}
+
+\ProcessOptionsX
+
+% For simple key-value commands, keyval would suffie
+\define@key{myemph}{code}{%
+  \def\my@emphstyle{#1}}
+\define@key{myemph}{style}{%
+  \def\my@emphstyle{\csname my@style@#1\endcsname}}
+\newcommand\setemph[1]{%
+  \setkeys{myemph}{#1}}
+
+\renewcommand\emph[1]{%
+  {\my@emphstyle #1}}
+
+\endinput
+
+\end{filecontents}
+
+
+\documentclass{article}
+
+\usepackage[style=default]{myemph}
+
+\begin{document}
+Something \emph{important}
+
+\setemph{style=bold}
+Something \emph{important}
+
+\setemph{code=\Large\sffamily}
+Something \emph{important}
+\end{document}

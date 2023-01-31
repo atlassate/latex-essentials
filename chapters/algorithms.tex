@@ -34,9 +34,9 @@
 \begin{remark*}
 使用时注意以下问题:
 \begin{enumerate}
-  \item 算法排版, algorithm 与 tcolorbox 存在冲突, 即 {\ttfamily tcolorbox} 环境不能包含 {\ttfamily algorithm} 环境;
-  \item 当同时引入 algpseudocode 和 algpascal, 必须使用 \verb|\aglanguage{pseudocode}| 或 
-  \verb|\aglanguage{pascal}|, 否则不能正确解析数学公式.
+  \item 算法排版, algorithm 与 tcolorbox 存在冲突, 即 \verbum{tcolorbox} 环境不能包含 \verbum{algorithm} 环境;
+  \item 当同时引入 algpseudocode 和 algpascal, 必须使用 \verbum*{aglanguage{pseudocode}} 或 
+  \verbum*{aglanguage{pascal}}, 否则不能正确解析数学公式.
 \end{enumerate}
 \end{remark*}
 
@@ -44,15 +44,15 @@
 
 如果算法较长, 则需要分页显示, 有两种方法:
 \begin{enumerate}
-  \item \verb|\agstore| 和 \verb|\agrestore| 命令将算法分成几个部分
-  \item 自定义 {\ttfamily breakablealgorithm} 环境
+  \item \verbum*{agstore} 和 \verbum*{agrestore} 命令将算法分成几个部分
+  \item 自定义 \verbum{breakablealgorithm} 环境
   \footnote{\url{https://tex.stackexchange.com/questions/33866/algorithm-tag-and-page-break}}
 \end{enumerate}
 
-\subsection{{\ttfamily \textbackslash algstore} 和 {\ttfamily \textbackslash algrestore} 命令}
+\subsection{\protect\verbum*{algstore} 和 \protect\verbum*{algrestore} 命令}
 
 \inputlatexcode[nobox]{snippets/algorithms/breakable-algorithm1.tex}
 
-\subsection{{\ttfamily breakablealgorithm} 环境}
+\subsection{\protect\verbum{breakablealgorithm} 环境}
 
 \inputlatexcode[nobox]{snippets/algorithms/breakable-algorithm2.tex}
