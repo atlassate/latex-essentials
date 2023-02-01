@@ -1,0 +1,29 @@
+% https://tex.stackexchange.com/questions/434750/passing-string-options-to-custom-style-file-made-simple
+\documentclass{article}
+
+%\usepackage{filecontents}
+
+\begin{filecontents}[overwrite]{myauthorgenerator.sty}
+  \NeedsTeXFormat{LaTeX2e}[1994/06/01]
+  \ProvidesClass{myauthorgenerator}[2018/06/03]
+
+  \RequirePackage{kvoptions}
+  \RequirePackage{xstring}
+
+  \DeclareStringOption{author}[unknown]
+  \ProcessKeyvalOptions*
+
+  \author{%
+    \saveexpandmode\expandarg%
+    \StrSubstitute{\myauthorgenerator@author}{,}{\and }%
+    \restoreexpandmode%
+  }
+\end{filecontents}
+
+\usepackage[author={Frodo,Sam,Pippin, Merry}]{myauthorgenerator}
+
+\title{Title}
+
+\begin{document}
+\maketitle
+\end{document}

@@ -1,0 +1,35 @@
+% 以字符串形式传递键值对参数
+% https://tex.stackexchange.com/questions/163265/passing-variable-as-argument
+% https://tex.stackexchange.com/questions/554397/forward-list-of-key-value-pairs-to-other-command-in-expl3
+\documentclass{ctexart}
+
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{xkeyval}
+\usepackage{ifthen}
+
+% 对上面的代码进行修改, 使之结束 key-value 参数
+\makeatletter
+\define@key{latexcode}{color}{\def\latexcode@Color{#1}}
+\define@key{latexcode}{mint}{\def\latexcode@Mint{#1}}% parameters for minted
+\setkeys{latexcode}{color=teal,mint={}}%默认值
+\newcommand{\inputlatexcode}[2][]{
+  {
+    \setkeys{latexcode}{#1}
+    \expandafter\inputminted\expandafter[\latexcode@Mint]{latex}{#2}
+    \ifthenelse{\equal{\latexcode@Color}{}}{
+      \input{#2}
+    }{
+      \par\noindent\textcolor{\latexcode@Color}{\rule{\textwidth}{2pt}}
+      \input{#2}
+      \par\noindent\textcolor{\latexcode@Color}{\rule{\textwidth}{2pt}}
+    }{}
+  }
+}
+\makeatother
+
+\begin{document}
+
+\inputlatexcode[color=red,mint={linenos,breaklines,bgcolor=cyan}]{lorem-ipsum.tex}
+
+\end{document}

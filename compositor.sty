@@ -228,17 +228,40 @@
 % \inputlatexcode 命令用于显示 latex 代码文件和渲染后的效果, 参数是文件名 
 % 注意: 在主文件定义 input 的搜索路径, 对 inputminted 不起作用
 % algorithm 与 tcolorbox 存在冲突
-\newcommand{\inputlatexcode}[2][colorbox]{
-  \inputminted[linenos=true]{latex}{#2}
-  \ifthenelse{\equal{#1}{colorbox}}{
-    \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
-    \input{#2}
-    \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
-  }{}
-  \ifthenelse{\equal{#1}{nobox}}{
-    \input{#2}
-  }{}
+% \newcommand{\inputlatexcode}[2][colorbox]{
+%   \inputminted[linenos=true]{latex}{#2}
+%   \ifthenelse{\equal{#1}{colorbox}}{
+%     \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
+%     \input{#2}
+%     \par\noindent\textcolor{teal}{\rule{\textwidth}{2pt}}
+%   }{}
+%   \ifthenelse{\equal{#1}{nobox}}{
+%     \input{#2}
+%   }{}
+% }
+
+% 对上面的代码进行修改, 使之结束 key-value 参数
+% 以字符串形式传递键值对参数 \expandafter 控制展开顺序
+% https://tex.stackexchange.com/questions/163265/passing-variable-as-argument
+% https://tex.stackexchange.com/questions/554397/forward-list-of-key-value-pairs-to-other-command-in-expl3
+\makeatletter
+\define@key{latexcode}{color}{\def\latexcode@Color{#1}}
+\define@key{latexcode}{mint}{\def\latexcode@Mint{#1}}% parameters for minted
+\setkeys{latexcode}{color=teal,mint={}}%默认值
+\newcommand{\inputlatexcode}[2][]{
+  {
+    \setkeys{latexcode}{#1}
+    \expandafter\inputminted\expandafter[\latexcode@Mint]{latex}{#2}
+    \ifthenelse{\equal{\latexcode@Color}{}}{
+      \input{#2}
+    }{
+      \par\noindent\textcolor{\latexcode@Color}{\rule{\textwidth}{2pt}}
+      \input{#2}
+      \par\noindent\textcolor{\latexcode@Color}{\rule{\textwidth}{2pt}}
+    }{}
+  }
 }
+\makeatother
 
 % 渲染 tikz 绘图代码文件, 参数 2 是 caption
 \newcommand{\inputtikz}[3][withoutcode]{
@@ -319,18 +342,18 @@
 
 \makeatletter
 \define@key{texcode}{color}{\def\texcode@Color{#1}}
-%\setkeys{texcode}{color=teal}
+\define@key{texcode}{mint}{\def\texcode@Mint{#1}}% parameters for minted
+\setkeys{texcode}{color=teal,mint={}}%默认值
 \newenvironment{texcode}
   { % start part
-    %\newcommand\boxstyle{colorbox}% end part 不能直接访问参数
     \typeout{Writing file \jobname.latexcode}
     \catcode`\^^M=\active
     \@ifnextchar[%
       {\catcode`\^^M=5 \texcode@}
-      {\catcode`\^^M=5 \texcode@[color=teal]}}
+      {\catcode`\^^M=5 \texcode@[color=teal,mint={}]}}% 默认值
   { % end part
     \endVerbatimOut%
-    \inputminted{latex}{\jobname.latexcode}
+    \expandafter\inputminted\expandafter[\texcode@Mint]{latex}{\jobname.latexcode}
     \ifthenelse{\equal{\texcode@Color}{}}{
       \input{\jobname.latexcode}
     }{
@@ -521,3 +544,4 @@ itemsep=0pt,parsep=0pt,label=\alph*.}
   {\end{list}}
 % -----------------------------------------------------------------------------
 
+\RequirePackage{fontset}

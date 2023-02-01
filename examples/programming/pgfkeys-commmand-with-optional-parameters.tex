@@ -1,0 +1,30 @@
+% https://tex.stackexchange.com/questions/600406/how-to-construct-a-macro-with-key-value-by-pgfkeys
+\documentclass[]{article}
+
+\usepackage{xcolor}
+\usepackage{pgfkeys}
+
+\pgfkeys
+  {%
+     /mycolorbox/.is family
+    ,/mycolorbox
+    ,color/.initial=blue
+    ,text/.initial=some text
+  }
+\newcommand\mycolorbox[1][]
+  {%
+    \begingroup
+      \pgfqkeys{/mycolorbox}{#1}%
+      \colorbox
+        {\pgfkeysvalueof{/mycolorbox/color}}
+        {\pgfkeysvalueof{/mycolorbox/text}}%
+    \endgroup
+  }
+
+\begin{document}
+\mycolorbox
+
+\mycolorbox[color=red]
+
+\mycolorbox[text=foobar]
+\end{document}

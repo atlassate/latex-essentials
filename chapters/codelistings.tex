@@ -178,32 +178,57 @@ The documentation reads:
 解决方法，使用下面的风格：
 xcode，igor，rrt。
 
-\section{\protect\verbum{latexcode} 环境与 \protect\verbum*{inputlatexcode} 命令}
+\section{\protect\verbum{texcode} 环境与 \protect\verbum*{inputlatexcode} 命令}
+
 
 为了显示{\LaTeX}代码和现实渲染结果
-\footnote{实现类似\verbum{tcblisting}环境的功能}，可以采用：
+\footnote{tcolorbox 包的 \verbum{tcblisting} 环境 和 showexpl 包也提供相关功能。}，可以采用：
 \begin{itemize}
-  \item \verbum{latexcode} 环境：工作过程是将代码输出到文件，读取并渲染该文件
+  \item \verbum{texcode} 环境：工作过程是将代码输出到文件，读取并渲染该文件
   \item \verbum*{inputlatexcode} 命令：直接读取并渲染该文件
 \end{itemize}
 
-显示并渲染代码：
+上述命令和环境在内部都调用了 \verbum*{inputminted} 命令。
 
-\begin{minted}{tex}
-\begin{latexcode}{colorbox}
-{\LaTeX} is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation.
-\end{latexcode}
+\subsection{\protect\verbum{texcode} 环境}
+
+基本形式：
+
+\begin{minted}{latex}
+\begin{texcode}[<options>]
+<Latex code>
+\end{texcode}
 \end{minted}
 
-显示并渲染代码文件，渲染结果带有 colorbox（这是默认参数）：
+\verbum{<options>} 包含分隔线颜色，\verbum*{inputminted} 命令的参数选项，默认值是：
+\verbum{[color=teal, mint=\{\}]}。当不需要分割线时，设置选项为 \verbum{[color=\{\}]}。
+
+显示并渲染代码示例：
 
 \begin{minted}{tex}
-\inputlatexcode[colorbox]{.tex文件路径}
+\begin{texcode}[color=magenta,mint={breaklines,linenos,bgcolor=green}]
+A common form of \textit{Lorem ipsum} reads:
+
+\begin{quotation}
+{\itshape Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+\end{quotation}
+\end{texcode}
 \end{minted}
 
-显示并渲染代码文件，渲染结果不带 colorbox
-\footnote{algorithm 与 tcolorbox 存在冲突，请使用 nobox 参数}：
+\begin{texcode}[color=magenta,mint={breaklines,linenos,bgcolor=green}]
+A common form of \textit{Lorem ipsum} reads:
 
-\begin{minted}{tex}
-\inputlatexcode[nobox]{.tex文件路径}
+\begin{quotation}
+{\itshape Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+\end{quotation}
+\end{texcode}
+
+
+\subsection{\protect\verbum*{inputlatexcode} 命令}
+显示并渲染代码文件，基本形式：
+
+\begin{minted}{latex}
+\inputlatexcode[<options>]{<file path>}
 \end{minted}
+
+\verbum{<options>} 的使用方法与 \verbum{texcode} 环境相同。

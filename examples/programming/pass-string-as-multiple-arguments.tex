@@ -1,0 +1,15 @@
+% https://tex.stackexchange.com/questions/540445/make-command-output-be-the-multiple-arguments-of-another-one
+\documentclass{article}
+
+\newcommand{\tunnel}[2]{{#1}{#2}}
+\newcommand{\name}[2]{\textbf{#1}~\textit{#2}}
+
+\begin{document}
+
+Desired output is \name{hello}{you}
+
+Actual output is \name\tunnel{hello}{you}
+
+Actual output is \expandafter\name\tunnel{hello}{you}
+
+\end{document}

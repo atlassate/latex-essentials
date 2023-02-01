@@ -1,0 +1,31 @@
+% https://tex.stackexchange.com/questions/163265/passing-variable-as-argument
+% https://tex.stackexchange.com/questions/554397/forward-list-of-key-value-pairs-to-other-command-in-expl3
+\documentclass{article}
+\usepackage{tikz}
+
+\pgfkeys
+    {/mypgf/.cd,
+      options/.store in = \options,
+      options/.get = \options,
+    }
+
+\newcommand{\img}[2][]{
+    \pgfkeys{/mypgf/.cd, options={#1}}
+    \def \test {#1}
+    %%\typeout{===>"\options"|#1}%%
+
+    % This works:
+    \includegraphics[#1]{#2}
+
+    % This does not work:
+    \expandafter\includegraphics\expandafter[\options]{#2}
+
+    % This does not work either:
+    \expandafter\includegraphics\expandafter[\test]{#2}
+}
+
+\begin{document}
+
+\img[width=\dimexpr0.1\textwidth]{example-image}
+
+\end{document}
