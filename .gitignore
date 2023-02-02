@@ -279,3 +279,4 @@ playground/
 *.latexcode
 *.pdf_tex
 *.pdf
+*.tmp

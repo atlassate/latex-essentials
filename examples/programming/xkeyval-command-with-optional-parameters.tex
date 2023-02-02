@@ -5,29 +5,29 @@
 \usepackage{xkeyval}
 
 % Declaration of options
-\DeclareOptionX<fooexample>{fcolor}{\def\FrameColor{#1}}
-\DeclareOptionX<fooexample>{bgcolor}{\def\BGColor{#1}}
+\DeclareOptionX<textboxstyle>{fcolor}{\def\FrameColor{#1}}
+\DeclareOptionX<textboxstyle>{bgcolor}{\def\BGColor{#1}}
 
 % Setting default values
-\ExecuteOptionsX<fooexample>{%
+\ExecuteOptionsX<textboxstyle>{%
   fcolor=red,%
   bgcolor=blue!20
 }
 
 % Definition of the command
-\newcommand*\foo[2][]{%
+\newcommand*\textbox[2][]{%
   \begingroup
-  \setkeys{fooexample}{#1}
+  \setkeys{textboxstyle}{#1}
   \fcolorbox{\FrameColor}{\BGColor}{#2}
   \endgroup
 }
 
 \begin{document}
 
-\foo{Lorem ipsum dolor sit amet}
+\textbox{Lorem ipsum dolor sit amet}
 
-\foo[fcolor=olive!90,bgcolor=red!30]{Lorem ipsum dolor sit amet}
+\textbox[fcolor=olive!90,bgcolor=red!30]{Lorem ipsum dolor sit amet}
 
-\foo[bgcolor=yellow]{Lorem ipsum dolor sit amet}
+\textbox[bgcolor=yellow]{Lorem ipsum dolor sit amet}
 
 \end{document}

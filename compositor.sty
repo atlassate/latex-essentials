@@ -1,3 +1,4 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{compositor}[2023/01/01 v1.0 a latex template]
 
 \makeatletter%
@@ -109,9 +110,9 @@
 % https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540#53540
 \newenvironment{codelisting}{\captionsetup{type=listing}}{}
 \setminted{
-  bgcolor=DarkSeaGreen2,          % xcolor 颜色名
+  bgcolor=DarkSeaGreen2,              % xcolor 颜色名
   breaklines=true,
-  breakafter=-/\#\{\}\%\[\]\\,    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
+  breakafter=-/\#\{\}\%\[\]\\\(\),    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
 }
 
 % The minted package manual reads: 
@@ -122,6 +123,7 @@
 \setmintedinline{
   bgcolor={},
   breaklines=true,
+  breakafter=-/\#\{\}\%\[\]\\\(\),    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
 }
 
 % line number font size
@@ -137,6 +139,8 @@
 \newcommand{\verbum@text}[1]{{\typeout{#1}\ttfamily #1}}
 \newcommand{\verbum@command}[1]{{\ttfamily \textbackslash #1}}
 \makeatother
+
+%\newcommand{\verbum}[1]{{\ttfamily\detokenize{#1}}} % 标题中的字符处理不好
 
 % 在抄录环境下高亮显示特定行, 语言选择 text
 % https://tex.stackexchange.com/questions/393526/bold-letters-within-minted-bash-text
@@ -245,19 +249,19 @@
 % https://tex.stackexchange.com/questions/163265/passing-variable-as-argument
 % https://tex.stackexchange.com/questions/554397/forward-list-of-key-value-pairs-to-other-command-in-expl3
 \makeatletter
-\define@key{latexcode}{color}{\def\latexcode@Color{#1}}
-\define@key{latexcode}{mint}{\def\latexcode@Mint{#1}}% parameters for minted
+\define@key{latexcode}{color}{\def\latexcode@color{#1}}
+\define@key{latexcode}{mint}{\def\latexcode@mint{#1}}% parameters for minted
 \setkeys{latexcode}{color=teal,mint={}}%默认值
 \newcommand{\inputlatexcode}[2][]{
   {
     \setkeys{latexcode}{#1}
-    \expandafter\inputminted\expandafter[\latexcode@Mint]{latex}{#2}
-    \ifthenelse{\equal{\latexcode@Color}{}}{
+    \expandafter\inputminted\expandafter[\latexcode@mint]{latex}{#2}
+    \ifthenelse{\equal{\latexcode@color}{}}{
       \input{#2}
     }{
-      \par\noindent\textcolor{\latexcode@Color}{\rule{\textwidth}{2pt}}
+      \par\noindent\textcolor{\latexcode@color}{\rule{\textwidth}{2pt}}
       \input{#2}
-      \par\noindent\textcolor{\latexcode@Color}{\rule{\textwidth}{2pt}}
+      \par\noindent\textcolor{\latexcode@color}{\rule{\textwidth}{2pt}}
     }{}
   }
 }
@@ -341,8 +345,8 @@
 %   \begin{texcode}{color={}} ... \end{texcode} % 不画分隔线
 
 \makeatletter
-\define@key{texcode}{color}{\def\texcode@Color{#1}}
-\define@key{texcode}{mint}{\def\texcode@Mint{#1}}% parameters for minted
+\define@key{texcode}{color}{\def\texcode@color{#1}}
+\define@key{texcode}{mint}{\def\texcode@mint{#1}}% parameters for minted
 \setkeys{texcode}{color=teal,mint={}}%默认值
 \newenvironment{texcode}
   { % start part
@@ -353,13 +357,13 @@
       {\catcode`\^^M=5 \texcode@[color=teal,mint={}]}}% 默认值
   { % end part
     \endVerbatimOut%
-    \expandafter\inputminted\expandafter[\texcode@Mint]{latex}{\jobname.latexcode}
-    \ifthenelse{\equal{\texcode@Color}{}}{
+    \expandafter\inputminted\expandafter[\texcode@mint]{latex}{\jobname.latexcode}
+    \ifthenelse{\equal{\texcode@color}{}}{
       \input{\jobname.latexcode}
     }{
-      \par\noindent\textcolor{\texcode@Color}{\rule{\textwidth}{2pt}}
+      \par\noindent\textcolor{\texcode@color}{\rule{\textwidth}{2pt}}
       \input{\jobname.latexcode}
-      \par\noindent\textcolor{\texcode@Color}{\rule{\textwidth}{2pt}}
+      \par\noindent\textcolor{\texcode@color}{\rule{\textwidth}{2pt}}
     }
   }
 \def\texcode@[#1]{%
@@ -545,3 +549,5 @@ itemsep=0pt,parsep=0pt,label=\alph*.}
 % -----------------------------------------------------------------------------
 
 \RequirePackage{fontset}
+
+\RequirePackage{latexalpha2}

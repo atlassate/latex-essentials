@@ -1,0 +1,12 @@
+\begin{figure}[H] 
+  \centering
+  \wolframgraphics[pdf]{
+    f[x_] := Sin[x];
+    g[x_] := Cos[x];
+    Plot[{f[x], g[x]}, {x, 0, 2Pi}, 
+      PlotLabels -> "Expressions",
+      Ticks->{Table[i, {i, 0, 2Pi, Pi/4}], Table[i, {i, -1, 1, 0.25}]}]
+  }{multiplot}
+  \includegraphics{multiplot.pdf}
+  \caption{Plot of $f(x)=sin(x), g(x)=cos(x)$}
+\end{figure}

@@ -1,0 +1,93 @@
+% https://github.com/stevenliuyi/latex-alpha2
+\chapter{调用 Mathematica}
+
+在 {\LaTeX} 中使用 Mathematica 代码（本地系统需要安装 Mathematica 或 Wolfram Engine）, 可以由以下两种方式:
+
+\begin{itemize}
+  \item 将 Mathematica 输出为 TexForm 格式, 然后复制粘贴; 或者
+  \item 使用 latexalpha2 宏包
+\end{itemize}
+
+\section{安装 latexalpha2 宏包}
+
+以下介绍在 macOS 中的安装方法(参考\cite{WIKIBOOKS}):
+
+修改 {\TeX} 搜索路径
+\footnote{\url{https://web.physics.wustl.edu/alford/tex/tex_paths.html}}
+\footnote{\url{https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files}}
+：
+
+修改文件 /usr/local/texlive/2021/texmf.cnf, 设置如下(这个值默认是注释掉的, 取消注释即可)
+
+\mint{bash}|TEXMFHOME = ~/Library/texmf|
+
+从 GitHub 上下载代码
+
+从 \url{https://github.com/stevenliuyi/latex-alpha2} 中下载 zip 文件, 然解压缩到 ~/Library/texmf/tex/latex 目录下 
+
+完成安装，运行：
+
+\begin{minted}{bash}
+texhash
+mktexlsr
+\end{minted}
+
+% \subection{编译命令}
+
+% 普通文档编译:
+
+% \begin{minted}{bash}
+% xelatex -shell-escape doc.tex
+% \end{minted}
+
+% 含有文献目录的文档编译
+
+% \begin{minted}{bash}
+% xelatex -shell-escape doc.tex
+% bibtex doc.aux
+% xelatex -shell-escape doc.tex
+% xelatex -shell-escape doc.tex
+% \end{minted}
+
+\section{基本使用}
+
+\subsection{直接运行 wolfram language 代码}
+
+\mint{latex}|$\wolfram{<mathematica command>}$|
+
+例如, 
+运行:
+
+\mint{latex}|$\wolfram{Series[Exp[x],{x,0,5}]}$|
+
+结果:
+
+$\wolfram{Series[Exp[x],{x,0,5}]}$
+
+\subsection{绘制二维图}
+
+绘制正切函数曲线:
+
+\inputminted{latex}{snippets/mathematica/plot2d.tex}
+
+输出:
+
+\input{snippets/mathematica/plot2d.tex}
+
+\subsection{绘制三维图}
+
+绘制三维图:
+
+\inputminted{latex}{snippets/mathematica/plot3d.tex}
+
+输出:
+
+\input{snippets/mathematica/plot3d.tex}
+
+\subsection{多个命令}
+
+\inputminted{latex}{snippets/mathematica/multiplot.tex}
+
+输出:
+
+\input{snippets/mathematica/multiplot.tex}

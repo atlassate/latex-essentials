@@ -1,3 +1,4 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fontset}[2023/01/01 v1.0 a latex template]
 
 % 中文排版, 可以直接使用 ctexart, ctexbook
@@ -46,9 +47,11 @@
 \setCJKfamilyfont{NotoSerifSC}{NotoSerifSC-Regular.otf}
 \newcommand{\notoserifsc}{\CJKfamily{NotoSerifSC}}
 
-% setmainfont, setsansfont, setmonofont等
-% 在此处设置无效, 需要在 .tex 文件定义
-% \RequirePackage{fontspec}
-% \setmainfont{Arial} 
+\AtBeginDocument{
+  % setmainfont, setsansfont, setmonofont等
+  % 需要在 document 环境前定义
+  \RequirePackage{fontspec}
+  \setmainfont{Arial} 
+}
 
 \RequirePackage{CJKfntef}  
