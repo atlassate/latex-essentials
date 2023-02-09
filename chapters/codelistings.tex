@@ -4,7 +4,7 @@
 
 \verbum{verbatim} 环境适合比较简单场合下使用，无法实现代码的高亮显示，如：
 
-\begin{latexcode}{colorbox}
+\begin{texcode}
 \begin{verbatim}
 #include <stdio.h>
 
@@ -13,7 +13,7 @@ int main(int argc, char **argc) {
   return 0;
 }
 \end{verbatim}
-\end{latexcode}
+\end{texcode}
 
 \verbum*{verb} 命令可以用于代码显示\footnote{行内长串代码显示存在换行的问题，可以使用 \verbum*{ttfamily} 作为替代方案。}
 ，如：\mintinline{text}{\verb|message = "hello,world"|}。
@@ -23,7 +23,9 @@ int main(int argc, char **argc) {
 
 实际上使用 \mintinline{text}{{\tffamily message = "hello,world"}} 也可以达到类似的效果；
 compositor 包中的 \verbum*{verbum} 和 \verbum*{verbum*} 命令正是基于此，通常在行尾能够自动换行，
-如果行尾的单词过长，有可能会超出。
+如果行尾的单词过长，有可能会超出
+\footnote{\url{https://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt}}。
+如果不想要超出，可以考虑其它的对齐方式，如\verbum*{raggedright}。
 并且 \verbum*{verbum} 和 \verbum*{verbum*} 命令用在标题中也需要在前面加上 \verbum*{protect}
 \footnote{\url{https://tex.stackexchange.com/questions/83893/verbatim-inside-a-command}}。
 
@@ -40,7 +42,7 @@ compositor 包中的 \verbum*{verbum} 和 \verbum*{verbum*} 命令正是基于�
 
 \subsection{\protect\verbum{lstlisting} 环境}
 
-\begin{latexcode}{colorbox}
+\begin{texcode}
 \begin{lstlisting}[language=C,caption={C/C++ 语言},numbers=left]
   /* Hello, world */
   int main{int argc, char **argv} {
@@ -48,7 +50,7 @@ compositor 包中的 \verbum*{verbum} 和 \verbum*{verbum*} 命令正是基于�
     return 0;
   }
 \end{lstlisting}
-\end{latexcode}
+\end{texcode}
 
 \subsection{\protect\verbum*{lstinline} 命令}
 
@@ -58,21 +60,21 @@ compositor 包中的 \verbum*{verbum} 和 \verbum*{verbum*} 命令正是基于�
 
 显示代码文件，文件路径为相对于主文件的路径:
 
-\begin{latexcode}{colorbox}
+\begin{texcode}
 \lstinputlisting[language=C,caption={hello.c 文件},numbers=left]{snippets/codelistings/helloworld.c}
-\end{latexcode}
+\end{texcode}
 
 \subsection{自定义语言}
 
 listings 包没有提供 JavaScript 语言高亮显示， 但是可以自定义（详见模板）。
 
-\begin{latexcode}{colorbox}
+\begin{texcode}
 \begin{lstlisting}[language=js,caption={JavaScript 语言}]
 // 向控制台输出 'hello, world'
 const message = 'hello, world'
 console.log(message)
 \end{lstlisting}
-\end{latexcode}
+\end{texcode}
 
 其它的扩展见 StackOverflow
 \footnote{\url{https://tex.stackexchange.com/questions/224093/adding-keywords-to-existing-language-for-listings-package}}
@@ -104,14 +106,14 @@ minted 整体风格比 listings 略胜一筹。
 
 \subsection{\protect\verbum{minted} 环境}
 
-\begin{latexcode}{colorbox}
-\begin{minted}{c}
+\begin{texcode}
+\begin{minted}[linenos,highlightlines={1}]{c}
 int main{int argc, char **argv} {
   printf("Hello, world\n");
   return 0;
 }
 \end{minted}
-\end{latexcode}
+\end{texcode}
 
 \subsection{\protect\verbum*{mint} 命令}
 
@@ -128,20 +130,20 @@ int main{int argc, char **argv} {
 
 显示代码文件，文件路径为相对于主文件的路径:
 
-\begin{latexcode}{colorbox}
+\begin{texcode}
 \inputminted{c}{snippets/codelistings/helloworld.c}
-\end{latexcode}
+\end{texcode}
 
 \subsection{\protect\verbum{listing} 环境}
 
 minted 提供 \verbum{listing} 环境来作为一个浮动体来包裹代码。
 
-\begin{latexcode}{colorbox}
+\begin{texcode}
 \begin{listing}[H]
   \caption{hello.c文件}
   \inputminted{c}{snippets/codelistings/helloworld.c}
 \end{listing}
-\end{latexcode}
+\end{texcode}
 
 \subsection{Troubleshooting}
 

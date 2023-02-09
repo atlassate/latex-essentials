@@ -1,0 +1,14 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \draw[help lines] (-2,-2) grid (2,2);
+  \draw[thick,magenta] (0,0) circle (1);
+  \draw[thick,purple] (-1,2) -- (2,-2);
+  \fill[red] (0,0) circle (1pt);
+  \node[below left] (O) at (0,0) {$O$};
+\end{tikzpicture}
+
+\end{document}

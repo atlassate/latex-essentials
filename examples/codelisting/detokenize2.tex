@@ -11,7 +11,8 @@
 
 \title{detokenize}
 
-\newcommand\verbum[1]{{\ttfamily\detokenize{#1}}}
+%\newcommand\verbum[1]{{\ttfamily\detokenize{#1}}}
+\DeclareRobustCommand\verbum[1]{{\ttfamily\detokenize{#1}}}
 
 \begin{document}
 
@@ -26,8 +27,11 @@ Lorem ipsum is placeholder text commonly used in the graphic, print, and publish
 \section{\verbum{newcommand}}% works
 
 %\section{\verbum{\newcommand}}% not works
+\section[newcommand]{\verbum{\newcommand}}% works
 
 \section{\protect\verbum{newcommand}}% works
+
+\verbum{\newcommand}
 
 %\section{\protect\verbum{\newcommand}}% not works
 

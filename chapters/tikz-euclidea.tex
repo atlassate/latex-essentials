@@ -1,0 +1,630 @@
+\chapter{TikZ 几何作图}
+
+\section{垂直平分线/中垂线 Perpendicular Bisector}
+
+\subsection{调用方式}
+
+作线段 $P_1P_2$ 的垂直平分线:
+
+\mint{latex}{perpendicular bisector={P1,P2,a,b}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2$] 点
+  \item[a] $P_1P_2$ 逆时针方向(左边)长度或系数, 其中系数是指 $P_1P_2$ 长度的$1/2$而言, 如: 1cm 或 .75
+  \item[b] $P_1P_2$ 顺时针方向(右边)长度或系数, 其中系数是指 $P_1P_2$ 长度的$1/2$而言, 如: 1cm 或 .75
+\end{description}
+
+\subsection{示例}
+
+指定两端的长度:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \foreach \p in {A,B}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \path[draw,thick,magenta,perpendicular bisector={A,B,1cm,2cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+指定系数:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \foreach \p in {A,B}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \path[draw,thick,magenta,perpendicular bisector={A,B,1,2cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+可以是负数, 这样就在相反方向:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \foreach \p in {A,B}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \path[draw,thick,magenta,perpendicular bisector={A,B,-1,2cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+\section{垂线 Perpendicular Line}
+
+\subsection{调用方式}
+
+过直线 $P_1P_2$ 外一点 $P_3$ 作垂线:
+
+\mint{latex}{perpendicular={P1,P2,P3,a,b}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,P_3$] $P_3$是直线$P_1P_2$外一点, 设垂足为 $P_4$
+  \item[a] 垂线段起点, 相对$P_3P_4$的位置, 如: 1cm 或 .75
+  \item[b] 垂线段终点, 相对$P_3P_4$的位置, 如: 1cm 或 .75
+\end{description}
+
+当$a,b$为长度时, 代表距离 $P_3$ 的位置, 方向是 $P_3P_4$, 负值代表相反方向;
+当$a,b$为系数时, 代表 $\cfrac{PP_3}{|P_3P_4|}$.
+
+\subsection{示例}
+
+指定起始点距离 $P_3$ 的位置, 方向是 $P_3P_4$, 负值代表相反方向:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \path[draw,thick,magenta,perpendicular={A,B,C,-1cm,2cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+指定系数:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \path[draw,thick,magenta,perpendicular={A,B,C,-0.5,1.5}]; 
+\end{tikzpicture}
+\end{texcode}
+
+指定距离:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \path[draw,thick,magenta,perpendicular={A,B,C,-0.5cm,2.5cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+\section{平行线 Parallel Line}
+
+\subsection{调用方式}
+
+过直线 $P_1P_2$ 外一点 $P_3$ 作平行线:
+
+\mint{latex}{parallel={P1,P2,P3,a,b}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,P_3$] $P_3$ 是直线 $P_1P_2$ 外一点, 第四点 $P_4$ 是 $P_3$ 按向量 $P_1P_2$ 移动所得
+  \item[a] 平行线段起点, 相对$P_3P_4$的位置, 如: 1cm 或 .75
+  \item[b] 平行线段终点, 相对$P_3P_4$的位置, 如: 1cm 或 .75
+\end{description}
+
+当$a,b$为长度时, 代表距离 $P_3$ 的位置, 方向是 $P_3P_4$, 负值代表相反方向;
+当$a,b$为系数时, 代表 $\cfrac{PP_3}{|P_3P_4|}$.
+
+\subsection{示例}
+
+指定起始点距离 $P_3$ 的位置, 方向是 $P_3P_4$, 负值代表相反方向:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \path[draw,thick,magenta,parallel={A,B,C,-1cm,2cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+指定系数:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \path[draw,thick,magenta,parallel={A,B,C,-0.5,1.5}]; 
+\end{tikzpicture}
+\end{texcode}
+
+指定距离:
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \path[draw,thick,magenta,parallel={A,B,C,-0.5cm,2.5cm}]; 
+\end{tikzpicture}
+\end{texcode}
+
+\section{平移 Translate}
+
+\subsection{调用方式}
+
+按向量 $P_1P_2$ 移动 $P_3$:
+
+\mint{latex}{translate={P1,P2,P3}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,P_3$] 第四点 $P_4$ 是 $P_3$ 按向量 $P_1P_2$ 移动所得
+\end{description}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \coordinate [translate={A,B,C}] (D); 
+  \foreach \p in {A,B,C,D}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue, -latex] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \draw (D) node[above] {$D$};
+\end{tikzpicture}
+\end{texcode}
+
+\section{对称点 Reflect}
+
+\subsection{调用方式}
+
+求 $P_3$ 关于直线 $P_1P_2$ 的对称点:
+
+\mint{latex}{reflect={P1,P2,P3}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,P_3$] 第四点 $P_4$ 是 $P_3$ 关于直线 $P_1P_2$ 的对称点
+\end{description}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (2,2);
+  \coordinate [reflect={A,B,C}] (D); 
+  \foreach \p in {A,B,C,D}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue, -latex] (A) -- (B);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \draw (D) node[above] {$D$};
+\end{tikzpicture}
+\end{texcode}
+
+\section{旋转 Rotate}
+
+\subsection{调用方式}
+
+求 $P_2$ 绕 $P_1$ 旋转 $angle$ 度的点:
+
+\mint{latex}{rotate={P1,P2,angle}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,angle$] 第3点 $P_3$ 是 $P_2$ 绕 $P_1$ 旋转 $angle$ 度得到
+\end{description}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate [rotate={A,B,-30}] (C); 
+  \draw[thick] (A) -- (B) (A) -- (C);
+  \foreach \p in {A,B,C}
+    \fill[orange] (\p) circle (2pt);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+\end{tikzpicture}
+\end{texcode}
+
+\section{角平分线 Angle Bisector}
+
+\subsection{调用方式}
+
+\mint{latex}{angle bisector={P1,P2,P3}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,P_3$] 第四点 $P_4$ 是顶点为 $P_1$ 的角平分线 与 $P_2P_3$ 的交点 (利用角平分线定理求得)
+\end{description}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (4,1);
+  \coordinate (C) at (2,3);
+  \coordinate [angle bisector={A,B,C}] (D); 
+  \foreach \p in {A,B,C,D}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B) -- (C) -- cycle;
+  \draw[thick, magenta] (A) -- (D);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above] {$C$};
+  \draw (D) node[above right] {$D$};
+\end{tikzpicture}
+\end{texcode}
+
+\section{构造角}
+
+\subsection{调用方式}
+
+\mint{latex}{angle={A,B,C,D,E,k}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$A,B,C,D,E$] 为坐标
+  \item[$k$] 系数, 第 6 点 $F$ 满足: $\angle{EDF} = k \cdot \angle{BAC}$, 系数 $k$ 可以是任意实数
+\end{description}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}[scale=1]
+  \draw[help lines] (0,0) grid (5,5);
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (3,1);
+  \coordinate (C) at (1,4);
+  \coordinate (D) at (0,2);
+  \coordinate (E) at (3,3);
+  \path[angle={A,B,C,D,E,1/2}] coordinate (F);
+  \draw[blue,thick] (A) -- (B) (A) -- (C);
+  \draw[red,thick] (D) -- (E) (D) -- (F);
+  \foreach \p in {A,B,C,D,E,F}
+    \fill[orange] (\p) circle (2pt);
+\end{tikzpicture}
+\end{texcode}
+
+\section{直线与直线的交点 Line-Line Intersection}
+
+\subsection{调用方式}
+
+\mint{latex}{intersect={P1,P2,P3,P4}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item[$P_1,P_2,P_3,P_4$] 第五点 $P$ 是 $P_1P_2$ 与 $P_3P_4$ 的交点 (可以是延长线相交点)
+\end{description}
+
+\begin{remark}
+
+求解两直线交点的方程\footnote{\url{https://mathworld.wolfram.com/Line-LineIntersection.html}}:
+
+\begin{align*}
+  \begin{vmatrix}
+    x & y & 1\\
+    x_1 & y_1 & 1\\
+    x_2 & y_2 & 1
+  \end{vmatrix} & = 0\\
+  \begin{vmatrix}
+    x & y & 1\\
+    x_3 & y_3 & 1\\
+    x_4 & y_4 & 1
+  \end{vmatrix} & = 0
+\end{align*}
+
+注意, 两个方程的系数都是行列式, 解得:
+
+\begin{align*}
+  x &= \cfrac{
+      \begin{vmatrix}
+        \begin{vmatrix} x_1 & y_1 \\ x_2 & y_2 \end{vmatrix} & \begin{vmatrix} x_1 & 1 \\ x_2 & 1 \end{vmatrix} \\
+        \begin{vmatrix} x_3 & y_3 \\ x_4 & y_4 \end{vmatrix} & \begin{vmatrix} x_3 & 1 \\ x_4 & 1 \end{vmatrix} 
+      \end{vmatrix}}{
+      \begin{vmatrix}
+        \begin{vmatrix} x_1 & 1 \\ x_2 & 1 \end{vmatrix} & \begin{vmatrix} y_1 & 1 \\ y_2 & 1 \end{vmatrix} \\
+        \begin{vmatrix} x_3 & 1 \\ x_4 & 1 \end{vmatrix} & \begin{vmatrix} y_3 & 1 \\ y_4 & 1 \end{vmatrix} 
+      \end{vmatrix}} 
+    = \cfrac{
+      \begin{vmatrix}
+        \begin{vmatrix} x_1 & y_1 \\ x_2 & y_2 \end{vmatrix} & x_1 - x_2 \\
+        \begin{vmatrix} x_3 & y_3 \\ x_4 & y_4 \end{vmatrix} & x_3 - x_4 
+      \end{vmatrix}}{
+      \begin{vmatrix}
+        x_1 - x_2 & y_1 - y_2 \\
+        x_3 - x_4 & y_3 - y_4 
+      \end{vmatrix}}\\
+  y &= \cfrac{
+      \begin{vmatrix}
+        \begin{vmatrix} x_1 & y_1 \\ x_2 & y_2 \end{vmatrix} & \begin{vmatrix} y_1 & 1 \\ y_2 & 1 \end{vmatrix} \\
+        \begin{vmatrix} x_3 & y_3 \\ x_4 & y_4 \end{vmatrix} & \begin{vmatrix} y_3 & 1 \\ y_4 & 1 \end{vmatrix} 
+      \end{vmatrix}}{
+      \begin{vmatrix}
+        \begin{vmatrix} x_1 & 1 \\ x_2 & 1 \end{vmatrix} & \begin{vmatrix} y_1 & 1 \\ y_2 & 1 \end{vmatrix} \\
+        \begin{vmatrix} x_3 & 1 \\ x_4 & 1 \end{vmatrix} & \begin{vmatrix} y_3 & 1 \\ y_4 & 1 \end{vmatrix} 
+      \end{vmatrix}}
+    = \cfrac{
+      \begin{vmatrix}
+        \begin{vmatrix} x_1 & y_1 \\ x_2 & y_2 \end{vmatrix} & y_1 - y_2 \\
+        \begin{vmatrix} x_3 & y_3 \\ x_4 & y_4 \end{vmatrix} & y_3 - y_4 
+      \end{vmatrix}}{
+      \begin{vmatrix}
+        x_1 - x_2 & y_1 - y_2 \\
+        x_3 - x_4 & y_3 - y_4 
+      \end{vmatrix}}
+\end{align*}
+
+进一步化简得到\footnote{\url{https://en.wikipedia.org/wiki/Line–line_intersection}}:
+
+\begin{align*}
+  x &= \cfrac{(x_1y_2-y_1x_2)(x_3-x_4)-(x_1-x_2)(x_3y_4-y_3x_4)}{(x_1-x_2)(y_3-y_4)-(y_1-y_2)(x_3-x_4)}\\
+  y &= \cfrac{(x_1y_2-y_1x_2)(y_3-y_4)-(y_1-y_2)(x_3y_4-y_3x_4)}{(x_1-x_2)(y_3-y_4)-(y_1-y_2)(x_3-x_4)}
+\end{align*}
+
+\begin{remark}
+
+上述方法给出的交点坐标公式在 TikZ 环境中的计算稳定性不够好, 经常出现 {\ttfamily Dimension too large} 错误, 
+究其原因是分母可能有时会比较小. 下面给出一个计算更稳定的公式.
+
+我们可以给出两条直线的参数方程:
+
+\begin{align*}
+  \intertext{直线 $L_1$ 的方程:}
+  \begin{bmatrix} x\\ y \end{bmatrix} &= 
+    \begin{bmatrix}x_1\\ y_1\end{bmatrix}
+    + s\begin{bmatrix}x_2-x_1\\y_2-y_1\end{bmatrix}\\
+  \intertext{直线 $L_2$ 的方程:}
+  \begin{bmatrix} x\\ y \end{bmatrix} &= 
+    \begin{bmatrix}x_3\\ y_3\end{bmatrix}
+    + t\begin{bmatrix}x_4-x_3\\ y_4-y_3\end{bmatrix}
+\end{align*}
+
+可以解出 $s,t$:
+
+\begin{align*}
+  s &= \cfrac{
+    \begin{vmatrix}x_1-x_3 & x_3-x_4\\y_1-y_3 & y_3-y_4 \end{vmatrix}
+  }{\begin{vmatrix}x_1-x_2 & x_3-x_4\\y_1-y_2 & y_3-y_4 \end{vmatrix}}\\
+  t &= \cfrac{
+    \begin{vmatrix}x_1-x_3 & x_1-x_2\\y_1-y_3 & y_1-y_2 \end{vmatrix}
+  }{\begin{vmatrix}x_1-x_2 & x_3-x_4\\y_1-y_2 & y_3-y_4 \end{vmatrix}}
+\end{align*}
+
+我们也可从几何的角度来分析:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (4,2);
+  \coordinate (C) at (0,2);
+  \coordinate (D) at (3,0);
+  \coordinate [intersect={A,B,C,D}] (E); 
+  \coordinate [translate={C,D,A}] (F);
+  \foreach \p in {A,B,C,D,E,F}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick,-latex] (A) -- (B);
+  \draw[thick,-latex] (C) -- (D);
+  \draw[thick,-latex] (A) -- (F);
+  \draw[thick,-latex] (A) -- (C);
+  \fill[yellow,opacity=0.25] (A) -- (E) -- (F) -- cycle;
+  \fill[green,opacity=.25] (A) -- (C) -- (F) -- cycle;
+  \draw[dashed] (B) -- (F);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above left] {$C$};
+  \draw (D) node[below right] {$D$};
+  \draw (E) node[above] {$E$};
+  \draw (F) node[below left] {$F$};
+\end{tikzpicture}
+\end{figure}
+
+\begin{align*}
+  \overrightarrow{AE} &= s \overrightarrow{AB}\\
+  s &= \cfrac{S_{\triangle{AEF}}}{S_{\triangle{ABF}}}\\
+    &= \cfrac{S_{\triangle{ACF}}}{S_{\triangle{ABF}}}\\
+    &= \cfrac{\overrightarrow{AF}\times\overrightarrow{AC}}{\overrightarrow{AF}\times\overrightarrow{AB}}\\
+    &= \cfrac{\overrightarrow{CD}\times\overrightarrow{AC}}{\overrightarrow{CD}\times\overrightarrow{AB}}
+\end{align*}
+
+\end{remark}
+
+\begin{remark}
+
+为了保证数值计算的稳定性, 可以对下面的方程进行列主元消元法求解:
+\begin{align*}
+  x_1+s(x_2-x_1) &= x3+t(x_4-x3)\\
+  y_1+s(y_2-y_1) &= y3+t(y_4-y3)
+\end{align*}  
+
+\end{remark}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \draw[help lines] (-5,-5) grid[step=1] (5,5);
+  \coordinate (A) at (-8,-3);
+  \coordinate (B) at (2,7);
+  \coordinate (C) at (-2,7);
+  \coordinate (D) at (2,-5);
+  \coordinate [intersect={A,B,C,D}] (E); 
+  \foreach \p in {A,B,C,D,E}
+    \fill[orange] (\p) circle (2pt);
+  \draw[thick, blue] (A) -- (B) (C) -- (D);
+  \draw (A) node[left] {$A$};
+  \draw (B) node[right] {$B$};
+  \draw (C) node[above left] {$C$};
+  \draw (D) node[below right] {$D$};
+  \draw (E) node[below left] {$E$};
+\end{tikzpicture}
+\end{texcode}
+
+\end{remark}
+
+\section{圆的切线}
+
+\subsection{调用方式}
+
+过圆 (圆心: $O$, 半径: $r$) 外一点 $P$ 作切线:
+
+\mint{latex}{tangent point={P,O,r}}
+
+\subsection{参数说明}
+
+\begin{description}
+  \item $P$: 圆外一点坐标
+  \item $O$: 圆心坐标
+  \item $r$: 半径, 注意半径必须带上单位
+\end{description}
+
+求得的切点是 $OP$ 逆时针旋转方向, 另外一点可以通过对称求得
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  %\draw[help lines] (-4,-4) grid (4,4);
+  \coordinate (O) at (0,0);
+  \coordinate (A) at +(0:2);  % 圆上一点, 相对坐标
+  \coordinate (P) at (3,4);
+  \coordinate[tangent point={O,A,P}] (T1); 
+  \coordinate[reflect={O,P,T1}] (T2);
+  \draw[thick,circle={O,A}];
+  \draw[thick,orange] (P) -- (T1) (P) -- (T2);
+  \foreach \p in {O,P,T1,T2}
+    \fill[orange] (\p) circle (2pt);
+  \draw (O) node[below] {$O$};
+  \draw (P) node[right] {$P$};
+  \draw (T1) node[above] {$T_1$};
+  \draw (T2) node[right] {$T_2$};
+\end{tikzpicture}
+\end{texcode}
+
+外公切线
+
+先求位似中心Homothetic center\footnote{\url{https://en.wikipedia.org/wiki/Homothetic_center}}
+
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \tikzmath {
+    \a = 30;
+    \b = \a;
+    \r1 = 1;
+    \r2 = 2;
+  }
+  %\draw[help lines] (-4,-4) grid (4,4);
+  \coordinate (O1) at (0,0);
+  \coordinate (A1) at ($(O1)+(\a:\r1)$);
+  \coordinate (O2) at (4,0);
+  \coordinate (A2) at ($(O2)+(\b:\r2)$);
+  \coordinate[external center={O1,A1,O2,A2}] (P); 
+  \coordinate[tangent point={O1,A1,P}] (B);
+  \coordinate[tangent point={O2,A2,P}] (C);
+  \coordinate[reflect={O1,O2,B}] (D);
+  \coordinate[reflect={O1,O2,C}] (E);
+  \draw[thick,circle={O1,A1}];
+  \draw[thick,circle={O2,A2}];
+  \draw[thick,magenta] (P) -- (C) (P) -- (E);
+  \foreach \p in {A1,A2,B,C,D,E,O1,O2,P}
+    \fill[orange] (\p) circle (2pt);
+  \draw (O1) node[below] {$O_1$};
+  \draw (O2) node[below] {$O_2$};
+  \draw (P) node[below] {$P$};
+\end{tikzpicture}
+\end{texcode}
+
+内公切线
+\begin{texcode}[color={}]
+\begin{tikzpicture}
+  \tikzmath {
+    \a = 150;
+    \b = \a - 180;
+    \r1 = 1;
+    \r2 = 2;
+  }
+  %\draw[help lines] (-4,-4) grid (4,4);
+  \coordinate (O1) at (0,0);
+  \coordinate (A1) at ($(O1)+(\a:\r1)$);
+  \coordinate (O2) at (4,0);
+  \coordinate (A2) at ($(O2)+(\b:\r2)$);
+  \coordinate[internal center={O1,A1,O2,A2}] (P); 
+  \coordinate[tangent point={O1,A1,P}] (B);
+  \coordinate[tangent point={O2,A2,P}] (C);
+  \coordinate[reflect={O1,O2,B}] (D);
+  \coordinate[reflect={O1,O2,C}] (E);
+  \draw[thick,circle={O1,A1}];
+  \draw[thick,circle={O2,A2}];
+  \draw[thick,magenta] (P) -- (B) (P) -- (C) (P) -- (D) (P) -- (E);
+  \foreach \p in {A1,A2,B,C,D,E,O1,O2,P}
+    \fill[orange] (\p) circle (2pt);
+  \draw (O1) node[below] {$O_1$};
+  \draw (O2) node[below] {$O_2$};
+  \draw (P) node[below] {$P$};
+\end{tikzpicture}
+\end{texcode}

@@ -1,10 +1,5 @@
-\ProvidesPackage{sketcher}[2023/01/01 v1.0 a latex template]
+\ProvidesFile{tikzlibraryeuclidea.code.tex}[2023/01/01 v1.0.0 A tikz library for plane geometry]
 
-% -------------------------------- tikz ---------------------------------------
-\RequirePackage{tikz}
-\RequirePackage{pgfplots}
-\usetikzlibrary{arrows.meta,calc,math,intersections,through,angles,quotes,decorations,decorations.markings}
- 
 % 注意: 计算过程是保留坐标单位(pt)的, 所以存在乘除法单位的问题, 首先数值始终携带单位, 在 calc 运算时有的需要
 % 转换为标量; 将坐标转换为 pt 值, 数值可能超出限值, 出现 Dimension too large 错误, 
 % 在计算长度时及时进行缩小 https://tex.stackexchange.com/questions/475556/tikz-why-is-dimension-too-large

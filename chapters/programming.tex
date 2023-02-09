@@ -2,7 +2,13 @@
 
 \section{宏、命令与环境}
 
-\subsection{宏基础}
+\subsection{def vs edef}
+
+这是 plain {\TeX} 定义宏的命令。
+
+def和edef都可以定义宏，其区别是：def定义宏时，其宏体不做展开操作；而edef定义宏时，其宏体需要进行展开操作，直到不能再展开为止。def定义的宏，在实际调用时才进行展开，因此宏定义时可以引用还没有定义的其他的宏；edef定义宏时，由于马上就进行展开操作，因此不能引用还没有定义的宏。无论def定义的宏还是edef定义的宏，在实际调用时都会进行“彻底”的展开操作。
+
+\subsection{命令与环境}
 
 本节内容来自：\url{https://latex.org/forum/viewtopic.php?t=26184}。
 
@@ -382,10 +388,23 @@ Lorem ipsum dolor sit amet
   \item \verbum*{BeforeBeginEnvironment}
 \end{itemize}
 
-详细说明请参考文献\cite{HOOKS}。
+详细说明请参考文献 \cite{HOOKS}。
 
 \subsection{\protect\verbum*{expandafter}}
 
 compositor 宏包的 \verbum{texcode} 环境的实现使用了
 \verbum*{expandafter} 来控制展开顺序，从而实现了将外部命令的字符串参数注入内部命令。
 
+\section{\protect\verbum*{@ifstar}}
+
+参考文献 \cite{MANUAL}:
+
+\begin{minted}{latex}
+\newcommand{\cmdname}{\@ifstar{\cmdname@star}{\cmdname@nostar}}
+\newcommand{\cmdname@nostar}[<nostar-num-args>]{<nostar-body>} 
+\newcommand{\cmdname@star}[<star-num-args>]{<star-body>}
+\end{minted}
+
+Many standard {\LaTeX} environments or commands have a variant with the same name but ending with a star character *, an asterisk. Examples are the table and table* environments and the \verbum*{section} and \verbum*{section*} commands.
+
+When defining environments, following this pattern is straightforward because \verbum*{newenvironment} and \verbum*{renewenvironment} allow the environment name to contain a star. So you just have to write \verbum*{newenvironment\{envname\}} or \verbum*{newenvironment\{envname*\}} and continue the definition as usual. For commands the situation is more complex as the star not being a letter cannot be part of the command name. As in the synopsis above, there will be a user-called command, given above as \verbum*{cmdname}, which peeks ahead to see if it is followed by a star. For instance, LaTeX does not really have a \verbum*{section*} command; instead, the \verbum*{section} command peeks ahead. This command does not accept arguments but instead expands to one of two commands that do accept arguments. In the synopsis these two are \verbum*{cmdname@nostar} and \verbum*{cmdname@star}. They could take the same number of arguments or a different number, or no arguments at all. As always, in a LaTeX document a command using an at-sign @ in its name must be enclosed inside a \verbum*{makeatletter} ... \verbum*{makeatother} block.
