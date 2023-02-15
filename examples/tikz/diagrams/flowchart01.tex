@@ -1,0 +1,28 @@
+%\documentclass{ctexart}
+\documentclass{standalone}
+\usepackage[UTF8]{ctex}
+\usepackage{fontset}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric}
+
+\tikzset{
+  start./style = { minimum width = 2cm},
+}
+
+\begin{document}
+\begin{tikzpicture}[node distance=10pt]
+  \node[draw, rounded corners]                        (start)    {\textit{开始}};
+  \node[draw, below=of start]              (input)    {输入};
+  \node[draw, below=of input]                         (process1) {处理1};
+  \node[draw, diamond, aspect=2.5, below=of process1]   (decision) {判断};
+  \node[draw, right=30pt of decision]                 (process2) {处理2};
+  \node[draw, rounded corners, below=20pt of decision](end)      {结束};
+  
+  \draw[->] (start)  -- (input);
+  \draw[->] (input) -- (process1);
+  \draw[->] (process1) -- (decision);
+  \draw[->] (decision) -- node[left]  {Yes} (end);
+  \draw[->] (decision) -- node[above] {No}  (process2);
+  \draw[->] (process2) -- (process2|-process1) -> (process1);
+\end{tikzpicture}
+\end{document}
