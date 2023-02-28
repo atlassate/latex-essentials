@@ -114,10 +114,11 @@
 % https://tex.stackexchange.com/questions/12428/code-spanning-over-two-pages-with-minted-inside-listing-with-caption/53540#53540
 \newenvironment{codelisting}{\captionsetup{type=listing}}{}
 \setminted{
+  %linenos=true,
   bgcolor=PaleGreen,                  % 背景颜色
   highlightcolor=Gold,                % 高亮颜色
   breaklines=true,
-  breakafter=-/\#\{\}\%\[\]\\\(\),    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
+  breakafter=-/\#\{\}\%\[\]\\\(\).,   % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
 }
 % https://tex.stackexchange.com/questions/84789/minted-with-frame-and-bgcolor/88384
 \makeatletter
@@ -139,9 +140,10 @@
 %   background colors on minted and \mint, you may use \setmintedinline{bgcolor={}}
 %   to turn off the coloring for inline commands.
 \setmintedinline{
+  linenos=false,
   bgcolor={},
   breaklines=true,
-  breakafter=-/\#\{\}\%\[\]\\\(\),    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
+  breakafter=-/\#\{\}\%\[\]\\\(\).,    % 在空格, ‘-’ 或 ‘/’ 等符号之后断行
 }
 
 % line number font size
@@ -568,7 +570,8 @@ itemsep=0pt,parsep=0pt,label=\alph*.}
 
 \RequirePackage{fontset}
 
-\RequirePackage{latexalpha2}
+% Mathematica or Wolfram Engine
+% \RequirePackage{latexalpha2}
 
 % -----------------------------------------------------------------------------
 % ttfamily 字体在换行使用连字符
