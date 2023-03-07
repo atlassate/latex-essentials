@@ -1,0 +1,39 @@
+% https://tex.stackexchange.com/questions/470452/tikz-align-text-in-nested-nodes
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds, positioning, fit}
+\begin{document}
+
+\newcommand{\boxdist}{3cm}
+\newcommand{\textwdh}{2cm}
+
+\begin{tikzpicture}[
+    box/.style={rectangle, rounded corners, draw=black, text width=15mm},
+    ]
+    \node (A) [text width=\textwdh] 
+    {Blaaaaaa bbbbbbbb \newline Some text text text text};
+    \node (B) [right= \boxdist of A.west, text width=\textwdh] {More text text text};
+    \node (C) [right= \boxdist of B.west, text width=\textwdh] {Even more text test};
+    \node (D) [right= \boxdist of C.west, text width=\textwdh] {And even more text};
+
+    \begin{scope}[on background layer]
+        \node [box, inner sep=11mm, fill=black!40, fit={(A) (B) (C) (D)}] {};
+    \end{scope}
+
+    \begin{scope}[on background layer]
+        \node [box, inner sep=9mm, fill=black!30, fit={(B) (C) (D)}] {};
+    \end{scope}
+
+    \begin{scope}[on background layer]
+        \node [box, inner sep=7mm, fill=black!20, fit={(C) (D)}] {};
+    \end{scope}
+
+    \begin{scope}[on background layer]
+        \node [box, inner sep=5mm, fill=black!10, fit={(D)}] {};
+    \end{scope}
+
+\end{tikzpicture}
+
+\end{document}

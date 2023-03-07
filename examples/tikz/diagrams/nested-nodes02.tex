@@ -1,0 +1,38 @@
+% https://tex.stackexchange.com/questions/125942/tikz-nested-nodes-position
+
+\documentclass{article}
+\usepackage{tikz}
+\tikzstyle{every picture}+=[remember picture]
+\begin{document}
+\begin{equation}
+    P(t) =
+        \tikz[baseline]{\node[fill=blue!50, anchor=base] (t1) {$
+            \epsilon_{0}\chi^{(1)}E(t)
+        $};}
+        +
+        \tikz[baseline]{\node[fill=red!50, anchor=base] (t2) {$
+             \tikz[baseline]{\node[fill=green!25, anchor=base] (t21) {$
+                \epsilon_{0}\chi^{(2)}E^{2}(t)
+             $};}
+            +
+             \tikz[baseline]{\node[fill=yellow!25, anchor=base] (t22) {$
+                \epsilon_{0}\chi^{(3)}E^{3}(t)
+             $};}
+            + \cdots
+        $};}
+\end{equation}
+\begin{itemize}
+    \item \tikz[baseline]{\node[anchor=base] (n1) {Linear};}
+    \item \tikz[baseline]{\node[anchor=base] (n2) {Nonlinear};}
+    \begin{itemize}
+        \item \tikz[baseline]{\node[anchor=base] (n21) {2. order};}
+        \item \tikz[baseline]{\node[anchor=base] (n22) {3. order};}
+    \end{itemize}
+\end{itemize}
+\begin{tikzpicture}[overlay]
+    \path[blue, ->, line width=1pt] (n1.north east) edge[out=45, in=-90]     (t1.south);
+     \path[red, ->, line width=1pt] (n2.north east) edge[out=45, in=-90] (t2.south);
+     \path[red, ->, dashed, line width=0.75pt] (n21.east) edge[out=0, in=-90] (t21.south);
+     \path[red, ->, dashed, line width=0.75pt] (n22.east) edge[out=0, in=-90] (t22.south);
+\end{tikzpicture}
+\end{document}
